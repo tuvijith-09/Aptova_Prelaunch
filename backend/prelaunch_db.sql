@@ -2,7 +2,10 @@
 -- BizFit — Prelaunch Database
 -- Only 3 tables needed for the static pages
 -- ============================================================
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 CREATE DATABASE IF NOT EXISTS prelaunch_db
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
@@ -25,7 +28,13 @@ CREATE TABLE IF NOT EXISTS waitlist (
     INDEX idx_waitlist_created (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+<<<<<<< HEAD
 
+=======
+select * from waitlist;
+select * from suggestions;
+select * from questions;
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 -- ================================================================
 -- TABLE 2: suggestions
 -- From suggest.html — Opportunity suggestions from users

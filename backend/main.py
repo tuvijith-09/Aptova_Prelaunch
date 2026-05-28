@@ -8,14 +8,28 @@ Run: uvicorn main:app --reload
 """
 
 import os
+<<<<<<< HEAD
 from datetime import datetime
 from typing import Optional
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+=======
+import io
+from datetime import datetime
+from typing import Optional
+from fastapi import FastAPI, Request, Query
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 from sqlalchemy import create_engine, Column, Integer, SmallInteger, String, Text, DateTime
 from sqlalchemy.orm import sessionmaker, declarative_base
 from pydantic import BaseModel, EmailStr
 from dotenv import load_dotenv
+<<<<<<< HEAD
+=======
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 
 # ----------------------------------------------------------------
 # Load .env
@@ -27,13 +41,23 @@ DB_PORT     = os.getenv("DB_PORT", "3306")
 DB_NAME     = os.getenv("DB_NAME", "bizfit_db")
 DB_USER     = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+<<<<<<< HEAD
+=======
+DOWNLOAD_SECRET = os.getenv("DOWNLOAD_SECRET", "aptova2026")
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 
 from urllib.parse import quote_plus
 DATABASE_URL = f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
 # ----------------------------------------------------------------
 # DB setup
 # ----------------------------------------------------------------
+<<<<<<< HEAD
 engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_recycle=1800)
+=======
+DB_SSL = os.getenv("DB_SSL", "false").lower() == "true"
+connect_args = {"ssl": {}} if DB_SSL else {}
+engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_recycle=1800, connect_args=connect_args)
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 Base = declarative_base()
 
@@ -87,7 +111,11 @@ app.add_middleware(
 def startup():
     # Creates tables if they don't exist yet
     Base.metadata.create_all(bind=engine)
+<<<<<<< HEAD
     print("✅ Database connected and tables ready.")
+=======
+    print("[OK] Database connected and tables ready.")
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 
 def get_db():
     db = SessionLocal()
@@ -183,4 +211,118 @@ def ask_question(payload: QuestionIn, request: Request,
 # ----------------------------------------------------------------
 @app.get("/health")
 def health():
+<<<<<<< HEAD
     return {"status": "ok", "service": "BizFit Prelaunch API"}
+=======
+    return {"status": "ok", "service": "aptova Prelaunch API"}
+
+
+# ----------------------------------------------------------------
+# Helper: style an Excel workbook
+# ----------------------------------------------------------------
+def style_excel(wb, ws, headers):
+    """Apply professional styling to the worksheet."""
+    header_font = Font(name='Calibri', bold=True, color='FFFFFF', size=11)
+    header_fill = PatternFill(start_color='059669', end_color='059669', fill_type='solid')
+    header_align = Alignment(horizontal='center', vertical='center')
+    thin_border = Border(
+        left=Side(style='thin', color='E2E8F0'),
+        right=Side(style='thin', color='E2E8F0'),
+        top=Side(style='thin', color='E2E8F0'),
+        bottom=Side(style='thin', color='E2E8F0'),
+    )
+    for col_num, header in enumerate(headers, 1):
+        cell = ws.cell(row=1, column=col_num, value=header)
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.alignment = header_align
+        cell.border = thin_border
+    # Auto-fit column widths (approximate)
+    for col in ws.columns:
+        max_len = 0
+        col_letter = col[0].column_letter
+        for cell in col:
+            if cell.value:
+                max_len = max(max_len, len(str(cell.value)))
+            cell.border = thin_border
+        ws.column_dimensions[col_letter].width = min(max_len + 4, 50)
+    ws.auto_filter.ref = ws.dimensions
+    ws.freeze_panes = 'A2'
+
+
+# ----------------------------------------------------------------
+# DOWNLOAD: Waitlist as Excel
+# ----------------------------------------------------------------
+@app.get("/download/waitlist")
+def download_waitlist(key: str = Query(...), db=Depends(get_db)):
+    if key != DOWNLOAD_SECRET:
+        return {"error": "Invalid key"}
+
+    rows = db.query(Waitlist).order_by(Waitlist.created_at.desc()).all()
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Waitlist"
+    headers = ["ID", "Full Name", "Email", "Phone", "IP Address", "Created At"]
+    style_excel(wb, ws, headers)
+
+    for row in rows:
+        ws.append([
+            row.id,
+            row.full_name,
+            row.email,
+            row.phone or "",
+            row.ip_address or "",
+            str(row.created_at) if row.created_at else "",
+        ])
+    style_excel(wb, ws, headers)  # re-apply for auto-width
+
+    buf = io.BytesIO()
+    wb.save(buf)
+    buf.seek(0)
+    filename = f"waitlist_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
+    return StreamingResponse(
+        buf,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f"attachment; filename={filename}"},
+    )
+
+
+# ----------------------------------------------------------------
+# DOWNLOAD: Suggestions as Excel
+# ----------------------------------------------------------------
+@app.get("/download/suggestions")
+def download_suggestions(key: str = Query(...), db=Depends(get_db)):
+    if key != DOWNLOAD_SECRET:
+        return {"error": "Invalid key"}
+
+    rows = db.query(Suggestion).order_by(Suggestion.created_at.desc()).all()
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Suggestions"
+    headers = ["ID", "Full Name", "Email", "Opportunity Title", "Domain", "Capital", "Description", "IP Address", "Created At"]
+    style_excel(wb, ws, headers)
+
+    for row in rows:
+        ws.append([
+            row.id,
+            row.full_name,
+            row.email,
+            row.opp_title,
+            row.domain,
+            row.capital,
+            row.description,
+            row.ip_address or "",
+            str(row.created_at) if row.created_at else "",
+        ])
+    style_excel(wb, ws, headers)
+
+    buf = io.BytesIO()
+    wb.save(buf)
+    buf.seek(0)
+    filename = f"suggestions_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
+    return StreamingResponse(
+        buf,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f"attachment; filename={filename}"},
+    )
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29

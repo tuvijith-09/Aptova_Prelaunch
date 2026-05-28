@@ -1004,6 +1004,10 @@ function toggleMenu(){
   </div>
 </div>
 
+<<<<<<< HEAD
+=======
+<script src="config.js"></script>
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 <script>
 function tog(el) {
   el.parentElement.classList.toggle('open');
@@ -1052,7 +1056,11 @@ async function submitQuestion() {
   errMsg.style.display = 'none';
 
   try {
+<<<<<<< HEAD
     const res = await fetch('https://aptova-prelaunch.onrender.com/question', {
+=======
+    const res = await fetch(`${CONFIG.API_BASE_URL}/question`, {
+>>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, question })
