@@ -208,10 +208,6 @@ function toggleMenu(){
 
 </div>
 
-<<<<<<< HEAD
-=======
-<script src="config.js"></script>
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 <script>
 async function submitSuggestion() {
   const submitBtn = document.getElementById('submitBtn');
@@ -232,11 +228,7 @@ async function submitSuggestion() {
   submitBtn.innerHTML = '<span>Submitting suggestion...</span>';
 
   try {
-<<<<<<< HEAD
     const res = await fetch('https://aptova-prelaunch.onrender.com/suggest', {
-=======
-    const res = await fetch(`${CONFIG.API_BASE_URL}/suggest`, {
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, opp_title, domain, capital, description })

@@ -975,27 +975,24 @@ function toggleMenu(){
 <div id="questionModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;">
   <div style="background:white;border-radius:16px;padding:36px;max-width:460px;width:90%;box-shadow:0 24px 48px rgba(0,0,0,0.12);position:relative;">
     <button onclick="closeQuestionForm()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#64748B;">✕</button>
-
     <div id="qFormWrap">
       <p style="font-size:18px;font-weight:700;margin-bottom:6px;color:#0F172A;">Ask us anything</p>
       <p style="font-size:13px;color:#64748B;margin-bottom:24px;">We read every question and reply within 24 hours.</p>
-
       <div style="margin-bottom:16px;">
         <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#0F172A;">Full Name</label>
-        <input id="qName" type="text" placeholder="e.g. Rahul Sharma" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-family:inherit;font-size:14px;outline:none;" required>
+        <input id="qName" type="text" placeholder="e.g. Rahul Sharma" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-family:inherit;font-size:14px;outline:none;">
       </div>
       <div style="margin-bottom:16px;">
         <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#0F172A;">Email Address</label>
-        <input id="qEmail" type="email" placeholder="you@example.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-family:inherit;font-size:14px;outline:none;" required>
+        <input id="qEmail" type="email" placeholder="you@example.com" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-family:inherit;font-size:14px;outline:none;">
       </div>
       <div style="margin-bottom:20px;">
         <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#0F172A;">Your Question</label>
-        <textarea id="qText" rows="3" placeholder="What would you like to know?" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-family:inherit;font-size:14px;outline:none;resize:vertical;" required></textarea>
+        <textarea id="qText" rows="3" placeholder="What would you like to know?" style="width:100%;padding:11px 14px;border:1px solid #E2E8F0;border-radius:8px;font-family:inherit;font-size:14px;outline:none;resize:vertical;"></textarea>
       </div>
       <p id="qErr" style="display:none;color:#DC2626;font-size:13px;margin-bottom:12px;"></p>
-      <button id="qSubmitBtn" onclick="submitQuestion()" style="width:100%;background:#059669;color:white;border:none;padding:14px;border-radius:50px;font-weight:600;font-size:14px;font-family:inherit;cursor:pointer;text-transform:uppercase;letter-spacing:0.02em;">Send Question</button>
+      <button id="qSubmitBtn" onclick="submitQuestion()" style="width:100%;background:#059669;color:white;border:none;padding:14px;border-radius:50px;font-weight:600;font-size:14px;font-family:inherit;cursor:pointer;">Send Question</button>
     </div>
-
     <div id="qSuccess" style="display:none;text-align:center;padding:20px 0;">
       <div style="width:56px;height:56px;background:#D1FAE5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;">✓</div>
       <p style="font-size:18px;font-weight:700;margin-bottom:8px;color:#0F172A;">Question sent!</p>
@@ -1004,24 +1001,17 @@ function toggleMenu(){
   </div>
 </div>
 
-<<<<<<< HEAD
-=======
-<script src="config.js"></script>
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 <script>
 function tog(el) {
   el.parentElement.classList.toggle('open');
 }
 
 function openQuestionForm() {
-  const modal = document.getElementById('questionModal');
-  modal.style.display = 'flex';
+  document.getElementById('questionModal').style.display = 'flex';
 }
 
 function closeQuestionForm() {
-  const modal = document.getElementById('questionModal');
-  modal.style.display = 'none';
-  // Reset form
+  document.getElementById('questionModal').style.display = 'none';
   document.getElementById('qFormWrap').style.display = 'block';
   document.getElementById('qSuccess').style.display = 'none';
   document.getElementById('qName').value = '';
@@ -1032,9 +1022,13 @@ function closeQuestionForm() {
   document.getElementById('qSubmitBtn').textContent = 'Send Question';
 }
 
-// Close modal when clicking outside
-document.getElementById('questionModal').addEventListener('click', function(e) {
-  if (e.target === this) closeQuestionForm();
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById('questionModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) closeQuestionForm();
+    });
+  }
 });
 
 async function submitQuestion() {
@@ -1056,11 +1050,7 @@ async function submitQuestion() {
   errMsg.style.display = 'none';
 
   try {
-<<<<<<< HEAD
     const res = await fetch('https://aptova-prelaunch.onrender.com/question', {
-=======
-    const res = await fetch(`${CONFIG.API_BASE_URL}/question`, {
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, question })
