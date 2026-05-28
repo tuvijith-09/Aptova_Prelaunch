@@ -29,7 +29,8 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 # ----------------------------------------------------------------
 DATABASE_URL = (
     f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
+    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    f"?charset=utf8mb4&ssl=true"
 )
 
 # ----------------------------------------------------------------
