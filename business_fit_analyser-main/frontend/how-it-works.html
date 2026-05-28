@@ -1052,7 +1052,7 @@ async function submitQuestion() {
   errMsg.style.display = 'none';
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/question', {
+    const res = await fetch('https://aptova-prelaunch.onrender.com/question', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, question })

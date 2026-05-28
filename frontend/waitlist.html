@@ -194,7 +194,7 @@ async function submitForm() {
   errMsg.style.display = 'none';
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/waitlist', {
+    const res = await fetch('https://aptova-prelaunch.onrender.com/waitlist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, phone: phone || null })
