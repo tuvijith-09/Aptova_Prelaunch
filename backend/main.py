@@ -1,5 +1,5 @@
 """
-main.py — BizFit Prelaunch Backend
+main.py — Aptova Prelaunch Backend
 Only 3 endpoints for the 3 static page forms:
   POST /waitlist    → waitlist.html
   POST /suggest     → suggest.html
@@ -8,74 +8,61 @@ Run: uvicorn main:app --reload
 """
 
 import os
-<<<<<<< HEAD
-from datetime import datetime
-from typing import Optional
-from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-=======
 import io
 from datetime import datetime
 from typing import Optional
-from fastapi import FastAPI, Request, Query
+from fastapi import FastAPI, Request, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 from sqlalchemy import create_engine, Column, Integer, SmallInteger, String, Text, DateTime
 from sqlalchemy.orm import sessionmaker, declarative_base
 from pydantic import BaseModel, EmailStr
 from dotenv import load_dotenv
-<<<<<<< HEAD
-=======
+from urllib.parse import quote_plus
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 
 # ----------------------------------------------------------------
 # Load .env
 # ----------------------------------------------------------------
 load_dotenv()
 
-DB_HOST     = os.getenv("DB_HOST", "localhost")
-DB_PORT     = os.getenv("DB_PORT", "3306")
-DB_NAME     = os.getenv("DB_NAME", "bizfit_db")
-DB_USER     = os.getenv("DB_USER", "root")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "")
-<<<<<<< HEAD
-=======
+DB_HOST         = os.getenv("DB_HOST", "localhost")
+DB_PORT         = os.getenv("DB_PORT", "3306")
+DB_NAME         = os.getenv("DB_NAME", "bizfit_db")
+DB_USER         = os.getenv("DB_USER", "root")
+DB_PASSWORD     = os.getenv("DB_PASSWORD", "")
 DOWNLOAD_SECRET = os.getenv("DOWNLOAD_SECRET", "aptova2026")
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
 
-from urllib.parse import quote_plus
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
+DATABASE_URL = (
+    f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}"
+    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4&ssl_disabled=true"
+)
+
 # ----------------------------------------------------------------
 # DB setup
 # ----------------------------------------------------------------
-<<<<<<< HEAD
-engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_recycle=1800)
-=======
-DB_SSL = os.getenv("DB_SSL", "false").lower() == "true"
-connect_args = {"ssl": {}} if DB_SSL else {}
-engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_recycle=1800, connect_args=connect_args)
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
+engine       = create_engine(DATABASE_URL, pool_pre_ping=True, pool_recycle=1800)
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
-Base = declarative_base()
+Base         = declarative_base()
+
 
 # ----------------------------------------------------------------
 # Models
 # ----------------------------------------------------------------
 class Waitlist(Base):
     __tablename__ = "waitlist"
-    id         = Column(Integer, primary_key=True, autoincrement=True)
-    full_name  = Column(String(150), nullable=False)
-    email      = Column(String(255), nullable=False, unique=True)
-    phone      = Column(String(20),  nullable=True)
-    ip_address = Column(String(45),  nullable=True)
-    created_at = Column(DateTime,    default=datetime.utcnow)
+    id         = Column(Integer,      primary_key=True, autoincrement=True)
+    full_name  = Column(String(150),  nullable=False)
+    email      = Column(String(255),  nullable=False, unique=True)
+    phone      = Column(String(20),   nullable=True)
+    ip_address = Column(String(45),   nullable=True)
+    created_at = Column(DateTime,     default=datetime.utcnow)
+
 
 class Suggestion(Base):
     __tablename__ = "suggestions"
-    id          = Column(Integer, primary_key=True, autoincrement=True)
+    id          = Column(Integer,     primary_key=True, autoincrement=True)
     full_name   = Column(String(150), nullable=False)
     email       = Column(String(255), nullable=False)
     opp_title   = Column(String(255), nullable=False)
@@ -85,37 +72,36 @@ class Suggestion(Base):
     ip_address  = Column(String(45),  nullable=True)
     created_at  = Column(DateTime,    default=datetime.utcnow)
 
+
 class Question(Base):
     __tablename__ = "questions"
-    id         = Column(Integer,     primary_key=True, autoincrement=True)
-    full_name  = Column(String(150), nullable=False)
-    email      = Column(String(255), nullable=False)
-    question   = Column(Text,        nullable=False)
-    ip_address = Column(String(45),  nullable=True)
+    id         = Column(Integer,      primary_key=True, autoincrement=True)
+    full_name  = Column(String(150),  nullable=False)
+    email      = Column(String(255),  nullable=False)
+    question   = Column(Text,         nullable=False)
+    ip_address = Column(String(45),   nullable=True)
     is_replied = Column(SmallInteger, default=0)
-    created_at = Column(DateTime,    default=datetime.utcnow)
+    created_at = Column(DateTime,     default=datetime.utcnow)
+
 
 # ----------------------------------------------------------------
 # FastAPI app
 # ----------------------------------------------------------------
-app = FastAPI(title="BizFit Prelaunch API", version="1.0.0")
+app = FastAPI(title="Aptova Prelaunch API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],      # Replace * with your domain when deploying
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
 @app.on_event("startup")
 def startup():
-    # Creates tables if they don't exist yet
     Base.metadata.create_all(bind=engine)
-<<<<<<< HEAD
-    print("✅ Database connected and tables ready.")
-=======
     print("[OK] Database connected and tables ready.")
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
+
 
 def get_db():
     db = SessionLocal()
@@ -124,7 +110,6 @@ def get_db():
     finally:
         db.close()
 
-from fastapi import Depends
 
 # ----------------------------------------------------------------
 # Schemas
@@ -134,6 +119,7 @@ class WaitlistIn(BaseModel):
     email: EmailStr
     phone: Optional[str] = None
 
+
 class SuggestionIn(BaseModel):
     full_name: str
     email: EmailStr
@@ -142,18 +128,18 @@ class SuggestionIn(BaseModel):
     capital: str
     description: str
 
+
 class QuestionIn(BaseModel):
     full_name: str
     email: EmailStr
     question: str
 
+
 # ----------------------------------------------------------------
-# ENDPOINT 1: Waitlist — from waitlist.html
+# ENDPOINT 1: Waitlist
 # ----------------------------------------------------------------
 @app.post("/waitlist")
-def join_waitlist(payload: WaitlistIn, request: Request,
-                  db=Depends(get_db)):
-    # Check duplicate email
+def join_waitlist(payload: WaitlistIn, request: Request, db=Depends(get_db)):
     existing = db.query(Waitlist).filter(Waitlist.email == payload.email.lower()).first()
     if existing:
         return {"success": False, "message": "You're already on the waitlist!"}
@@ -170,11 +156,10 @@ def join_waitlist(payload: WaitlistIn, request: Request,
 
 
 # ----------------------------------------------------------------
-# ENDPOINT 2: Suggestions — from suggest.html
+# ENDPOINT 2: Suggestions
 # ----------------------------------------------------------------
 @app.post("/suggest")
-def submit_suggestion(payload: SuggestionIn, request: Request,
-                       db=Depends(get_db)):
+def submit_suggestion(payload: SuggestionIn, request: Request, db=Depends(get_db)):
     entry = Suggestion(
         full_name   = payload.full_name.strip(),
         email       = payload.email.lower().strip(),
@@ -190,11 +175,10 @@ def submit_suggestion(payload: SuggestionIn, request: Request,
 
 
 # ----------------------------------------------------------------
-# ENDPOINT 3: Questions — from how-it-works.html
+# ENDPOINT 3: Questions
 # ----------------------------------------------------------------
 @app.post("/question")
-def ask_question(payload: QuestionIn, request: Request,
-                 db=Depends(get_db)):
+def ask_question(payload: QuestionIn, request: Request, db=Depends(get_db)):
     entry = Question(
         full_name  = payload.full_name.strip(),
         email      = payload.email.lower().strip(),
@@ -211,21 +195,17 @@ def ask_question(payload: QuestionIn, request: Request,
 # ----------------------------------------------------------------
 @app.get("/health")
 def health():
-<<<<<<< HEAD
-    return {"status": "ok", "service": "BizFit Prelaunch API"}
-=======
     return {"status": "ok", "service": "aptova Prelaunch API"}
 
 
 # ----------------------------------------------------------------
-# Helper: style an Excel workbook
+# Helper: style Excel workbook
 # ----------------------------------------------------------------
 def style_excel(wb, ws, headers):
-    """Apply professional styling to the worksheet."""
-    header_font = Font(name='Calibri', bold=True, color='FFFFFF', size=11)
-    header_fill = PatternFill(start_color='059669', end_color='059669', fill_type='solid')
+    header_font  = Font(name='Calibri', bold=True, color='FFFFFF', size=11)
+    header_fill  = PatternFill(start_color='059669', end_color='059669', fill_type='solid')
     header_align = Alignment(horizontal='center', vertical='center')
-    thin_border = Border(
+    thin_border  = Border(
         left=Side(style='thin', color='E2E8F0'),
         right=Side(style='thin', color='E2E8F0'),
         top=Side(style='thin', color='E2E8F0'),
@@ -233,21 +213,22 @@ def style_excel(wb, ws, headers):
     )
     for col_num, header in enumerate(headers, 1):
         cell = ws.cell(row=1, column=col_num, value=header)
-        cell.font = header_font
-        cell.fill = header_fill
+        cell.font      = header_font
+        cell.fill      = header_fill
         cell.alignment = header_align
-        cell.border = thin_border
-    # Auto-fit column widths (approximate)
+        cell.border    = thin_border
+
     for col in ws.columns:
-        max_len = 0
+        max_len    = 0
         col_letter = col[0].column_letter
         for cell in col:
             if cell.value:
                 max_len = max(max_len, len(str(cell.value)))
             cell.border = thin_border
         ws.column_dimensions[col_letter].width = min(max_len + 4, 50)
+
     ws.auto_filter.ref = ws.dimensions
-    ws.freeze_panes = 'A2'
+    ws.freeze_panes    = 'A2'
 
 
 # ----------------------------------------------------------------
@@ -258,33 +239,27 @@ def download_waitlist(key: str = Query(...), db=Depends(get_db)):
     if key != DOWNLOAD_SECRET:
         return {"error": "Invalid key"}
 
-    rows = db.query(Waitlist).order_by(Waitlist.created_at.desc()).all()
-    wb = Workbook()
-    ws = wb.active
+    rows     = db.query(Waitlist).order_by(Waitlist.created_at.desc()).all()
+    wb       = Workbook()
+    ws       = wb.active
     ws.title = "Waitlist"
-    headers = ["ID", "Full Name", "Email", "Phone", "IP Address", "Created At"]
+    headers  = ["ID", "Full Name", "Email", "Phone", "IP Address", "Created At"]
     style_excel(wb, ws, headers)
 
     for row in rows:
         ws.append([
-            row.id,
-            row.full_name,
-            row.email,
-            row.phone or "",
-            row.ip_address or "",
+            row.id, row.full_name, row.email,
+            row.phone or "", row.ip_address or "",
             str(row.created_at) if row.created_at else "",
         ])
-    style_excel(wb, ws, headers)  # re-apply for auto-width
 
     buf = io.BytesIO()
     wb.save(buf)
     buf.seek(0)
     filename = f"waitlist_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
-    return StreamingResponse(
-        buf,
+    return StreamingResponse(buf,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        headers={"Content-Disposition": f"attachment; filename={filename}"},
-    )
+        headers={"Content-Disposition": f"attachment; filename={filename}"})
 
 
 # ----------------------------------------------------------------
@@ -295,34 +270,55 @@ def download_suggestions(key: str = Query(...), db=Depends(get_db)):
     if key != DOWNLOAD_SECRET:
         return {"error": "Invalid key"}
 
-    rows = db.query(Suggestion).order_by(Suggestion.created_at.desc()).all()
-    wb = Workbook()
-    ws = wb.active
+    rows     = db.query(Suggestion).order_by(Suggestion.created_at.desc()).all()
+    wb       = Workbook()
+    ws       = wb.active
     ws.title = "Suggestions"
-    headers = ["ID", "Full Name", "Email", "Opportunity Title", "Domain", "Capital", "Description", "IP Address", "Created At"]
+    headers  = ["ID", "Full Name", "Email", "Opportunity Title", "Domain", "Capital", "Description", "IP Address", "Created At"]
     style_excel(wb, ws, headers)
 
     for row in rows:
         ws.append([
-            row.id,
-            row.full_name,
-            row.email,
-            row.opp_title,
-            row.domain,
-            row.capital,
-            row.description,
-            row.ip_address or "",
-            str(row.created_at) if row.created_at else "",
+            row.id, row.full_name, row.email,
+            row.opp_title, row.domain, row.capital, row.description,
+            row.ip_address or "", str(row.created_at) if row.created_at else "",
         ])
-    style_excel(wb, ws, headers)
 
     buf = io.BytesIO()
     wb.save(buf)
     buf.seek(0)
     filename = f"suggestions_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
-    return StreamingResponse(
-        buf,
+    return StreamingResponse(buf,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        headers={"Content-Disposition": f"attachment; filename={filename}"},
-    )
->>>>>>> 4d2b67a909af83137b5c816a0bc75d3e83f0bb29
+        headers={"Content-Disposition": f"attachment; filename={filename}"})
+
+
+# ----------------------------------------------------------------
+# DOWNLOAD: Questions as Excel
+# ----------------------------------------------------------------
+@app.get("/download/questions")
+def download_questions(key: str = Query(...), db=Depends(get_db)):
+    if key != DOWNLOAD_SECRET:
+        return {"error": "Invalid key"}
+
+    rows     = db.query(Question).order_by(Question.created_at.desc()).all()
+    wb       = Workbook()
+    ws       = wb.active
+    ws.title = "Questions"
+    headers  = ["ID", "Full Name", "Email", "Question", "Replied", "IP Address", "Created At"]
+    style_excel(wb, ws, headers)
+
+    for row in rows:
+        ws.append([
+            row.id, row.full_name, row.email, row.question,
+            "Yes" if row.is_replied else "No",
+            row.ip_address or "", str(row.created_at) if row.created_at else "",
+        ])
+
+    buf = io.BytesIO()
+    wb.save(buf)
+    buf.seek(0)
+    filename = f"questions_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
+    return StreamingResponse(buf,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f"attachment; filename={filename}"})
