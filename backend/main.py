@@ -36,8 +36,10 @@ DOWNLOAD_SECRET = os.getenv("DOWNLOAD_SECRET", "aptova2026")
 
 DATABASE_URL = (
     f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4&ssl_disabled=true"
+    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
 )
+
+
 
 # ----------------------------------------------------------------
 # DB setup
