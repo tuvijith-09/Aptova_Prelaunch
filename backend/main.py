@@ -101,9 +101,12 @@ app.add_middleware(
 
 @app.on_event("startup")
 def startup():
-    Base.metadata.create_all(bind=engine)
-    print("[OK] Database connected and tables ready.")
-
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("[OK] Database connected and tables ready.")
+    except Exception as e:
+        print(f"[WARNING] DB connection at startup failed: {e}")
+        print("[INFO] App will still start. DB will connect on first request.")
 
 def get_db():
     db = SessionLocal()
