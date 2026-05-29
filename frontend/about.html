@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us — BizFit</title>
-<meta name="description" content="Three students, one problem. Learn why we built BizFit and what we discovered along the way.">
+<title>About Us — Aptova</title>
+<meta name="description" content="Three students, one problem. Learn why we built Aptova and what we discovered along the way.">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -18,7 +18,7 @@ body{background:var(--bg);background-image:url("wavy_grid.svg");background-size:
 
 /* NAV */
 nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 6%;background:rgba(248,250,252,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
-.logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-soon{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.1);padding:2px 7px;border-radius:999px;margin-left:4px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Plus Jakarta Sans',sans-serif;}
+.logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;background:var(--primary);border:1px solid var(--phov);padding:3px 8px;border-radius:999px;margin-left:6px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 2px 8px rgba(5,150,105,.3);}
 .nav-links{display:flex;gap:26px;}.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--primary);color:#fff;border:none;padding:9px 20px;border-radius:50px;font-weight:600;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-transform:uppercase;letter-spacing:.02em;transition:all .2s;box-shadow:0 4px 12px rgba(5,150,105,.25);}.nav-cta:hover{background:var(--phov);transform:translateY(-1px);}
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;font-size:24px;color:var(--ink);line-height:1;z-index:110;font-family:'Plus Jakarta Sans',sans-serif;}
@@ -248,21 +248,23 @@ footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-c
 <body>
 
 <nav>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
+    <a href="waitlist.html">Join Waitlist</a>
   </div>
-  <a href="waitlist.html" class="nav-cta">Join waitlist</a>
+  <a href="explore.html" class="nav-cta">Explore Opportunities</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
-    <a href="waitlist.html" class="mob-cta">Join waitlist →</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
   </div>
 </nav>
 <script>
@@ -282,7 +284,7 @@ function toggleMenu(){
     <div class="wb-left">
       <h1 class="wb-heading">Why we built this</h1>
       <blockquote class="wb-blockquote">"Three students, one problem. No one could tell us which opportunity actually made sense for us."</blockquote>
-      <p class="wb-body">We watched batchmates start side-hustles based on what was trending — and struggle because the opportunity didn't match their actual situation. Some had capital but no time. Some had skills but no market. Some had market but no money. BizFit was built to answer the question none of our seniors could answer properly: <strong style="color:rgba(255,255,255,.65);">what fits you, specifically?</strong></p>
+      <p class="wb-body">We watched batchmates start side-hustles based on what was trending — and struggle because the opportunity didn't match their actual situation. Some had capital but no time. Some had skills but no market. Some had market but no money. Aptova was built to answer the question none of our seniors could answer properly: <strong style="color:rgba(255,255,255,.65);">what fits you, specifically?</strong></p>
       <div class="wb-team">
         <a href="https://www.linkedin.com/in/tuvijith-pillarishetty-4a832334b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="wb-member">
           <span class="wb-name">Tuvijith Kumar</span>
@@ -301,7 +303,7 @@ function toggleMenu(){
 
     <!-- Right: Discovery Grid -->
     <div class="discovery-box">
-      <div class="disc-eyebrow">What we discovered building BizFit</div>
+      <div class="disc-eyebrow">What we discovered building Aptova</div>
       <div class="disc-grid">
         <div class="disc-card">
           <div class="disc-num">73%</div>
@@ -320,7 +322,7 @@ function toggleMenu(){
           <div class="disc-label">real opportunities most students have never considered</div>
         </div>
       </div>
-      <div class="disc-note">We surveyed 200 students and recent graduates across Tier 1, 2, and rural India to understand the real problem. BizFit is our answer to what we found.</div>
+      <div class="disc-note">We surveyed 200 students and recent graduates across Tier 1, 2, and rural India to understand the real problem. Aptova is our answer to what we found.</div>
     </div>
 
   </div>
@@ -330,26 +332,27 @@ function toggleMenu(){
 <section class="mission-strip">
   <div class="ms-eyebrow">Our Mission</div>
   <h2 class="ms-h2">The right opportunity shouldn't come down to luck or connections.</h2>
-  <p class="ms-p">Every student hits the employment wall. But starting something of your own shouldn't mean blindly following trends or risking money you don't have. We built BizFit to strip away the guesswork and give you an honest, mathematical validation of what you can actually do with the resources you have today.</p>
+  <p class="ms-p">Every student hits the employment wall. But starting something of your own shouldn't mean blindly following trends or risking money you don't have. We built Aptova to strip away the guesswork and give you an honest, mathematical validation of what you can actually do with the resources you have today.</p>
 </section>
 
 <!-- FINAL CTA -->
 <section class="final">
   <h2 class="final-h">Ready to find your<br><em>perfect fit?</em></h2>
-  <p class="final-sub">Join the waitlist — free to start · early access · no spam</p>
+  <p class="final-sub">We're opening early access to just 1,000 students. Every AI report uses real compute — capping the beta keeps early access fast and accessible.</p>
   <a href="waitlist.html" class="btn">Claim your early spot →</a>
 </section>
 
 <footer>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="fl">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
-    <a href="waitlist.html">Join waitlist</a>
-    <a href="mailto:hello@bizfit.com">Ask a question</a>
+    <a href="about.html">About Us</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="mailto:hello@Aptova.com">Ask a question</a>
   </div>
-  <div>© 2026 BizFit · Made for the Students by the Students</div>
+  <div>© 2026 Aptova · Made for the Students by the Students</div>
 </footer>
 
 </body>

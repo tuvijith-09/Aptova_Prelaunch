@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Join the Waitlist — BizFit</title>
-<meta name="description" content="Claim early access to BizFit — the free AI tool that matches students to real business opportunities based on their exact situation.">
+<title>Join the Waitlist — Aptova</title>
+<meta name="description" content="Claim early access to Aptova — the AI tool that matches students to invisible opportunities based on their exact situation. No credit card required.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -24,7 +24,7 @@
 html{scroll-behavior:smooth;}
 body{background-color:var(--bg);background-image:url("wavy_grid.svg");background-size:1200px 1200px;background-position:top center;background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 6%;background:rgba(248,250,252,.9);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
-.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-soon{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.1);padding:2px 7px;border-radius:999px;margin-left:4px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;background:var(--primary);border:1px solid var(--phov);padding:3px 8px;border-radius:999px;margin-left:6px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;box-shadow:0 2px 8px rgba(5,150,105,.3);}
 .nav-links{display:flex;gap:26px;}.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--primary);color:white;border:none;padding:10px 24px;border-radius:50px;font-weight:600;font-size:13px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:.02em;transition:all .2s;box-shadow:0 4px 12px rgba(5,150,105,.25);}
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;font-size:24px;color:var(--ink);line-height:1;z-index:110;font-family:'Inter',sans-serif;}
@@ -82,12 +82,13 @@ textarea.form-input{resize:vertical;min-height:80px;}
 <body>
 
 <nav>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;margin-top:0px;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
+    <a href="waitlist.html">Join Waitlist</a>
   </div>
   <a href="#" class="nav-cta" style="opacity:.35;pointer-events:none;">On waitlist</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
@@ -96,6 +97,7 @@ textarea.form-input{resize:vertical;min-height:80px;}
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
+    <a href="waitlist.html">Join Waitlist</a>
   </div>
 </nav>
 <script>
@@ -112,9 +114,13 @@ function toggleMenu(){
   <div class="left">
     <div class="left-inner">
       <div class="coming-badge"><div class="badge-dot"></div>Spots filling up · Launching mid-2026</div>
-      <h1 class="left-h1">Claim your early access.<br>Find your<br><em>invisible opportunity.</em></h1>
-
-
+      <h1 class="left-h1">Claim your early access.<br>Find your<br><em>right opportunity.</em></h1>
+      <p class="left-sub" style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:20px;text-align:left;">
+        Because each custom AI match report uses real compute (processing your skills, location, hours, and budget), the initial public beta is strictly capped at <strong>1,000 students</strong> to ensure speed and cost sustainability. Spots are allocated strictly first-come, first-served.
+      </p>
+      <p class="left-sub" style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:12px;text-align:left;">
+        🎁 <strong>Instant Bonus</strong>: Join the waitlist today and instantly receive our curated <strong>"₹0-Capital Starter Kit"</strong> — a step-by-step launch blueprint for India's top 5 invisible opportunities, delivered straight to your inbox immediately.
+      </p>
     </div>
   </div>
 
@@ -123,7 +129,7 @@ function toggleMenu(){
     
     <div class="form-wrap" id="formWrap">
       <div class="form-title">Secure your spot</div>
-      <div class="form-sub">Drop your details below. Be the first to know when we launch before the general public.</div>
+      <div class="form-sub" style="margin-bottom:24px;">Reserve your priority queue spot and receive your free ₹0-Capital Starter Kit instantly.</div>
       
       <form id="waitlistForm" onsubmit="event.preventDefault(); submitForm();">
         <div class="form-group">
@@ -150,7 +156,7 @@ function toggleMenu(){
     <div class="success-state" id="successState">
       <div class="sc-icon">✓</div>
       <h2 class="sc-title">You're on the list.</h2>
-      <p class="sc-desc">Thank you for joining. We'll send you an email as soon as we open the doors for early access.</p>
+      <p class="sc-desc">Thank you for joining. We've sent the <strong>"₹0-Capital Starter Kit"</strong> to your inbox. Check your email (and spam folder) shortly!</p>
       <a href="index.html" class="sc-btn">← Back to home</a>
     </div>
 
@@ -160,15 +166,15 @@ function toggleMenu(){
   <div class="benefits" style="margin-top: 80px; max-width: 1000px; width: 100%;">
     <div class="benefit">
       <div class="b-icon">1</div>
-      <div class="b-text"><strong>First-in-line access</strong> to the full AI assessment and matching engine.</div>
+      <div class="b-text"><strong>Strictly Capped Beta</strong> — Bypass queue bottlenecks and secure priority AI profiling before compute allocations are capped.</div>
     </div>
     <div class="benefit">
       <div class="b-icon">2</div>
-      <div class="b-text"><strong>Priority validation reports</strong> for your chosen opportunity ideas.</div>
+      <div class="b-text"><strong>Instant Starter Kit</strong> — Receive launch blueprints for India's top 5 zero-investment invisible opportunities emailed to you instantly.</div>
     </div>
     <div class="benefit">
       <div class="b-icon">3</div>
-      <div class="b-text"><strong>Shape the product.</strong> Tell us what you need and we'll build it into the beta.</div>
+      <div class="b-text"><strong>Founding Member Perks</strong> — Access our direct founder WhatsApp channel to get 1-on-1 feedback on your matched ideas.</div>
     </div>
   </div>
 

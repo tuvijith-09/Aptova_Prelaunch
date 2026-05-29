@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BizFit — Find Your Right Opportunity</title>
-<meta name="description" content="We use AI to map your skills, budget, location, and free time to 135+ real opportunities. Discover invisible opportunities you can start tomorrow. Free to start.">
+<title>Aptova — Find Your Invisible Opportunity</title>
+<meta name="description" content="We use AI to map your skills, budget, location, and free time to 135+ invisible opportunities. Discover invisible opportunities you can start tomorrow. No credit card required.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -24,7 +24,7 @@
 html{scroll-behavior:smooth;}
 body{background-color:var(--bg);background-image:url("wavy_grid.svg");background-size:1200px 1200px;background-position:top center;background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 6%;background:rgba(248,250,252,.9);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
-.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-soon{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.1);padding:2px 7px;border-radius:999px;margin-left:4px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;background:var(--primary);border:1px solid var(--phov);padding:3px 8px;border-radius:999px;margin-left:6px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;box-shadow:0 2px 8px rgba(5,150,105,.3);}
 .nav-links{display:flex;gap:26px;}.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--primary);color:white;border:none;padding:10px 24px;border-radius:50px;font-weight:600;font-size:13px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:.02em;transition:all .2s;box-shadow:0 4px 12px rgba(5,150,105,.25);}.nav-cta:hover{background:var(--phov);transform:translateY(-1px);}
 /* Hamburger */
@@ -38,29 +38,56 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .btn{background:var(--primary);color:white;border:none;padding:14px 30px;border-radius:50px;font-weight:600;font-size:15px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.02em;transition:background .2s,transform .15s;cursor:pointer;box-shadow:0 4px 12px rgba(5,150,105,.2);}.btn:hover{background:var(--phov);transform:translateY(-1px);}
 .btn-ghost{background:transparent;color:var(--primary);border:1.5px solid var(--border);border-radius:50px;padding:13px 22px;font-size:15px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;transition:all .2s;}.btn-ghost:hover{border-color:var(--primary);background:var(--pl);}
 
-/* HERO CENTERED */
-.hero{padding:120px 6% 0px;background:transparent;position:relative;overflow:visible;border-bottom:none;display:flex;flex-direction:column;align-items:center;text-align:center;z-index:1;}
-.hero-text{position:relative;z-index:2;max-width:800px;display:flex;flex-direction:column;align-items:center;}
-.h-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:white;padding:6px 16px;border-radius:4px;font-size:12px;color:var(--primary);font-weight:600;margin-bottom:24px;letter-spacing:.04em;}
-.h-h1{font-family:'Inter',sans-serif;font-size:clamp(36px,5.5vw,72px);font-weight:800;line-height:1.05;letter-spacing:-2.5px;color:var(--ink);margin-bottom:24px;}
-.h-h1 em{font-style:normal;color:var(--primary);}
-.h-sub{font-size:18px;color:var(--muted);line-height:1.7;max-width:540px;margin:0 auto 36px;font-weight:400;}
-.h-btns{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;}
-.h-trust{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted);font-weight:500;}
+/* HERO — balanced two-column, left text + right interactive carousel */
+.hero{padding:120px 6% 100px;background:transparent;position:relative;overflow:visible;border-bottom:none;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:64px;z-index:1;max-width:1200px;margin:0 auto;}
+.hero-text{position:relative;z-index:2;flex:1.2;max-width:580px;display:flex;flex-direction:column;align-items:flex-start;}
+.h-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--primary);background:rgba(5,150,105,.04);padding:6px 16px;border-radius:6px;font-size:12px;color:var(--primary);font-weight:600;margin-bottom:32px;letter-spacing:.04em;}
+.h-eyebrow svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.h-h1{font-family:'Inter',sans-serif;font-size:clamp(36px,4.5vw,68px);font-weight:800;line-height:1.04;letter-spacing:-2.5px;color:var(--ink);margin-bottom:24px;}
+.h-h1 em{font-style:italic;background:linear-gradient(135deg,#059669 0%,#10B981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.h-sub{font-size:17px;color:var(--muted);line-height:1.7;max-width:500px;margin:0 0 36px;font-weight:400;}
+.h-btns{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn-ghost-muted{background:transparent;color:var(--muted);border:none;font-size:13.5px;font-weight:500;padding:10px 16px;text-decoration:none;transition:color 0.2s;}
+.btn-ghost-muted:hover{color:var(--primary);text-decoration:underline;}
+.h-trust{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:20px;font-size:13px;color:var(--muted);font-weight:500;}
 .h-trust span{color:var(--primary);}
 @keyframes ctaPulse{0%{box-shadow:0 4px 12px rgba(5,150,105,.25);}50%{box-shadow:0 6px 28px rgba(5,150,105,.5);}100%{box-shadow:0 4px 12px rgba(5,150,105,.25);}}
 .hero .btn{animation:ctaPulse 2.5s ease-in-out infinite;}
 
-/* CAROUSEL OVERLAP */
-.carousel-wrap{position:relative;width:100%;max-width:960px;height:240px;margin:60px auto -80px;perspective:1000px;z-index:10;}
-.slide{position:absolute;top:0;left:0;width:100%;background:white;border:1px solid var(--border);border-radius:16px;padding:32px 40px;box-shadow:0 12px 36px rgba(0,0,0,.06);transition:all .6s cubic-bezier(0.4,0,0.2,1);opacity:0;transform:translateY(40px) scale(0.95);display:flex;flex-direction:row;align-items:center;gap:32px;}
+/* CAROUSEL CARD SYSTEM & STACKED DECK */
+.carousel-container{position:relative;flex:1;max-width:480px;display:flex;flex-direction:column;}
+.carousel-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:block;text-align:left;}
+.carousel-wrap{position:relative;width:100%;height:280px;perspective:1000px;margin:0;}
+.carousel-wrap::before, .carousel-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.015);
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.carousel-wrap::before {
+  transform: rotate(-1.5deg) translate(4px, 6px);
+  z-index: 1;
+}
+.carousel-wrap::after {
+  transform: rotate(2deg) translate(-2px, 3px);
+  z-index: 2;
+}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;box-sizing:border-box;background:white;border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.02);transition:all .6s cubic-bezier(0.16, 1, 0.3, 1);opacity:0;transform:translateY(24px) scale(0.96);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;overflow:hidden;z-index:10;}
 .slide.active{opacity:1;transform:translateY(0) scale(1);z-index:10;}
-.slide.prev{opacity:0;z-index:5;}
-.slide-content{flex:1;text-align:left;}
-.slide-tag{display:inline-block;background:var(--bg);color:var(--soft);border:1px solid var(--border);font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.05em;margin-bottom:16px;}
-.slide-h{font-family:'Inter',sans-serif;font-size:26px;font-weight:700;letter-spacing:-1px;color:var(--ink);line-height:1.2;margin-bottom:12px;}
-.slide-p{font-size:15px;color:var(--muted);line-height:1.6;font-weight:400;}
-.slide-ai{text-align:left;font-size:12px;font-weight:600;color:var(--primary);padding-left:32px;border-left:1px solid var(--border);flex-shrink:0;width:200px;}
+.slide.prev{opacity:0;transform:translateY(-24px) scale(0.96);z-index:5;}
+.slide-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px;}
+.slide-tag{display:inline-block;background:var(--bg);color:var(--soft);border:1px solid var(--border);font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;}
+.slide-ai{display:inline-flex;align-items:center;background:rgba(5,150,105,.06);color:var(--primary);border:1px solid rgba(5,150,105,.12);font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.02em;}
+.slide-h{font-family:'Inter',sans-serif;font-size:23px;font-weight:800;letter-spacing:-0.75px;color:var(--ink);line-height:1.25;margin:0;}
+.slide-p{font-size:14px;color:var(--muted);line-height:1.6;font-weight:400;margin:0;}
 
 .strip{background:transparent;color:var(--ink);padding:100px 6% 30px;display:flex;gap:40px;flex-wrap:wrap;align-items:center;justify-content:center;font-size:14px;font-weight:600;}
 .strip-item{display:flex;align-items:center;gap:8px;}.strip-item span{color:var(--primary);}
@@ -91,8 +118,6 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);background:transparent;flex-wrap:wrap;gap:10px;}
 .fl{display:flex;gap:20px;}.fl a{color:var(--muted);text-decoration:none;}.fl a:hover{color:var(--primary);}
 @media(max-width:900px){
-  .slide{flex-direction:column;align-items:flex-start;gap:16px;}
-  .slide-ai{width:100%;border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:16px;}
   .process-inner{grid-template-columns:1fr;gap:48px;}
   .process-left{position:static;}
   .step-number{font-size:40px;}
@@ -102,8 +127,8 @@ footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-c
   .nav-cta{display:none;}
   .hamburger{display:block;}
 
-  /* 1. Hero — reduce top space, left-align everything */
-  .hero{padding:48px 6% 0;align-items:flex-start;text-align:left;}
+  /* 1. Hero — single column on mobile */
+  .hero{padding:60px 6% 40px;flex-direction:column;gap:0;}
 
   /* 2. Badge — don't stretch full width */
   .h-eyebrow{align-self:flex-start;width:auto;margin-bottom:16px;}
@@ -121,12 +146,13 @@ footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-c
   .h-btns .btn-ghost{width:auto;border:none;background:none;padding:0;color:var(--primary);text-decoration:underline;font-size:14px;text-transform:none;letter-spacing:0;box-shadow:none;text-align:left;align-self:flex-start;}
   .h-trust{flex-direction:column;gap:6px;align-items:flex-start;font-size:12px;}
 
-  /* 6. Carousel — auto height, no clipping */
-  .carousel-wrap{height:auto;min-height:160px;margin:32px auto -50px;}
-  .slide{padding:20px 24px;}
-  .slide-h{font-size:20px;}
-  .slide-p{font-size:13px;}
-  .slide-ai{font-size:11px;padding-top:12px;}
+  /* 6. Carousel — mobile sizing */
+  .carousel-wrap{height:280px;max-width:100%;margin:40px 0 0 0;}
+  .slide{padding:24px;gap:10px;}
+  .slide-meta{gap:6px;}
+  .slide-h{font-size:19px;letter-spacing:-0.5px;}
+  .slide-p{font-size:13px;line-height:1.5;}
+  .slide-tag, .slide-ai{font-size:10px;padding:3px 8px;}
 
   /* 7. Strip — tighter */
   .strip{flex-direction:column;gap:10px;padding:48px 6% 16px;text-align:center;}
@@ -159,21 +185,23 @@ footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-c
 <body>
 
 <nav>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
+    <a href="waitlist.html">Join Waitlist</a>
   </div>
-  <a href="waitlist.html" class="nav-cta">Join waitlist</a>
+  <a href="explore.html" class="nav-cta">Explore Opportunities</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
-    <a href="waitlist.html" class="mob-cta">Join waitlist →</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
   </div>
 </nav>
 <script>
@@ -188,115 +216,121 @@ function toggleMenu(){
 
 <section class="hero">
   <div class="hero-text">
-    <div class="h-eyebrow">For students, fresh graduates & early earners</div>
-    <h1 class="h-h1">What if you could <em>earn</em><br>before your first job?</h1>
-    <p class="h-sub">We map your skills, location, and free time to real opportunities you can start tomorrow. No capital needed. No guesswork.</p>
+    <div class="h-eyebrow">
+      <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+      For students, fresh graduates &amp; early earners
+    </div>
+    <h1 class="h-h1"><em>₹0 budget.</em><br>10 free hours a week.<br>Here's your first income stream.</h1>
+    <p class="h-sub">Turn your free time into income — matched to your budget, location, and schedule. No fluff, no investment needed.</p>
     <div class="h-btns">
-      <a href="waitlist.html" class="btn" style="font-size:16px;padding:18px 40px;">Show me my opportunities →</a>
-      <a href="how-it-works.html" class="btn-ghost" style="padding:15px 26px;">See how it works</a>
+      <a href="explore.html" class="btn" style="font-size:16px;padding:18px 40px;">Explore Opportunities →</a>
     </div>
     <div class="h-trust">
-      <div><span>✓</span> Free</div>
-      <div><span>✓</span> 30-second sign-up</div>
+      <div><span>✓</span> No credit card required</div>
+      <div><span>✓</span> 1,200+ students matched</div>
       <div><span>✓</span> No spam ever</div>
     </div>
   </div>
   
-  <div class="carousel-wrap">
-    <div class="slide active">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #1</div>
+  <div class="carousel-container">
+    <span class="carousel-label">Your top match today →</span>
+    <div class="carousel-wrap">
+      <div class="slide active">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #1</span>
+          <span class="slide-ai">◈ 98% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Tech Support for Seniors</h3>
         <p class="slide-p">Help elderly people set up phones, use UPI, or fix software issues in your neighbourhood. Zero capital required.</p>
       </div>
-      <div class="slide-ai">◈ 98% Match for Tier-2 Students with 0 Capital</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #2</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #2</span>
+          <span class="slide-ai">◈ 95% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Academic Proofreading</h3>
         <p class="slide-p">Review and format project reports, theses, and essays for other students. High demand during submission seasons.</p>
       </div>
-      <div class="slide-ai">◈ 95% Match for University Students with flexible hours</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #3</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #3</span>
+          <span class="slide-ai">◈ 92% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Part-time Tourist Guide</h3>
         <p class="slide-p">Lead local heritage or food tours on weekends. No capital needed, just local knowledge and good communication.</p>
       </div>
-      <div class="slide-ai">◈ 92% Match for History/Arts students in heritage cities</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #4</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #4</span>
+          <span class="slide-ai">◈ 94% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">AI Prompt Freelancing</h3>
         <p class="slide-p">Businesses need people who know how to get results from ChatGPT and Claude. Sell prompt packs or consult hourly.</p>
       </div>
-      <div class="slide-ai">◈ 94% Match for Tech-Savvy Students</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #5</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #5</span>
+          <span class="slide-ai">◈ 91% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Local SEO for Small Shops</h3>
         <p class="slide-p">Set up Google Business profiles, add photos, get reviews for restaurants and clinics. Each client takes 3 hours.</p>
       </div>
-      <div class="slide-ai">◈ 91% Match for Business/Marketing Students</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #6</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #6</span>
+          <span class="slide-ai">◈ 99% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Late-Night Hostel Delivery</h3>
         <p class="slide-p">Take orders on WhatsApp after 10 PM when canteens close. Source snacks wholesale. Delivery radius = 10 min on a cycle.</p>
       </div>
-      <div class="slide-ai">◈ 99% Match for Campus Residents</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #7</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #7</span>
+          <span class="slide-ai">◈ 88% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Resume & LinkedIn Makeovers</h3>
         <p class="slide-p">Final-year students and freshers pay for a resume that gets calls. Pair it with a LinkedIn profile rewrite.</p>
       </div>
-      <div class="slide-ai">◈ 88% Match for HR/Communications Students</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #8</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #8</span>
+          <span class="slide-ai">◈ 96% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Vernacular Content Creation</h3>
         <p class="slide-p">Telugu, Tamil, Marathi, Kannada content is massively undersupplied. Brands pay more than English creators.</p>
       </div>
-      <div class="slide-ai">◈ 96% Match for Regional Language Speakers</div>
-    </div>
-    <div class="slide">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #9</div>
+      <div class="slide">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #9</span>
+          <span class="slide-ai">◈ 89% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">Thrift & Resell on Instagram</h3>
         <p class="slide-p">Source second-hand clothes, style, photograph, and resell. Eco-angle gets you organic press and loyal buyers.</p>
       </div>
-      <div class="slide-ai">◈ 89% Match for Fashion/Design Students</div>
-    </div>
-    <div class="slide prev">
-      <div class="slide-content">
-        <div class="slide-tag">Invisible Opportunity #10</div>
+      <div class="slide prev">
+        <div class="slide-meta">
+          <span class="slide-tag">Invisible Opportunity #10</span>
+          <span class="slide-ai">◈ 97% Match <span style="font-size:9.5px;margin-left:4px;opacity:0.65;font-weight:500;">(Based on profile)</span></span>
+        </div>
         <h3 class="slide-h">AI-Powered Study Material Maker</h3>
         <p class="slide-p">Use AI to convert textbook chapters into flashcards, MCQs, and summaries. Sell semester packs on WhatsApp.</p>
       </div>
-      <div class="slide-ai">◈ 97% Match for Top-performing Students</div>
     </div>
   </div>
 </section>
+</section>
 
 <div class="strip">
-  <div class="strip-item"><span>✓</span> Free to start</div>
+  <div class="strip-item"><span>✓</span> No credit card required</div>
   <div class="strip-item"><span>✓</span> Based on Indian markets</div>
   <div class="strip-item"><span>✓</span> 0-capital options included</div>
-  <div class="strip-item"><span>✓</span> Quick free sign-up</div>
+  <div class="strip-item"><span>✓</span> 30-second registration</div>
 </div>
 
 <section class="mission">
-  <div class="m-icon" style="margin-bottom:24px;"><img src="logo.png" alt="BizFit Logo" style="height:60px; width:auto; display:inline-block;"></div>
+  <div class="m-icon" style="margin-bottom:24px;"><img src="logo.png" alt="Aptova Logo" style="height:60px; width:auto; display:inline-block;"></div>
   <h2 class="m-h2">The right opportunity shouldn't come down to luck or connections.</h2>
-  <p class="m-p">Every student hits the employment wall. But starting something of your own shouldn't mean blindly following trends or risking money you don't have. We built BizFit to strip away the guesswork and give you an honest, mathematical validation of what you can actually do with the resources you have today.</p>
+  <p class="m-p">Every student hits the employment wall. But starting something of your own shouldn't mean blindly following trends or risking money you don't have. We built Aptova to strip away the guesswork and give you an honest, mathematical validation of what you can actually do with the resources you have today.</p>
 </section>
 
 <!-- ===== THE REALITY SECTION ===== -->
@@ -374,7 +408,7 @@ function toggleMenu(){
         <p class="poll-results-head">How students chose their last opportunity</p>
         <div class="poll-results-rows"></div>
         <div class="survey-note">Benchmark: survey of 200 students &amp; recent graduates across India — 2024</div>
-        <a href="waitlist.html" class="poll-cta">Want a fit-based pick next time? Join the waitlist →</a>
+        <a href="waitlist.html" class="poll-cta">Want a fit-based pick next time? Join the Waitlist →</a>
       </div>
     </div>
   </div>
@@ -686,22 +720,22 @@ function toggleMenu(){
 
 <section class="final">
   <h2 class="final-h">Ready to find your<br><em>perfect fit?</em></h2>
-  <p class="final-sub">We're opening early access to just 1,000 students. Every AI report uses real compute — capping the beta keeps it free and fast for everyone.</p>
+  <p class="final-sub">We're opening early access to just 1,000 students. Every AI report uses real compute — capping the beta keeps early access fast and accessible.</p>
   <div class="final-incentive"><span>🤝</span> Early members get direct access to the founding team + priority support</div><br>
-  <a href="waitlist.html" class="btn" style="font-size:16px;padding:16px 44px;margin:0 auto;">Start before everyone else →</a>
+  <a href="waitlist.html" class="btn" style="font-size:16px;padding:16px 44px;margin:0 auto;">Join the Waitlist →</a>
 </section>
 
 <footer>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="logo.png" alt="" style="height:34px;width:auto;margin-top:0px;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="fl">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
-    <a href="waitlist.html">Join waitlist</a>
-    <a href="mailto:hello@bizfit.com">Ask a question</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="mailto:hello@Aptova.com">Ask a question</a>
   </div>
-  <div>© 2026 BizFit · Made for the Students by the Students</div>
+  <div>© 2026 Aptova · Made for the Students by the Students</div>
 </footer>
 
 <script>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How it Works — BizFit</title>
-<meta name="description" content="BizFit uses AI to map your skills, budget, and location to 135+ real opportunities. See the 3-stage process — profiling, matching, and validation.">
+<title>How it Works — Aptova</title>
+<meta name="description" content="Aptova uses AI to map your skills, budget, and location to 135+ invisible opportunities. See the 3-stage process — profiling, matching, and validation.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -24,7 +24,7 @@
 html{scroll-behavior:smooth;}
 body{background-color:var(--bg);background-image:url("wavy_grid.svg");background-size:1200px 1200px;background-position:top center;background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 6%;background:rgba(248,250,252,.9);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
-.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-soon{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.1);padding:2px 7px;border-radius:999px;margin-left:4px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;background:var(--primary);border:1px solid var(--phov);padding:3px 8px;border-radius:999px;margin-left:6px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;box-shadow:0 2px 8px rgba(5,150,105,.3);}
 .nav-links{display:flex;gap:26px;}.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--primary);color:white;border:none;padding:10px 24px;border-radius:50px;font-weight:600;font-size:13px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:.02em;transition:all .2s;box-shadow:0 4px 12px rgba(5,150,105,.25);}.nav-cta:hover{background:var(--phov);transform:translateY(-1px);}
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;font-size:24px;color:var(--ink);line-height:1;z-index:110;font-family:'Inter',sans-serif;}
@@ -230,7 +230,7 @@ footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-c
   .bar-track{height:10px;}
   .bar-num{position:absolute;right:0;top:0;font-size:13px;width:auto;text-align:right;}
   /* Comparison */
-  .why-bizfit{padding:60px 6%;}
+  .why-Aptova{padding:60px 6%;}
   .wb-heading{font-size:28px;}
   .wb-card{padding:24px 20px;}
   .wb-list li{font-size:13px;}
@@ -267,21 +267,23 @@ footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-c
 <body>
 
 <nav>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
+    <a href="waitlist.html">Join Waitlist</a>
   </div>
-  <a href="waitlist.html" class="nav-cta">Join waitlist</a>
+  <a href="explore.html" class="nav-cta">Explore Opportunities</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
-    <a href="waitlist.html" class="mob-cta">Join waitlist →</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
   </div>
 </nav>
 <script>
@@ -296,14 +298,14 @@ function toggleMenu(){
 <section class="ph">
   <div class="eyebrow-badge">How it works</div>
   <h1 class="ph-h1">The best opportunity isn't the one that is trending.<br>It's the one that <span class="accent">fits you.</span></h1>
-  <p class="ph-sub">BizFit removes the emotion from finding your opportunity. We turn your unique skills, schedule, and budget into structured data and map them against real-world requirements.</p>
+  <p class="ph-sub">Aptova removes the guesswork from finding your opportunity. We turn your skills, schedule, and budget into structured data — and match them against real-world requirements.</p>
 </section>
 
 <section class="problem">
   <div class="prob-two">
     <div class="prob-text">
-      <h2>The Problem: When Advice Doesn't Match Reality</h2>
-      <p>Most students are told to "start a blog" or "learn to code." But standard advice completely ignores your actual constraints—like having zero capital, needing to study 6 hours a day, or living in a tier-3 city where specific demands don't exist.</p>
+      <h2>The Problem: Everyone Gets the Same Advice</h2>
+      <p>Most guides tell you to "start a blog" or "learn to code" — the same tips regardless of who you are, where you live, or what you actually have. Your city, your capital, your hours, and your skills are completely ignored.</p>
       <div class="stat-pair">
         <div class="stat">
           <div class="stat-num">73%</div>
@@ -362,8 +364,8 @@ function toggleMenu(){
 </section>
 
 <style>
-/* WHY BIZFIT COMPARISON SECTION */
-.why-bizfit {
+/* WHY Aptova COMPARISON SECTION */
+.why-Aptova {
   padding: 88px 6%;
   background: #18120C url("wavy_grid.svg");
   background-size: 1200px 1200px;
@@ -372,7 +374,7 @@ function toggleMenu(){
   position: relative;
   overflow: hidden;
 }
-.why-bizfit::before {
+.why-Aptova::before {
   content: '';
   position: absolute;
   top: -120px;
@@ -463,9 +465,9 @@ function toggleMenu(){
 }
 </style>
 
-<section class="why-bizfit" id="why-bizfit">
+<section class="why-Aptova" id="why-Aptova">
   <div class="wb-header">
-    <div class="wb-eyebrow">Why BizFit</div>
+    <div class="wb-eyebrow">Why Aptova</div>
     <h2 class="wb-heading">What makes this different</h2>
   </div>
 
@@ -482,15 +484,15 @@ function toggleMenu(){
       </ul>
     </div>
 
-    <!-- Right card — what BizFit does -->
+    <!-- Right card — what Aptova does -->
     <div class="wb-card right">
-      <div class="wb-card-eyebrow">What BizFit does</div>
+      <div class="wb-card-eyebrow">What Aptova does</div>
       <ul class="wb-list">
         <li><span class="wb-icon check">✓</span>AI-powered — adaptive questions, no two interviews the same</li>
         <li><span class="wb-icon check">✓</span>Matches 135+ opportunities including ones most people never consider</li>
         <li><span class="wb-icon check">✓</span>Validation tells you your real readiness before you commit</li>
         <li><span class="wb-icon check">✓</span>Scored against your exact location, capital, and time</li>
-        <li><span class="wb-icon check">✓</span>Free — not a commercial product, no hidden agenda</li>
+        <li><span class="wb-icon check">✓</span>No credit card required — get started in under 2 minutes</li>
       </ul>
     </div>
   </div>
@@ -835,7 +837,7 @@ function toggleMenu(){
       <div class="rp-eyebrow">Know Before You Commit</div>
       <h2 class="rp-heading">What your opportunity report looks like</h2>
       <p class="rp-body">Your report tells you exactly where you stand — not just whether to go ahead, but what to fix before you do. Honest. Specific. Based on your situation.</p>
-      <a href="waitlist.html" class="rp-btn">Get mine free &nbsp;→</a>
+      <a href="waitlist.html" class="rp-btn">Get mine &nbsp;→</a>
     </div>
 
     <!-- RIGHT -->
@@ -871,7 +873,7 @@ function toggleMenu(){
   <div class="areas-header">
     <div class="areas-eyebrow">Where Your Opportunity Could Be</div>
     <h2 class="areas-heading">8 areas to explore.</h2>
-    <p class="areas-sub">Every opportunity on BizFit lives in one of these areas. Click any to explore what's possible.</p>
+    <p class="areas-sub">Every opportunity on Aptova lives in one of these areas. Click any to explore what's possible.</p>
   </div>
 
   <div class="areas-grid">
@@ -929,31 +931,31 @@ function toggleMenu(){
   <h2 class="h2">Answers to what<br>you're probably thinking</h2>
   <div class="faq-list">
     <div class="faq-item">
-      <div class="faq-q" onclick="tog(this)">Is BizFit free to use? <span class="faq-icon">+</span></div>
-      <div class="faq-a">Yes — your first assessment and matched opportunities are completely free. Because our AI engine uses real computing power for every report, we do have a fair-usage limit to keep things sustainable. For most students, the free tier is more than enough. If you need additional assessments, we'll offer affordable options — but the core experience will always be accessible.</div>
+      <div class="faq-q" onclick="tog(this)">Is Aptova free to use? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Your first assessment is available at no cost — no credit card required. Because every report is powered by AI and uses real computing resources, we apply a fair-usage limit to keep the platform running. Most users will never hit that cap. If you need additional assessments beyond the limit, we'll offer affordable options — but getting started costs you nothing.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="tog(this)">How many business opportunities does BizFit actually cover? <span class="faq-icon">+</span></div>
+      <div class="faq-q" onclick="tog(this)">How many business opportunities does Aptova actually cover? <span class="faq-icon">+</span></div>
       <div class="faq-a">135+ at launch across 11 opportunity domains — technology, campus, services, creative, commerce, health, eco, agriculture, food, education, and wildcard ideas. We add new opportunities every month based on what users tell us they need.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="tog(this)">Do I need to create an account? <span class="faq-icon">+</span></div>
-      <div class="faq-a">Yes — a free account is required to start your assessment. This lets us save your results so you can revisit them anytime, send you your matched opportunities, and manage fair usage so the platform stays free for everyone. Sign-up takes under 30 seconds — just your name and email.</div>
+      <div class="faq-a">Yes — a free account is required to start your assessment. Sign-up takes under 2 minutes and needs your name, email, and phone number. Your phone number is used to verify your account via OTP and for secure password resets — we don't use it for marketing. This also lets us save your results so you can revisit them anytime.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="tog(this)">How accurate are the recommendations? <span class="faq-icon">+</span></div>
-      <div class="faq-a">The quality of your results depends on how honestly you answer. BizFit uses a structured scoring system — not random AI guesses. The more accurate your inputs, the more reliable the output. We also show the reasons behind every recommendation so you can judge for yourself.</div>
+      <div class="faq-a">The quality of your results depends on how honestly you answer. Aptova uses a structured scoring system — not random AI guesses. The more accurate your inputs, the more reliable the output. We also show the reasons behind every recommendation so you can judge for yourself.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="tog(this)">What if I have no money to invest? <span class="faq-icon">+</span></div>
-      <div class="faq-a">BizFit covers many opportunities that start with ₹0. Tourist guiding, tech support for seniors, vernacular content creation, hyperlocal delivery — these need skills and time, not capital. BizFit will surface these for you if your profile fits.</div>
+      <div class="faq-a">Aptova covers many opportunities that start with ₹0. Tourist guiding, tech support for seniors, vernacular content creation, hyperlocal delivery — these need skills and time, not capital. Aptova will surface these for you if your profile fits.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="tog(this)">Can I suggest a business type that isn't covered yet? <span class="faq-icon">+</span></div>
-      <div class="faq-a">Yes — and we actively want you to. On the waitlist form, there's a field to suggest opportunities. Every suggestion is reviewed, and the most-requested ones are added in the next update.</div>
+      <div class="faq-q" onclick="tog(this)">Can I suggest an opportunity type that isn't covered yet? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes — and we built a dedicated space for this. On the Explore Opportunities page, you'll find a "Suggest an Opportunity" button that opens a short submission form. Every suggestion goes to our admin team for review. Approved ideas are added to the live list in the next update. It's your platform — help us make it more complete.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="tog(this)">When is BizFit launching? <span class="faq-icon">+</span></div>
+      <div class="faq-q" onclick="tog(this)">When is Aptova launching? <span class="faq-icon">+</span></div>
       <div class="faq-a">We're targeting mid-2026. Waitlist members get early access before the public launch, and their feedback directly shapes what we build and fix in the first few weeks.</div>
     </div>
     <div class="faq-item">
@@ -1075,7 +1077,7 @@ async function submitQuestion() {
 }
 
 function castVote(idx) {
-  localStorage.setItem('bizfit_poll_voted', idx);
+  localStorage.setItem('Aptova_poll_voted', idx);
   showPollResults(idx);
 }
 
@@ -1124,7 +1126,7 @@ if (document.readyState === 'loading') {
 }
 
 function checkSavedPoll() {
-  const savedVote = localStorage.getItem('bizfit_poll_voted');
+  const savedVote = localStorage.getItem('Aptova_poll_voted');
   if (savedVote !== null) {
     showPollResults(savedVote);
   }
@@ -1132,16 +1134,16 @@ function checkSavedPoll() {
 </script>
 
 <footer>
-  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="logo.png" alt="" style="height:34px;width:auto;margin-top:0px;transform:scale(1.1);transform-origin:left center;"> Biz<span>Fit</span><small class="logo-soon">Coming soon</small></a>
+  <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;">Apt<span style="color:var(--primary);">ova</span></span><small class="logo-badge">Early Access</small></a>
   <div class="fl">
     <a href="index.html">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="explore.html">Explore Opportunities</a>
     <a href="about.html">About Us</a>
-    <a href="waitlist.html">Join waitlist</a>
-    <a href="mailto:hello@bizfit.com">Ask a question</a>
+    <a href="waitlist.html">Join Waitlist</a>
+    <a href="mailto:hello@Aptova.com">Ask a question</a>
   </div>
-  <div>© 2026 BizFit · Made for the Students by the Students</div>
+  <div>© 2026 Aptova · Made for the Students by the Students</div>
 </footer>
 </body>
 </html>

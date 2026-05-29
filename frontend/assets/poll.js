@@ -2,7 +2,7 @@
   // Replace with your Formspree form ID for poll votes (can differ from waitlist form).
   var FORMSPREE_POLL_ID = 'YOUR_POLL_FORM_ID';
 
-  var STORAGE_KEY = 'bizfit_poll_vote';
+  var STORAGE_KEY = 'aptova_poll_vote';
 
   var OPTIONS = [
     { id: 'saw_someone', label: 'Saw someone else do it', pct: 41 },
