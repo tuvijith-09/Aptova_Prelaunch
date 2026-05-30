@@ -57,7 +57,71 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .tier-badge{display:none;align-items:center;font-size:12px;font-weight:600;color:var(--primary);background:var(--plight);border:1px solid #6EE7B7;padding:4px 12px;border-radius:999px;margin-top:4px;width:fit-content}
 .filter-invest{min-width:260px;max-width:360px;flex:2}
 .invest-value{font-size:14px;font-weight:700;color:var(--ink)}
-.invest-slider{width:100%;height:6px;accent-color:var(--primary);cursor:pointer}
+.range-slider-container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+}
+.slider-track {
+  position: absolute;
+  height: 6px;
+  left: 0;
+  right: 0;
+  background: var(--border);
+  border-radius: 3px;
+  z-index: 1;
+}
+.slider-track-fill {
+  position: absolute;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 3px;
+  z-index: 2;
+}
+.invest-slider {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+  z-index: 3;
+  margin: 0;
+  outline: none;
+}
+.invest-slider::-webkit-slider-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2.5px solid white;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  transition: transform 0.1s;
+}
+.invest-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.invest-slider::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2.5px solid white;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  transition: transform 0.1s;
+}
+.invest-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
 .slider-ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:2px}
 .filter-bar{padding:12px 6% 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;scrollbar-width:none}
 .filter-bar::-webkit-scrollbar{display:none}
@@ -272,10 +336,15 @@ function toggleMenu(){
       <span class="tier-badge" id="tierBadge"></span>
     </div>
     <div class="filter-group filter-invest">
-      <span class="filter-label">Max investment</span>
-      <span class="invest-value" id="investLabel">Up to ₹5,00,000</span>
-      <input type="range" class="invest-slider" id="investSlider" min="0" max="500000" step="5000" value="500000" aria-label="Maximum investment in rupees">
-      <div class="slider-ticks"><span>₹0</span><span>₹5L</span></div>
+      <span class="filter-label">Investment range</span>
+      <span class="invest-value" id="investLabel">₹0 to ₹1,00,000</span>
+      <div class="range-slider-container">
+        <div class="slider-track"></div>
+        <div class="slider-track-fill"></div>
+        <input type="range" class="invest-slider" id="investSliderMin" min="0" max="100000" step="2000" value="0" aria-label="Minimum investment in rupees">
+        <input type="range" class="invest-slider" id="investSliderMax" min="0" max="100000" step="2000" value="100000" aria-label="Maximum investment in rupees">
+      </div>
+      <div class="slider-ticks"><span>₹0</span><span>₹1L</span></div>
     </div>
   </div>
   <div class="filter-bar">
@@ -595,9 +664,31 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 var activeCat = 'all';
 
-function updateInvestLabel() {
-  var val = parseInt(document.getElementById('investSlider').value, 10);
-  var label = val >= 500000 ? 'Up to ₹5,00,000' : 'Up to ' + formatRupee(val);
+function updateSliderFill() {
+  var minSlider = document.getElementById('investSliderMin');
+  var maxSlider = document.getElementById('investSliderMax');
+  var trackFill = document.querySelector('.slider-track-fill');
+  
+  var minVal = parseInt(minSlider.value, 10);
+  var maxVal = parseInt(maxSlider.value, 10);
+  
+  if (minVal > maxVal - 2000) {
+    if (this === minSlider) {
+      minSlider.value = maxVal - 2000;
+    } else {
+      maxSlider.value = minVal + 2000;
+    }
+    minVal = parseInt(minSlider.value, 10);
+    maxVal = parseInt(maxSlider.value, 10);
+  }
+  
+  var percentMin = (minVal / 100000) * 100;
+  var percentMax = (maxVal / 100000) * 100;
+  
+  trackFill.style.left = percentMin + '%';
+  trackFill.style.right = (100 - percentMax) + '%';
+  
+  var label = formatRupee(minVal) + ' to ' + (maxVal >= 100000 ? '₹1,00,000+' : formatRupee(maxVal));
   document.getElementById('investLabel').textContent = label;
 }
 
@@ -617,7 +708,8 @@ function applyFilters() {
   var cityKey = document.getElementById('cityFilter').value;
   var tierInfo = CITY_TIERS[cityKey] || CITY_TIERS[''];
   var activeTier = tierInfo.tier;
-  var maxInvest = parseInt(document.getElementById('investSlider').value, 10);
+  var minInvest = parseInt(document.getElementById('investSliderMin').value, 10);
+  var maxInvest = parseInt(document.getElementById('investSliderMax').value, 10);
   var tierBadge = document.getElementById('tierBadge');
   if (cityKey && tierInfo.label) {
     tierBadge.textContent = 'Showing ' + tierInfo.label + ' opportunities';
@@ -638,7 +730,7 @@ function applyFilters() {
       var idx = parseInt(card.getAttribute('data-idx'), 10);
       var item = DATA[idx];
       var matchSearch = !q || card.getAttribute('data-name').includes(q);
-      var matchInvest = item.capNum <= maxInvest;
+      var matchInvest = item.capNum >= minInvest && item.capNum <= maxInvest;
       var matchTier = activeTier === null || item.tiers.indexOf(activeTier) !== -1;
       var show = matchSearch && matchInvest && matchTier;
       card.style.display = show ? '' : 'none';
@@ -651,11 +743,25 @@ function applyFilters() {
 
 function setupExploreFilters() {
   document.getElementById('cityFilter').addEventListener('change', applyFilters);
-  document.getElementById('investSlider').addEventListener('input', function () {
-    updateInvestLabel();
+  
+  var minSlider = document.getElementById('investSliderMin');
+  var maxSlider = document.getElementById('investSliderMax');
+  
+  minSlider.addEventListener('input', function () {
+    minSlider.style.zIndex = '4';
+    maxSlider.style.zIndex = '3';
+    updateSliderFill.call(this);
     applyFilters();
   });
-  updateInvestLabel();
+  
+  maxSlider.addEventListener('input', function () {
+    maxSlider.style.zIndex = '4';
+    minSlider.style.zIndex = '3';
+    updateSliderFill.call(this);
+    applyFilters();
+  });
+  
+  updateSliderFill();
 }
 
 enrichOpportunityData(DATA);
