@@ -1,9 +1,9 @@
-"""
+﻿"""
 models.py
 ---------
-SQLAlchemy ORM models for BizFit.
+SQLAlchemy ORM models for Aptova.
 Every class here maps to one table in the MySQL database.
-The column names and types match bizfit_database_fixed.sql exactly.
+The column names and types match Aptova_database_fixed.sql exactly.
 """
 
 import uuid

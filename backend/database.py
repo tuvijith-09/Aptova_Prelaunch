@@ -1,7 +1,7 @@
-"""
+﻿"""
 database.py
 -----------
-Handles the database connection for BizFit.
+Handles the database connection for Aptova.
 Uses SQLAlchemy to connect FastAPI to MySQL.
 Reads credentials from the .env file — never hardcoded.
 """
@@ -18,8 +18,8 @@ load_dotenv()
 
 DB_HOST     = os.getenv("DB_HOST", "localhost")
 DB_PORT     = os.getenv("DB_PORT", "3306")
-DB_NAME     = os.getenv("DB_NAME", "bizfit_db")
-DB_USER     = os.getenv("DB_USER", "bizfit_app")
+DB_NAME     = os.getenv("DB_NAME", "Aptova_db")
+DB_USER     = os.getenv("DB_USER", "Aptova_app")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 
 # ----------------------------------------------------------------

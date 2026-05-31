@@ -1,4 +1,4 @@
-"""
+﻿"""
 main.py — Aptova Prelaunch Backend
 Only 3 endpoints for the 3 static page forms:
   POST /waitlist    → waitlist.html
@@ -29,7 +29,7 @@ load_dotenv()
 
 DB_HOST         = os.getenv("DB_HOST", "localhost")
 DB_PORT         = os.getenv("DB_PORT", "3306")
-DB_NAME         = os.getenv("DB_NAME", "bizfit_db")
+DB_NAME         = os.getenv("DB_NAME", "Aptova_db")
 DB_USER         = os.getenv("DB_USER", "root")
 DB_PASSWORD     = os.getenv("DB_PASSWORD", "")
 DOWNLOAD_SECRET = os.getenv("DOWNLOAD_SECRET", "aptova2026")
