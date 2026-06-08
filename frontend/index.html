@@ -200,7 +200,7 @@
       background: white;
       border: 1px solid var(--border);
       border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, .015);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .0155);
       pointer-events: none;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -418,6 +418,269 @@
       font-weight: 400;
     }
 
+    /* ===== THE REALITY SECTION ===== */
+    .reality-sec {
+      padding: 100px 6%;
+      background: white;
+      /* Perfectly clean layout background */
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reality-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 72px;
+      align-items: start;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .reality-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .reality-h {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .reality-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 460px;
+    }
+
+    .reality-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .rs-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .rs-num {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      min-width: 100px;
+      flex-shrink: 0;
+    }
+
+    .rs-text {
+      font-size: 14px;
+      color: var(--soft);
+      line-height: 1.55;
+    }
+
+    .rs-src {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .survey-card {
+      background: #FAF9F6;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .survey-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .survey-row {
+      margin-bottom: 14px;
+    }
+
+    .survey-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .survey-label {
+      font-weight: 500;
+      color: var(--soft);
+    }
+
+    .survey-pct {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .survey-track {
+      background: var(--border);
+      border-radius: 20px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .survey-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--primary), #34D399);
+    }
+
+    .survey-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-style: italic;
+    }
+
+    .poll-question {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+
+    .poll-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .poll-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .poll-option:hover {
+      border-color: #6EE7B7;
+    }
+
+    .poll-option.is-selected {
+      border-color: var(--primary);
+      background: var(--pl);
+    }
+
+    .poll-option input {
+      margin: 0;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .poll-option-text {
+      font-size: 13px;
+      color: var(--soft);
+      line-height: 1.4;
+    }
+
+    .poll-submit {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      transition: background .2s, opacity .2s;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, .2);
+    }
+
+    .poll-submit:hover:not(:disabled) {
+      background: var(--phov);
+    }
+
+    .poll-submit:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .poll-results-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .poll-results-head {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+
+    .survey-row.is-yours .survey-label {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .poll-yours {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-left: 4px;
+    }
+
+    .survey-fill {
+      transition: width .6s ease;
+    }
+
+    .poll-cta {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .poll-cta:hover {
+      text-decoration: underline;
+    }
+
     .ideas {
       padding: 88px 6%;
       background: transparent;
@@ -597,6 +860,11 @@
 
       .step-number {
         font-size: 40px;
+      }
+
+      .reality-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
     }
 
@@ -808,6 +1076,16 @@
 
       .reality-sec {
         padding: 48px 6%;
+      }
+
+      .rs-num {
+        font-size: 28px;
+        min-width: 72px;
+      }
+
+      .reality-sub {
+        line-height: 1.5;
+        margin-bottom: 28px;
       }
 
       /* Ideas grid */
@@ -1123,14 +1401,6 @@
       color: var(--muted);
       border-color: var(--border);
     }
-
-    /* REMOVAL OF HIDDEN WAVY/GRID BACKGROUND ASSETS */
-    .reality-sec {
-      padding: 100px 6%;
-      background: white;
-      /* Removed hidden wavy grid svg artifact */
-      border-bottom: 1px solid var(--border);
-    }
   </style>
 </head>
 
@@ -1343,6 +1613,7 @@
       honest, AI validation of what you can actually do with the resources you have today.</p>
   </section>
 
+  <!-- ===== THE REALITY SECTION ===== -->
   <section class="reality-sec" id="the-reality">
     <div class="reality-inner">
       <div>
@@ -1392,6 +1663,7 @@
     </div>
   </section>
 
+  <!-- ===== THE PROCESS SECTION ===== -->
   <style>
     .process-section {
       padding: 100px 6%;
@@ -1568,6 +1840,7 @@
   <section class="process-section" id="the-process">
     <div class="process-inner">
 
+      <!-- LEFT COLUMN -->
       <div class="process-left">
         <div class="process-eyebrow">The Process</div>
         <h2 class="process-heading">Three steps from uncertainty to clarity</h2>
@@ -1576,8 +1849,10 @@
 
       </div>
 
+      <!-- RIGHT COLUMN -->
       <div class="process-right">
 
+        <!-- Step 1 -->
         <div class="process-step">
           <div class="step-number">1</div>
           <div class="step-body">
@@ -1588,6 +1863,7 @@
           </div>
         </div>
 
+        <!-- Step 2 -->
         <div class="process-step">
           <div class="step-number">2</div>
           <div class="step-body">
@@ -1598,6 +1874,7 @@
           </div>
         </div>
 
+        <!-- Step 3 -->
         <div class="process-step">
           <div class="step-number">3</div>
           <div class="step-body">
@@ -1611,6 +1888,8 @@
       </div>
     </div>
   </section>
+  <!-- ===== END THE PROCESS SECTION ===== -->
+
   <section class="ideas">
     <div class="i-top">
       <div>
@@ -1759,6 +2038,7 @@
     <div>© 2026 Aptova · Made for the Students by the Students</div>
   </footer>
 
+  <!-- MODAL -->
   <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
     <div class="modal" id="modalContainer" style="max-width: 560px; transition: max-width 0.3s ease;">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1875,7 +2155,7 @@
         else cat = "wow";
       }
 
-      var capNum = parseCapRupee(item.cap);
+      var @capNum = parseCapRupee(item.cap);
 
       var commitment = "5–10 hours/week";
       if (['service', 'resell', 'food', 'agri'].indexOf(cat) !== -1) {
@@ -2000,16 +2280,19 @@
 
           <div class="split-right">
             <div style="flex: 1; display: flex; flex-direction: column;">
+              <!-- Progress Indicator -->
               <div style="margin-bottom: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                   <h3 style="font-size: 15px; font-weight: 800; color: var(--ink);">Launch Roadmap</h3>
                   <span id="stepIndicatorText" style="font-size: 12px; font-weight: 700; color: var(--primary);">Step 1 of 3</span>
                 </div>
+                <!-- Step progress line -->
                 <div style="width: 100%; height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden; border: 1px solid var(--border);">
                   <div id="stepProgressBarFill" style="width: 33.33%; height: 100%; background: var(--primary); transition: width 0.3s ease;"></div>
                 </div>
               </div>
 
+              <!-- Step Cards Deck -->
               <div class="step-card-container" style="position: relative; min-height: 250px; margin-bottom: 20px; flex: 1;">
 
                 <div class="step-card" style="display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left;">
@@ -2017,6 +2300,7 @@
                   <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Gather Your Tools</h4>
                   <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">To run this opportunity successfully, make sure you have: <strong style="color: var(--primary);">${enriched.tools}</strong></p>
 
+                  <!-- Phase steps list -->
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                     <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
                       <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
@@ -2028,6 +2312,7 @@
                     </div>
                   </div>
 
+                  <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
                     <strong>💡 Pro-Tip:</strong> Download mobile versions of these tools to manage operations and reply to clients quickly while on campus.
                   </div>
@@ -2038,6 +2323,7 @@
                   <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Execute Launch Sequence</h4>
                   <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">Your very first launch action: <span style="font-weight: 600; color: var(--primary);">${enriched.firstStep}</span></p>
 
+                  <!-- Phase steps list -->
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                     <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
                       <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
@@ -2049,6 +2335,7 @@
                     </div>
                   </div>
 
+                  <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
                     <strong>💡 Pro-Tip:</strong> Your first sample is your credentials. Spend an extra hour making it look extremely polished. Quality sells itself.
                   </div>
@@ -2059,6 +2346,7 @@
                   <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Promote &amp; Connect</h4>
                   <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">Pitch your service to 5 local clients on WhatsApp, and join our community to generate detailed fit assessments.</p>
 
+                  <!-- Phase steps list -->
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                     <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
                       <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
@@ -2070,6 +2358,7 @@
                     </div>
                   </div>
 
+                  <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
                     <strong>💡 Pro-Tip:</strong> Offer your first client a "first-job free" or discounted trial in exchange for a testimonial or a Google Business review.
                   </div>
@@ -2078,6 +2367,7 @@
               </div>
             </div>
 
+            <!-- Controls and CTA -->
             <div>
               <div id="carouselControls" style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px;">
                 <button id="prevStepBtn" class="btn-step btn-step-secondary" disabled>← Back</button>
