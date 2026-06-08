@@ -10,265 +10,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #F8FAFC;
-      --bg2: #FFFFFF;
-      --ink: #0F172A;
-      --soft: #334155;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --primary: #059669;
-      --phov: #047857;
-      --pl: #D1FAE5;
-      --dark: #18120C;
-      --dark2: #221A12;
-      --dark3: #2A2018;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      background-image: url("wavy_grid.svg");
-      background-size: 1200px 1200px;
-      background-position: top center;
-      background-attachment: fixed;
-      color: var(--ink);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 13px 6%;
-      background: rgba(248, 250, 252, .92);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-    }
-
-    .logo {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--ink);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: var(--primary);
-    }
-
-    .logo-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: white;
-      background: var(--primary);
-      border: 1px solid var(--phov);
-      padding: 3px 8px;
-      border-radius: 999px;
-      margin-left: 6px;
-      line-height: 1.3;
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      box-shadow: 0 2px 8px rgba(5, 150, 105, .3);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 6px 0;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-links a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      text-shadow: 0 0 12px rgba(52, 168, 83, 0.4);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #34A853;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-      box-shadow: 0 0 8px rgba(52, 168, 83, 0.6);
-    }
-
-    .nav-links a.active::after,
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 9px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 13px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      transition: all .2s;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25);
-    }
-
-    .nav-cta:hover {
-      background: var(--phov);
-      transform: translateY(-1px);
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      font-size: 24px;
-      color: var(--ink);
-      line-height: 1;
-      z-index: 110;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .08);
-      padding: 16px 6% 24px;
-      flex-direction: column;
-      gap: 4px;
-      z-index: 105;
-      animation: menuSlide .25s ease-out;
-    }
-
-    .mobile-menu.open {
-      display: flex;
-    }
-
-    .mobile-menu a {
-      color: var(--soft);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      transition: all .2s;
-    }
-
-    .mobile-menu a:last-of-type {
-      border-bottom: none;
-    }
-
-    .mobile-menu a:hover {
-      color: var(--primary);
-    }
-
-    .mobile-menu a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      border-left: 3px solid #34A853;
-      padding-left: 12px !important;
-      background: rgba(52, 168, 83, 0.04);
-      box-shadow: inset 4px 0 12px rgba(52, 168, 83, 0.02);
-    }
-
-    .mobile-menu .mob-cta {
-      display: block;
-      text-align: center;
-      background: var(--primary);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      margin-top: 12px;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25);
-    }
-
-    @keyframes menuSlide {
-      from {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media(max-width:768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      .hamburger {
-        display: block;
-      }
-    }
-
-    /* HERO */
+/* HERO */
     .hero {
       padding: 80px 6% 72px;
       background: transparent;
@@ -585,60 +329,7 @@
       margin-bottom: 28px;
     }
 
-    .btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 14px 36px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all .2s;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      box-shadow: 0 8px 24px rgba(5, 150, 105, .25);
-    }
-
-    .btn:hover {
-      background: var(--phov);
-      transform: translateY(-1px);
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 24px 6%;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--muted);
-      background: transparent;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .fl {
-      display: flex;
-      gap: 20px;
-    }
-
-    .fl a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    .fl a:hover {
-      color: var(--primary);
-    }
-
-    @media(max-width:900px) {
+@media(max-width:900px) {
       .wb-inner {
         grid-template-columns: 1fr;
         gap: 48px;
@@ -650,11 +341,8 @@
     }
 
     @media(max-width:768px) {
-      .nav-links {
-        display: none;
-      }
 
-      .hero {
+.hero {
         padding: 60px 6% 48px;
       }
 
@@ -737,34 +425,23 @@
         padding: 60px 6%;
       }
 
-      footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-      }
-
-      .fl {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-      }
-    }
+}
   </style>
 </head>
 
 <body>
 
   <nav>
-    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt=""
+    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
         style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
         style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        class="logo-badge">ALPHA</small></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html" class="active">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
     </div>
     <a href="explore.html" class="nav-cta">Explore Opportunities</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
@@ -773,7 +450,7 @@
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html" class="active">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
       <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
     </div>
   </nav>
@@ -844,7 +521,7 @@
             <div class="disc-label">is enough to start several legitimate businesses in India</div>
           </div>
           <div class="disc-card">
-            <div class="disc-num">135+</div>
+            <div class="disc-num">200+</div>
             <div class="disc-label">real opportunities most students have never considered</div>
           </div>
         </div>
@@ -869,27 +546,27 @@
     <h2 class="final-h">Ready to find your<br><em>perfect fit?</em></h2>
     <p class="final-sub">We're opening early access to just 1,000 students. Every AI report uses real compute — capping
       the beta keeps early access fast and accessible.</p>
-    <a href="waitlist.html" class="btn">Claim your early spot →</a>
+    <a href="waitlist.html" class="btn">Join the community →</a>
   </section>
 
   <footer>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img
-        src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
+        src="Zero.svg" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
         style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        class="logo-badge">ALPHA</small></a>
     <div class="fl">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
       <a href="mailto:hello@Aptova.com">Ask a question</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms & Conditions</a>
     </div>
     <div>© 2026 Aptova · Made for the Students by the Students</div>
   </footer>
-
+  <script src="assets/early-access.js"></script>
 </body>
 
 </html>

@@ -6,251 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How it Works — Aptova</title>
   <meta name="description"
-    content="Aptova uses AI to map your skills, budget, and location to 135+ invisible opportunities. See the 3-stage process — profiling, matching, and validation.">
+    content="Aptova uses AI to map your skills, budget, and location to 200+ invisible opportunities. See the 3-stage process — profiling, matching, and validation.">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #F8FAFC;
-      --bg2: #FFFFFF;
-      --ink: #0F172A;
-      --soft: #334155;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --primary: #059669;
-      --phov: #047857;
-      --pl: #D1FAE5;
-      --dark: #022C22;
-      --dark2: #064E3B;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg);
-      background-image: url("wavy_grid.svg");
-      background-size: 1200px 1200px;
-      background-position: top center;
-      background-attachment: fixed;
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 13px 6%;
-      background: rgba(248, 250, 252, .9);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-    }
-
-    .logo {
-      font-family: 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: var(--primary);
-    }
-
-    .logo-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: white;
-      background: var(--primary);
-      border: 1px solid var(--phov);
-      padding: 3px 8px;
-      border-radius: 999px;
-      margin-left: 6px;
-      line-height: 1.3;
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 2px 8px rgba(5, 150, 105, .3);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 6px 0;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-links a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      text-shadow: 0 0 12px rgba(52, 168, 83, 0.4);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #34A853;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-      box-shadow: 0 0 8px rgba(52, 168, 83, 0.6);
-    }
-
-    .nav-links a.active::after,
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      transition: all .2s;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25);
-    }
-
-    .nav-cta:hover {
-      background: var(--phov);
-      transform: translateY(-1px);
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      font-size: 24px;
-      color: var(--ink);
-      line-height: 1;
-      z-index: 110;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .08);
-      padding: 16px 6% 24px;
-      flex-direction: column;
-      gap: 4px;
-      z-index: 105;
-      animation: menuSlide .25s ease-out;
-    }
-
-    .mobile-menu.open {
-      display: flex;
-    }
-
-    .mobile-menu a {
-      color: var(--soft);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      transition: all .2s;
-    }
-
-    .mobile-menu a:last-of-type {
-      border-bottom: none;
-    }
-
-    .mobile-menu a:hover {
-      color: var(--primary);
-    }
-
-    .mobile-menu a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      border-left: 3px solid #34A853;
-      padding-left: 12px !important;
-      background: rgba(52, 168, 83, 0.04);
-      box-shadow: inset 4px 0 12px rgba(52, 168, 83, 0.02);
-    }
-
-    .mobile-menu .mob-cta {
-      display: block;
-      text-align: center;
-      background: var(--primary);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      margin-top: 12px;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25);
-    }
-
-    @keyframes menuSlide {
-      from {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* PAGE HEADER */
+/* PAGE HEADER */
     .ph {
       padding: 100px 6% 80px;
       text-align: center;
@@ -938,34 +700,7 @@
       margin-top: 2px;
     }
 
-    footer {
-      padding: 24px 6%;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--muted);
-      background: transparent;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .fl {
-      display: flex;
-      gap: 20px;
-    }
-
-    .fl a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    .fl a:hover {
-      color: var(--primary);
-    }
-
-    @media(max-width:900px) {
+@media(max-width:900px) {
       .aie-steps {
         grid-template-columns: 1fr;
       }
@@ -989,19 +724,8 @@
     }
 
     @media(max-width:768px) {
-      .nav-links {
-        display: none;
-      }
 
-      .nav-cta {
-        display: none;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      /* Page header */
+/* Page header */
       .ph {
         padding: 60px 6% 40px;
       }
@@ -1154,19 +878,7 @@
         font-size: 14px;
       }
 
-      /* Footer */
-      footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-      }
-
-      .fl {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-      }
-    }
+}
 
     @media(max-width:480px) {
       .areas-grid {
@@ -1179,16 +891,16 @@
 <body>
 
   <nav>
-    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt=""
+    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
         style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
         style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        class="logo-badge">ALPHA</small></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html" class="active">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
     </div>
     <a href="explore.html" class="nav-cta">Explore Opportunities</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
@@ -1197,7 +909,7 @@
       <a href="how-it-works.html" class="active">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
       <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
     </div>
   </nav>
@@ -1457,7 +1169,7 @@
         <div class="wb-card-eyebrow">What Aptova does</div>
         <ul class="wb-list">
           <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>AI-powered — adaptive questions, no two interviews the same</li>
-          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Matches 135+ opportunities including ones most people never consider
+          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Matches 200+ opportunities including ones most people never consider
           </li>
           <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Validation tells you your real readiness before you commit</li>
           <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Scored against your exact location, capital, and time</li>
@@ -1527,7 +1239,7 @@
     <div class="stage2-two">
       <div class="v-text">
         <h2 class="v-h">Stage 2: Validation & Verdict</h2>
-        <p>Once your profile is built, the engine maps it against 135+ pre-researched opportunities. It calculates a
+        <p>Once your profile is built, the engine maps it against 200+ pre-researched opportunities. It calculates a
           "Fit Score" based on how well your constraints match the requirements of the opportunity.</p>
         <div class="v-checks">
           <div class="vc-item" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;color:#34A853;flex-shrink:0;display:inline-block;vertical-align:middle;margin-right:2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Avoids saturated markets</div>
@@ -1948,7 +1660,7 @@
         <h2 class="rp-heading">What your opportunity report looks like</h2>
         <p class="rp-body">Your report tells you exactly where you stand — not just whether to go ahead, but what to fix
           before you do. Honest. Specific. Based on your situation.</p>
-        <a href="waitlist.html" class="rp-btn">Get mine &nbsp;→</a>
+        <a href="waitlist.html" class="rp-btn">Join the community &nbsp;→</a>
       </div>
 
       <!-- RIGHT -->
@@ -1992,42 +1704,42 @@
     </div>
 
     <div class="areas-grid">
-      <a href="explore.html" class="area-card nature" style="text-decoration:none;">
+      <a href="explore.html?category=agri" class="area-card nature" style="text-decoration:none;">
         <div class="area-icon" style="color:#059669;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17 8C8 10 5.9 16.17 6 21c4.83.1 11-2 13-11 0 0-3-.5-6 1.5m-5.83 5c.43-1.6 1.4-3 2.83-4 1.43-1 3.1-1.5 4.83-1.5 0 0-2.1-4-7.83-3-5.73 1-5.9 7-2 8.5z"/></svg></div>
         <div class="area-title">Nature &amp; Farming</div>
         <div class="area-sub">Land, water &amp; food sources</div>
       </a>
-      <a href="explore.html" class="area-card digital" style="text-decoration:none;">
+      <a href="explore.html?category=digital" class="area-card digital" style="text-decoration:none;">
         <div class="area-icon" style="color:#2563EB;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></div>
         <div class="area-title">Digital &amp; Tech</div>
         <div class="area-sub">Skills that work from anywhere</div>
       </a>
-      <a href="explore.html" class="area-card food" style="text-decoration:none;">
+      <a href="explore.html?category=food" class="area-card food" style="text-decoration:none;">
         <div class="area-icon" style="color:#D97706;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg></div>
         <div class="area-title">Food &amp; Beverage</div>
         <div class="area-sub">India's most resilient sector</div>
       </a>
-      <a href="explore.html" class="area-card teaching" style="text-decoration:none;">
+      <a href="explore.html?category=education" class="area-card teaching" style="text-decoration:none;">
         <div class="area-icon" style="color:#7C3AED;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M21 5c-1.11-.9-2.45-1.5-3.82-1.5C16.28 3.5 14.4 4.16 13 5c-1.4-1-3.28-1.5-4.18-1.5-1.37 0-2.71.6-3.82 1.5C3.9 5.9 3 7.5 3 9.5v11c0 .28.22.5.5.5.15 0 .28-.07.38-.16C4.98 20 6.64 19.5 8 19.5c1.37 0 2.71.6 3.82 1.5.15.1.32.16.5.16s.35-.06.5-.16c1.1-1 2.76-1.5 3.82-1.5 1.37 0 3.03.5 4.12 1.34.1.09.23.16.38.16.28 0 .5-.22.5-.5v-11c0-2-.9-3.6-1.9-4.5zM21 18.5c-1.1-.7-2.6-1-4-1-1.37 0-3.03.5-4.12 1.34V6.5c1.1-.9 2.76-1.5 4.12-1.5 1.4 0 2.9.3 4 1v12.5z"/></svg></div>
         <div class="area-title">Teaching &amp; Skilling</div>
         <div class="area-sub">What you know is someone's need</div>
       </a>
-      <a href="explore.html" class="area-card trade" style="text-decoration:none;">
+      <a href="explore.html?category=resell" class="area-card trade" style="text-decoration:none;">
         <div class="area-icon" style="color:#EA580C;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M20 12v-1.78c.9-.75 1.5-1.89 1.5-3.22 0-2.21-1.79-4-4-4H13V2H6v2H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h1v3h7v-3h1c2.21 0 4-1.79 4-4h2c0 1.33.6 2.47 1.5 3.22V12h-2zm-9 6H5v-2h6v2zm6-6H5V6h12c1.1 0 2 .9 2 2s-.9 2-2 2z"/></svg></div>
         <div class="area-title">Promotions &amp; Trade</div>
         <div class="area-sub">Buy, sell, move, grow</div>
       </a>
-      <a href="explore.html" class="area-card social" style="text-decoration:none;">
+      <a href="explore.html?category=service" class="area-card social" style="text-decoration:none;">
         <div class="area-icon" style="color:#E11D48;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
         <div class="area-title">Social Services</div>
         <div class="area-sub">Serve your neighbourhood</div>
       </a>
-      <a href="explore.html" class="area-card planet" style="text-decoration:none;">
+      <a href="explore.html?category=planet" class="area-card planet" style="text-decoration:none;">
         <div class="area-icon" style="color:#0D9488;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
         <div class="area-title">Planet &amp; Energy</div>
         <div class="area-sub">Future-proof &amp; govt-backed</div>
       </a>
-      <a href="explore.html" class="area-card creative" style="text-decoration:none;">
+      <a href="explore.html?category=creative" class="area-card creative" style="text-decoration:none;">
         <div class="area-icon" style="color:#7C3AED;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div>
         <div class="area-title">Creative &amp; Culture</div>
         <div class="area-sub">Make things people love</div>
@@ -2055,7 +1767,7 @@
       <div class="faq-item">
         <div class="faq-q" onclick="tog(this)">How many business opportunities does Aptova actually cover? <span
             class="faq-icon">+</span></div>
-        <div class="faq-a">135+ at launch across 11 opportunity domains — technology, campus, services, creative,
+        <div class="faq-a">200+ at launch across 11 opportunity domains — technology, campus, services, creative,
           commerce, health, eco, agriculture, food, education, and wildcard ideas. We add new opportunities every month
           based on what users tell us they need.</div>
       </div>
@@ -2089,7 +1801,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="tog(this)">When is Aptova launching? <span class="faq-icon">+</span></div>
-        <div class="faq-a">We're targeting mid-2026. Waitlist members get early access before the public launch, and
+        <div class="faq-a">We're targeting mid-2026. Community members get early access before the public launch, and
           their feedback directly shapes what we build and fix in the first few weeks.</div>
       </div>
       <div class="faq-item">
@@ -2104,7 +1816,7 @@
       <div class="faq-ask-icon">✉</div>
       <div class="faq-ask-text">
         <span class="faq-ask-label">Still have a question?</span>
-        <span class="faq-ask-sub">Ask us directly — we reply to every message within 24 hours.</span>
+        <span class="faq-ask-sub">Ask us directly — we reply to every message at the earliest.</span>
       </div>
     </div>
   </section>
@@ -2118,7 +1830,7 @@
         style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#64748B;">✕</button>
       <div id="qFormWrap">
         <p style="font-size:18px;font-weight:700;margin-bottom:6px;color:#0F172A;">Ask us anything</p>
-        <p style="font-size:13px;color:#64748B;margin-bottom:24px;">We read every question and reply within 24 hours.
+        <p style="font-size:13px;color:#64748B;margin-bottom:24px;">We read every question and reply at the earliest.
         </p>
         <div style="margin-bottom:16px;">
           <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#0F172A;">Full Name</label>
@@ -2147,7 +1859,7 @@
           style="width:56px;height:56px;background:#E6F4EA;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#34A853;">
           <svg viewBox="0 0 24 24" fill="currentColor" style="width:28px;height:28px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
         <p style="font-size:18px;font-weight:700;margin-bottom:8px;color:#0F172A;">Question sent!</p>
-        <p style="font-size:14px;color:#64748B;">We'll reply to your email within 24 hours.</p>
+        <p style="font-size:14px;color:#64748B;">We'll reply to your email at the earliest.</p>
       </div>
     </div>
   </div>
@@ -2284,21 +1996,22 @@
 
   <footer>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img
-        src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
+        src="Zero.svg" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
         style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        class="logo-badge">ALPHA</small></a>
     <div class="fl">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
       <a href="mailto:hello@Aptova.com">Ask a question</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms & Conditions</a>
     </div>
     <div>© 2026 Aptova · Made for the Students by the Students</div>
   </footer>
+  <script src="assets/early-access.js"></script>
 </body>
 
 </html>

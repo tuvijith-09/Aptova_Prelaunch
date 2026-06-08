@@ -1,4 +1,4 @@
-﻿"""
+"""
 main.py — Aptova Prelaunch Backend
 Only 3 endpoints for the 3 static page forms:
   POST /waitlist    → waitlist.html
@@ -192,7 +192,7 @@ def ask_question(payload: QuestionIn, request: Request, db=Depends(get_db)):
     )
     db.add(entry)
     db.commit()
-    return {"success": True, "message": "Got it! We reply to every question within 24 hours."}
+    return {"success": True, "message": "Got it! We reply to every question at the earliest."}
 
 
 # ----------------------------------------------------------------

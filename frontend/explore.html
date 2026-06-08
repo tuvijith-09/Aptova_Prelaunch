@@ -6,252 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explore Domains — Aptova</title>
   <meta name="description"
-    content="Browse 135+ student-friendly business opportunities across 11 domains. Filter by city tier and investment from ₹0 to ₹5 lakhs.">
+    content="Browse 200+ student-friendly business opportunities across 11 domains. Filter by city tier and investment from ₹0 to ₹5 lakhs.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-
-    :root {
-      --bg: #F8FAFC;
-      --bg2: #FFFFFF;
-      --surface: #FFFFFF;
-      --surface2: #F1F5F9;
-      --ink: #0F172A;
-      --soft: #334155;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --primary: #059669;
-      --phov: #047857;
-      --plight: #D1FAE5;
-      --pglow: rgba(5, 150, 105, .12);
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      background: var(--bg);
-      background-image: url("wavy_grid.svg");
-      background-size: 1200px 1200px;
-      background-position: top center;
-      background-attachment: fixed;
-      color: var(--ink);
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden
-    }
-
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 13px 6%;
-      background: rgba(248, 250, 252, .92);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px)
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--ink);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: -1px
-    }
-
-    .logo span {
-      color: var(--primary)
-    }
-
-    .logo-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: white;
-      background: var(--primary);
-      border: 1px solid var(--phov);
-      padding: 3px 8px;
-      border-radius: 999px;
-      margin-left: 6px;
-      line-height: 1.3;
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 2px 8px rgba(5, 150, 105, .3);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 6px 0;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-links a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      text-shadow: 0 0 12px rgba(52, 168, 83, 0.4);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #34A853;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-      box-shadow: 0 0 8px rgba(52, 168, 83, 0.6);
-    }
-
-    .nav-links a.active::after,
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 9px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      transition: all .2s;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25)
-    }
-
-    .nav-cta:hover {
-      background: var(--phov);
-      transform: translateY(-1px)
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      font-size: 24px;
-      color: var(--ink);
-      line-height: 1;
-      z-index: 110;
-      font-family: 'Inter', sans-serif
-    }
-
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .08);
-      padding: 16px 6% 24px;
-      flex-direction: column;
-      gap: 4px;
-      z-index: 105;
-      animation: menuSlide .25s ease-out
-    }
-
-    .mobile-menu.open {
-      display: flex
-    }
-
-    .mobile-menu a {
-      color: var(--soft);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      transition: all .2s;
-    }
-
-    .mobile-menu a:last-of-type {
-      border-bottom: none
-    }
-
-    .mobile-menu a:hover {
-      color: var(--primary)
-    }
-
-    .mobile-menu a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      border-left: 3px solid #34A853;
-      padding-left: 12px !important;
-      background: rgba(52, 168, 83, 0.04);
-      box-shadow: inset 4px 0 12px rgba(52, 168, 83, 0.02);
-    }
-
-    .mobile-menu .mob-cta {
-      display: block;
-      text-align: center;
-      background: var(--primary);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      margin-top: 12px;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25)
-    }
-
-    @keyframes menuSlide {
-      from {
-        opacity: 0;
-        transform: translateY(-8px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    /* HERO */
+/* HERO */
     .hero {
       position: relative;
       padding: 80px 6% 60px;
@@ -818,6 +578,137 @@
       border-color: var(--primary)
     }
 
+    /* RESPONSIVE MODAL SPLIT LAYOUT WITH TABS FOR MOBILE */
+    .modal-split {
+      display: flex;
+      gap: 30px;
+      text-align: left;
+    }
+
+    .split-left {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .split-right {
+      flex: 1.3;
+      min-width: 300px;
+      border-left: 1px solid var(--border);
+      padding-left: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .modal-tabs {
+      display: none;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+
+    .modal-tab-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      padding: 10px 4px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .modal-tab-btn.active {
+      color: var(--primary);
+    }
+
+    .modal-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 99px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-split {
+        flex-direction: column;
+        gap: 0;
+      }
+      .modal-tabs {
+        display: flex;
+        margin-right: 40px; /* Space for close x button */
+      }
+      .split-left, .split-right {
+        min-width: 0;
+        width: 100%;
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+      .modal-split.show-overview .split-right {
+        display: none !important;
+      }
+      .modal-split.show-blueprint .split-left {
+        display: none !important;
+      }
+    }
+
+    /* STEP CONTROL BUTTONS */
+    .btn-step {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-step-primary {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--primary);
+    }
+
+    .btn-step-primary:hover:not(:disabled) {
+      background: var(--phov);
+      border-color: var(--phov);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+    }
+
+    .btn-step-secondary {
+      background: var(--bg2);
+      color: var(--soft);
+      border: 1px solid var(--border);
+    }
+
+    .btn-step-secondary:hover:not(:disabled) {
+      background: var(--surface2);
+      color: var(--ink);
+      border-color: var(--muted);
+    }
+
+    .btn-step:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: var(--surface2);
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
     .modal-tag {
       display: inline-block;
       font-size: 12px;
@@ -935,36 +826,7 @@
       font-size: 15px
     }
 
-    /* FOOTER */
-    footer {
-      padding: 24px 6%;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--muted);
-      background: transparent;
-      flex-wrap: wrap;
-      gap: 10px
-    }
-
-    .fl {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap
-    }
-
-    .fl a {
-      color: var(--muted);
-      text-decoration: none
-    }
-
-    .fl a:hover {
-      color: var(--primary)
-    }
-
-    /* SUGGEST OPPORTUNITY ROW */
+/* SUGGEST OPPORTUNITY ROW */
     .filter-suggest {
       padding: 10px 6%;
       text-align: right;
@@ -988,21 +850,9 @@
       border-bottom-color: var(--phov);
     }
 
+@media(max-width:768px) {
 
-    @media(max-width:768px) {
-      .nav-links {
-        display: none
-      }
-
-      .nav-cta {
-        display: none
-      }
-
-      .hamburger {
-        display: block
-      }
-
-      .hero {
+.hero {
         padding: 60px 6% 40px
       }
 
@@ -1061,20 +911,13 @@
       }
 
       .modal {
-        padding: 28px
+        width: 100% !important;
+        max-width: calc(100% - 32px) !important;
+        margin: 16px;
+        padding: 24px 20px 20px !important;
       }
 
-      footer {
-        flex-direction: column;
-        text-align: center
-      }
-
-      .fl {
-        justify-content: center;
-        gap: 12px
-      }
-
-      .filter-suggest {
+.filter-suggest {
         padding: 10px 4%;
         text-align: center;
       }
@@ -1085,26 +928,27 @@
 <body>
 
   <nav>
-    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt=""
+    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
         style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
-        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
+          style="color:#34A853;">ova</span></span><small
+        class="logo-badge">ALPHA</small></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html" class="active">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
     </div>
-    <a href="explore.html" class="nav-cta">Explore Opportunities</a>
+    <a href="waitlist.html" class="nav-cta">Join the community</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html" class="active">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
-      <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
+      <a href="waitlist.html">Join Community</a>
+      <a href="waitlist.html" class="mob-cta">Join the community →</a>
     </div>
   </nav>
   <script>
@@ -1165,6 +1009,12 @@
             <option value="visakhapatnam">Visakhapatnam</option>
             <option value="patna">Patna</option>
             <option value="guwahati">Guwahati</option>
+            <option value="vijayawada">Vijayawada</option>
+            <option value="trivandrum">Trivandrum</option>
+            <option value="ludhiana">Ludhiana</option>
+            <option value="kanpur">Kanpur</option>
+            <option value="madurai">Madurai</option>
+            <option value="nashik">Nashik</option>
           </optgroup>
           <optgroup label="Tier-3">
             <option value="ranchi">Ranchi</option>
@@ -1175,6 +1025,18 @@
             <option value="varanasi">Varanasi</option>
             <option value="mangalore">Mangalore</option>
             <option value="mysuru">Mysuru</option>
+            <option value="srinagar">Srinagar</option>
+            <option value="jammu">Jammu</option>
+            <option value="panaji">Panaji</option>
+            <option value="shimla">Shimla</option>
+            <option value="puducherry">Puducherry</option>
+            <option value="shillong">Shillong</option>
+            <option value="agartala">Agartala</option>
+            <option value="aizawl">Aizawl</option>
+            <option value="imphal">Imphal</option>
+            <option value="kohima">Kohima</option>
+            <option value="itanagar">Itanagar</option>
+            <option value="gangtok">Gangtok</option>
             <option value="other">Other / smaller city</option>
           </optgroup>
         </select>
@@ -1290,21 +1152,22 @@
 
   <section class="bottom-cta">
     <h2>Ready to start your journey?</h2>
-    <p>Join the waitlist and get a personalized fit report.</p>
-    <a href="waitlist.html" class="nav-cta" style="padding:16px 40px;font-size:14px">Reserve My Fit Report on Launch</a>
+    <p>Join the community and get a personalized fit report.</p>
+    <a href="waitlist.html" class="nav-cta" style="padding:16px 40px;font-size:14px">Join the community</a>
   </section>
 
   <footer>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img
-        src="logo.png" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
-        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        src="Zero.svg" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
+        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
+          style="color:#34A853;">ova</span></span><small
+        class="logo-badge">ALPHA</small></a>
     <div class="fl">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Waitlist</a>
+      <a href="waitlist.html">Join Community</a>
       <a href="mailto:hello@Aptova.com">Ask a question</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms & Conditions</a>
@@ -1314,22 +1177,9 @@
 
   <!-- MODAL -->
   <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
-    <div class="modal">
+    <div class="modal" id="modalContainer" style="max-width: 560px; transition: max-width 0.3s ease;">
       <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-tag" id="mTag"></div>
-      <h2 id="mTitle"></h2>
-      <p id="mDesc"></p>
-      <div class="modal-meta">
-        <div class="meta-box">
-          <div class="meta-label">Capital Needed</div>
-          <div class="meta-val" id="mCap"></div>
-        </div>
-        <div class="meta-box">
-          <div class="meta-label">Key Advantage</div>
-          <div class="meta-val" id="mAdv"></div>
-        </div>
-      </div>
-      <a href="waitlist.html" class="modal-cta">Reserve My Fit Report on Launch →</a>
+      <div id="modalBody"></div>
     </div>
   </div>
 
@@ -1516,6 +1366,86 @@
       { n: "Human Billboard", d: "Companies pay students to wear branded t-shirts or hand out flyers at high-footfall spots. ₹300–800 for 2–3 hours. Your presence is the ad. Apps like TaskBob list these gigs.", cap: "₹0", adv: "Get paid to walk", cat: "wow", tags: ["Wildcard", "Gig"] },
       { n: "Digitise Old Family Photos", d: "Middle-class families have boxes of 1980s–2000s printed photos slowly decaying. Scan, restore with AI, and deliver a beautiful digital album. Charge ₹1,500–5,000 per family.", cap: "₹2k", adv: "Emotional premium", cat: "wow", tags: ["Wildcard", "AI"] },
 
+      /* ══════════════════════════════════════════════════════════
+         🆕 HIGH-CAPITAL OPPORTUNITIES (₹50k - ₹100k)
+      ══════════════════════════════════════════════════════════ */
+      { n: "Premium Shopify D2C Builder", d: "Build custom Shopify stores for local D2C brands. Capital goes toward premium theme licenses, custom plugins, and marketing templates to offer a high-end package.", cap: "₹50k", adv: "High client budgets", cat: "digital", tags: ["Tech", "Shopify"] },
+      { n: "Local Business Drone Mapping Service", d: "Use a professional drone to map real estate properties, construction sites, and large farm plots. Sell high-resolution 3D models and orthomosaic maps.", cap: "₹75k", adv: "High ticket clients", cat: "digital", tags: ["Tech", "Drones"] },
+      { n: "No-Code SaaS MVP Developer", d: "Build early MVPs for tech startups using Bubble, FlutterFlow, and Airtable. Budget covers yearly developer plans and UI kit resources.", cap: "₹60k", adv: "High margin retainer", cat: "digital", tags: ["Tech", "No-code"] },
+      { n: "Custom Smart Home Integrations", d: "Consult, purchase, and install smart lighting, security systems, and entertainment centers for premium residences and new apartments.", cap: "₹80k", adv: "Affluent neighborhoods", cat: "digital", tags: ["Tech", "Hardware"] },
+      { n: "Acoustic Pod & Home Studio Setup", d: "Design and install professional soundproofing and acoustic panels for aspiring podcasters, musicians, and streamers in their homes.", cap: "₹100k", adv: "Growing creator economy", cat: "digital", tags: ["Tech", "Audio"] },
+      { n: "AI-Driven Local Ad Agency", d: "Run high-converting localized Meta and Google ads. Budget covers premium AI copywriting tools, design assets, and initial ad spend for client case studies.", cap: "₹50k", adv: "Recurring retainers", cat: "digital", tags: ["Tech", "AI"] },
+
+      { n: "Campus Micro-Café Kiosk", d: "Run a compact coffee and sandwich bar near college hostels or fests. Budget covers espresso machine, sandwich press, and initial inventory.", cap: "₹60k", adv: "High foot traffic", cat: "campus", tags: ["Campus", "Food"] },
+      { n: "Campus 3D Printing & Prototyping Lab", d: "Print 3D models and prototypes for engineering and design students' projects. Budget covers 2 high-quality 3D printers and filament stock.", cap: "₹50k", adv: "Engineering projects", cat: "campus", tags: ["Campus", "Tech"] },
+      { n: "Student Co-Working Space Kiosk", d: "Rent out a small workspace equipped with high-speed internet, power backups, and study desks near campus. Capital covers router, power station, and desks.", cap: "₹75k", adv: "Exam season demand", cat: "campus", tags: ["Campus", "Space"] },
+      { n: "Campus Apparel Printing Hub", d: "Start a customized t-shirt and hoodie printing business for college societies, fests, and departments. Budget covers heat press, cutter, and blank stock.", cap: "₹80k", adv: "Bulk college orders", cat: "campus", tags: ["Campus", "Merch"] },
+      { n: "Electric Scooter Rental Fleet", d: "Purchase 3 electric scooters and rent them hourly/daily to students for easy campus commuting. Budget covers scooters and safety gear.", cap: "₹100k", adv: "Daily campus commute", cat: "campus", tags: ["Campus", "Commute"] },
+      { n: "Campus Photography Equipment Rental", d: "Lease professional cameras, lenses, and tripods to student creators and event organizers. Budget covers mid-range DSLR, lenses, and insurance.", cap: "₹75k", adv: "Student film/event projects", cat: "campus", tags: ["Campus", "Events"] },
+
+      { n: "Premium Car Detailing & Ceramic Coating", d: "Offer professional paint correction, interior detailing, and ceramic coating at the client's home. Budget covers polisher, vacuum, and high-end coating chemicals.", cap: "₹75k", adv: "Repeat premium clients", cat: "service", tags: ["Local", "Cars"] },
+      { n: "Professional Carpet & Sofa Deep Cleaning", d: "Deep clean sofas, carpets, and mattresses using heavy-duty injection-extraction machines. Budget covers professional machines and cleaning compounds.", cap: "₹50k", adv: "High demand in cities", cat: "service", tags: ["Local", "Cleaning"] },
+      { n: "Smart Lock & Home Security Installation", d: "Sell and install smart biometric door locks and CCTV security cameras for apartments and villas. Budget covers lock inventory, tools, and demo units.", cap: "₹60k", adv: "Urban security demand", cat: "service", tags: ["Local", "Hardware"] },
+      { n: "Hyperlocal Pest Control Service", d: "Offer residential pest control and sanitization. Capital covers thermal foggers, sprayers, certified safety gear, and organic chemicals.", cap: "₹50k", adv: "High margins, repeat work", cat: "service", tags: ["Local", "PestControl"] },
+      { n: "Mobile Appliance Repair Hub", d: "Set up a mobile repair service for ACs, washing machines, and refrigerators. Budget covers diagnostics equipment, spare parts, and tools.", cap: "₹80k", adv: "Essential local service", cat: "service", tags: ["Local", "Repairs"] },
+      { n: "Custom Wall Art & Wall Decal Service", d: "Partner with local artists or use wall-printing machines to install custom wallpaper, decals, and murals for homes and offices.", cap: "₹70k", adv: "Home decor premium", cat: "service", tags: ["Local", "Decor"] },
+
+      { n: "Professional Podcast Studio Rental", d: "Set up a mini soundproofed studio with professional mics and mixer for creators to record podcasts on an hourly basis.", cap: "₹100k", adv: "Hourly booking model", cat: "creative", tags: ["Creative", "Studio"] },
+      { n: "High-End Laser Engraving Shop", d: "Create custom engraved wooden gifts, metal tumblers, and leather wallets. Budget covers a high-precision fiber laser engraving machine and blank products.", cap: "₹80k", adv: "Personalized gifts market", cat: "creative", tags: ["Creative", "Laser"] },
+      { n: "Resin Art & Custom Countertop Workshop", d: "Design and sell high-end resin tables, clocks, and customized wall art. Budget covers premium epoxy resin, molds, safety gear, and wood inventory.", cap: "₹50k", adv: "High aesthetic appeal", cat: "creative", tags: ["Creative", "Art"] },
+      { n: "Corporate Video Production Service", d: "Produce high-quality promo videos and employee onboarding clips for businesses. Budget covers professional lighting kits, stabilizer, and audio equipment.", cap: "₹90k", adv: "B2B high budget contracts", cat: "creative", tags: ["Creative", "Video"] },
+      { n: "Custom Neon Sign Production", d: "Design and manufacture custom LED neon signs for businesses and home decor. Budget covers acrylic cutters, LED neon strips, power supplies, and shipping materials.", cap: "₹60k", adv: "Cafe & Bedroom decor trend", cat: "creative", tags: ["Creative", "Neon"] },
+      { n: "Premium Event Backdrop & Balloon Decor", d: "Design premium arches, floral walls, and custom backdrops for weddings, baby showers, and birthdays. Budget covers high-quality stand sets and props.", cap: "₹50k", adv: "Frequent event bookings", cat: "creative", tags: ["Creative", "Events"] },
+
+      { n: "Eco-Friendly Bamboo Toothbrush Brand", d: "Source bamboo toothbrushes and organic dental products in bulk. Package under your own brand and sell online. Budget covers MOQ, design, and eco-packaging.", cap: "₹50k", adv: "High repeat purchases", cat: "resell", tags: ["Commerce", "Eco"] },
+      { n: "Imported Aesthetic Stationery Brand", d: "Source unique pastel and aesthetic stationery directly from overseas wholesalers. Sell via Instagram and Shopify. Budget covers custom boxes, import duties, and initial stock.", cap: "₹60k", adv: "Gen-Z journal culture", cat: "resell", tags: ["Commerce", "Stationery"] },
+      { n: "Curated Vintage Leather Goods Brand", d: "Collaborate with local artisans to produce high-quality handcrafted leather bags, wallets, and belts. Budget covers leather stock, craftsmanship costs, and brand packaging.", cap: "₹75k", adv: "High ticket premium pricing", cat: "resell", tags: ["Commerce", "Leather"] },
+      { n: "Sneaker Customization & Care Hub", d: "Sell custom hand-painted sneakers and high-end sneaker cleaning kits. Budget covers sneakers for customization, professional Angelus paints, and cleaning inventory.", cap: "₹50k", adv: "High-value sneaker market", cat: "resell", tags: ["Commerce", "Sneakers"] },
+      { n: "Gourmet Loose-Leaf Tea Brand", d: "Source premium Darjeeling and Assam loose-leaf teas. Curate signature blends and pack them in glass jars and tin boxes. Budget covers teas, packaging, and food licensing.", cap: "₹60k", adv: "Wellness gifting peak", cat: "resell", tags: ["Commerce", "Tea"] },
+      { n: "Smart Home Gadgets Reselling", d: "Wholesaler-to-consumer resell of smart bulbs, smart plugs, and automated pet feeders. Budget covers bulk Indiamart purchasing, storage, and Shopify ads.", cap: "₹80k", adv: "High consumer interest", cat: "resell", tags: ["Commerce", "Tech"] },
+
+      { n: "Premium Home Gym Equipment Rental", d: "Buy premium treadmills, spin bikes, and adjustable dumbbells to rent out to home fitness enthusiasts. Budget covers high-durability fitness gear.", cap: "₹100k", adv: "Monthly recurring rentals", cat: "health", tags: ["Health", "Fitness"] },
+      { n: "Organic Cold-Pressed Juice Delivery", d: "Prepare and deliver fresh cold-pressed wellness juices daily. Budget covers commercial slow-juicer, fresh produce supply contract, and glass bottles.", cap: "₹50k", adv: "Daily subscription model", cat: "health", tags: ["Health", "Juice"] },
+      { n: "Air & Water Quality Wellness Store", d: "Sell and install high-efficiency air purifiers and alkaline water filters. Budget covers inventory, testing meters, and marketing materials.", cap: "₹70k", adv: "High pollution awareness", cat: "health", tags: ["Health", "Wellness"] },
+      { n: "Ergonomic Office Setup Consultant", d: "Curate and sell premium ergonomic chairs, standing desk converters, and monitor arms. Budget covers display inventory, marketing, and posture-testing tools.", cap: "₹60k", adv: "WFH corporate audience", cat: "health", tags: ["Health", "Office"] },
+      { n: "Dietary Meal prep & Subscription", d: "Provide healthy, macro-calculated calorie-deficit or protein-rich meals for professionals. Budget covers kitchen equipment, dieticians' consult, and delivery boxes.", cap: "₹80k", adv: "Health-conscious urbanites", cat: "health", tags: ["Health", "Food"] },
+      { n: "Aromatherapy & Herbal Soap Brand", d: "Manufacture and sell organic, handmade aromatherapy soaps, body scrubs, and bath bombs. Budget covers soap bases, organic essential oils, molds, and licensing.", cap: "₹50k", adv: "Self-care premium market", cat: "health", tags: ["Health", "Skin"] },
+
+      { n: "Upcycled Plastic Board Furniture", d: "Manufacture high-durability benches, desks, and shelves using recycled plastic boards. Budget covers raw sheets, woodworking equipment, and designer fees.", cap: "₹100k", adv: "Circular economy appeal", cat: "planet", tags: ["Eco", "Furniture"] },
+      { n: "Solar Powered Home Charger Network", d: "Partner with apartments to install solar-powered EV charging kiosks. Budget covers solar panel kits, inverter, and smart metering units.", cap: "₹80k", adv: "Green energy incentives", cat: "planet", tags: ["Eco", "Solar"] },
+      { n: "Compostable Food Container Brand", d: "Source bagasse and areca palm leaf plates and containers. Supply local cafes and cloud kitchens. Budget covers bulk container stock and sales collateral.", cap: "₹75k", adv: "Ban on single-use plastics", cat: "planet", tags: ["Eco", "Packaging"] },
+      { n: "Zero-Waste Refill Station Hub", d: "Partner with local stores to set up bulk dispensers for shampoo, detergents, and body washes where users bring containers. Budget covers dispensers and initial bulk chemical stock.", cap: "₹60k", adv: "Eco-conscious recurring users", cat: "planet", tags: ["Eco", "Retail"] },
+      { n: "Urban Terrace Garden Installer", d: "Set up automated drip irrigation, organic vegetable planters, and vertical garden setups on city balconies and terraces. Budget covers pipes, soil mix, and planter stock.", cap: "₹50k", adv: "High aesthetic home upgrade", cat: "planet", tags: ["Eco", "Gardening"] },
+      { n: "Water-Saving Smart Aerator Supply", d: "Bulk-supply and install water-saving aerators that reduce water flow by 80% for restaurants, hotels, and schools. Budget covers aerator stock and sales commissions.", cap: "₹50k", adv: "Water crisis solutions", cat: "planet", tags: ["Eco", "Water"] },
+
+      { n: "Vertical Hydroponic Fodder Unit", d: "Grow highly nutritious green fodder hydroponically for local dairy farmers. Budget covers multi-tier racks, LED grow lights, trays, and temperature control.", cap: "₹90k", adv: "All-season dairy feed demand", cat: "agri", tags: ["Agri", "Hydroponics"] },
+      { n: "Organic Honey Apiary Setup", d: "Set up 20 beehive boxes in rural or orchard areas. Produce and bottle certified organic honey. Budget covers boxes, bee colonies, extractor machine, and testing.", cap: "₹75k", adv: "High demand for pure honey", cat: "agri", tags: ["Agri", "Honey"] },
+      { n: "Automated Drip Irrigation Dealer", d: "Sell and install smart automated drip systems that save 50% water. Budget covers piping inventory, valves, controllers, and demo setups.", cap: "₹80k", adv: "Government subsidy support", cat: "agri", tags: ["Agri", "Irrigation"] },
+      { n: "Cold Storage Rental for Seeds", d: "Set up a mini walk-in cold room for farmers to store seeds and perishables. Budget covers insulated panels, refrigeration unit, and racks.", cap: "₹100k", adv: "Essential crop-season demand", cat: "agri", tags: ["Agri", "ColdStorage"] },
+      { n: "Exotic Ornamental Plant Propagation", d: "Propagate rare indoor plants and premium bonsai. Budget covers polyhouse structure, pots, high-quality soil medium, and rare parent stock.", cap: "₹50k", adv: "High-end nurseries & hotels", cat: "agri", tags: ["Agri", "Plants"] },
+      { n: "Bio-Fertilizer Production Unit", d: "Produce organic vermicompost and liquid bio-fertilizers like Jeevamrutha. Budget covers composting pits, shredder machine, packaging bag sealer, and testing.", cap: "₹60k", adv: "Low cost organic farming trend", cat: "agri", tags: ["Agri", "Bio"] },
+
+      { n: "Gourmet Waffle & Shake Cart", d: "Open a premium dessert cart serving fresh waffles and thick shakes. Budget covers waffle irons, commercial blender, refrigerator, and cart design.", cap: "₹75k", adv: "Popular late-night crowd", cat: "food", tags: ["Food", "Dessert"] },
+      { n: "Cloud Kitchen Dessert Brand", d: "Launch a delivery-only bakery specializing in custom cakes, brownies, and cookies. Budget covers deck oven, stand mixer, packaging, and Zomato/Swiggy onboarding.", cap: "₹80k", adv: "Online delivery platform focus", cat: "food", tags: ["Food", "Baking"] },
+      { n: "Cold Brew Coffee Bottling Hub", d: "Batch brew, bottle, and seal ready-to-drink flavored cold brew coffees. Budget covers commercial brewing tanks, glass bottles, custom labels, and cooling storage.", cap: "₹50k", adv: "Ready-to-drink café market", cat: "food", tags: ["Food", "Coffee"] },
+      { n: "Artisanal Cheese & Butter Brand", d: "Produce hand-stretched mozzarella, flavored gourmet butter, and cottage cheese. Budget covers pasteurizer, aging unit, milk source contract, and licensing.", cap: "₹60k", adv: "High margin gourmet segment", cat: "food", tags: ["Food", "Cheese"] },
+      { n: "Bubble Tea Kiosk Setup", d: "Open a small takeaway bubble tea stand. Budget covers sealing machine, shaker, cup printer, tapioca cooker, and ingredients import contract.", cap: "₹100k", adv: "Massive youth trend", cat: "food", tags: ["Food", "Beverage"] },
+      { n: "Healthy Salad & Wrap Prep Hub", d: "Supply pre-packaged fresh salads, protein wraps, and fruit bowls to corporate hubs. Budget covers commercial vegetable cutters, cooling display, and packaging.", cap: "₹70k", adv: "Corporate lunch demand", cat: "food", tags: ["Food", "Healthy"] },
+
+      { n: "Interactive Robotics & STEM Lab", d: "Conduct weekend hands-on robotics, coding, and STEM workshops for kids. Budget covers Arduino/Raspberry Pi kits, sensor modules, and laptop rentals.", cap: "₹100k", adv: "School curriculum tie-ups", cat: "education", tags: ["Education", "STEM"] },
+      { n: "Virtual Reality (VR) History Show", d: "Host mobile VR historical tours and space explorations for school students. Budget covers 5 standalone VR headsets, software licenses, and marketing.", cap: "₹80k", adv: "Novel educational experiences", cat: "education", tags: ["Education", "VR"] },
+      { n: "Aesthetic Study Center Kiosk", d: "Set up a quiet, air-conditioned study hall with high-speed internet and power outlets for competitive exam aspirants. Budget covers furniture, AC, and fiber setup.", cap: "₹75k", adv: "Ideal study environment", cat: "education", tags: ["Education", "Space"] },
+      { n: "Professional Video Course Studio", d: "Set up a high-quality green screen/smartboard recording studio for teachers making online courses. Budget covers studio lighting, camera, and smartboard.", cap: "₹60k", adv: "Rent out to educators", cat: "education", tags: ["Education", "Studio"] },
+      { n: "STEM Toys & Educational Kits Brand", d: "Package and sell hands-on science and electronics activity kits for kids. Budget covers sourcing wooden/plastic parts, box print, and instruction booklet.", cap: "₹50k", adv: "Activity based learning trend", cat: "education", tags: ["Education", "Toys"] },
+      { n: "Preschool Play Equipment Hub", d: "Sell or lease premium soft-play structures, sensory toys, and Montessori equipment to local daycare centers. Budget covers equipment stock.", cap: "₹90k", adv: "Expanding preschool market", cat: "education", tags: ["Education", "Play"] },
+
+      { n: "Silent Disco Event Rental Fleet", d: "Lease silent disco wireless headphones for campus parties, corporate retreats, and terrace events. Budget covers 50 high-quality multi-channel headphones and transmitters.", cap: "₹100k", adv: "Noise constraint event niche", cat: "wow", tags: ["Wildcard", "Events"] },
+      { n: "Professional Board Game Cafe Setup", d: "Supply a library of 100+ premium international board games to local cafes for weekend gaming events. Budget covers game imports and marketing.", cap: "₹60k", adv: "Community social hangout", cat: "wow", tags: ["Wildcard", "Cafe"] },
+      { n: "Action Camera & Vlog Kit Rental", d: "Rent out GoPros, Insta360 cameras, gimbals, and ring lights to travel vloggers. Budget covers cameras, mounts, and protective travel gear.", cap: "₹50k", adv: "Travel vlog season peaks", cat: "wow", tags: ["Wildcard", "Rental"] },
+      { n: "Sneaker Cleaning & Restoration Lab", d: "Deep clean, repaint, and restore luxury sneakers and leather shoes. Budget covers premium shoe-dryers, sonic cleaners, paints, and specialized brushes.", cap: "₹60k", adv: "Premium shoe care demand", cat: "wow", tags: ["Wildcard", "Care"] },
+      { n: "Retro Gaming Console Arcade", d: "Rent out arcade cabinets and retro gaming consoles for college fests, corporate fun days, and birthdays. Budget covers consoles, monitors, and cabinet custom builds.", cap: "₹75k", adv: "Nostalgia based college events", cat: "wow", tags: ["Wildcard", "Gaming"] },
+      { n: "Pop-Up Photo Booth Experience", d: "Build a modular photo booth with iPad, ring light, digital printing, and funny props for weddings and fests. Budget covers printing equipment, iPad, software subscription, and backdrops.", cap: "₹80k", adv: "High event rental demand", cat: "wow", tags: ["Wildcard", "Photo"] },
+
     ];
 
     /* ── RENDER ─────────────────────────────────────── */
@@ -1527,7 +1457,7 @@
         const cnt = document.getElementById('cnt-' + cat);
         if (cnt) cnt.textContent = DATA.filter(d => d.cat === cat).length;
       });
-      document.getElementById('totalCount').textContent = '135+';
+      document.getElementById('totalCount').textContent = '200+';
 
       DATA.forEach((item, i) => {
         const grid = document.getElementById('grid-' + item.cat);
@@ -1555,23 +1485,281 @@
     }
 
     /* ── MODAL ─────────────────────────────────────── */
+    function getEnrichedDetails(item) {
+      var commitment = "5–10 hours/week";
+      if (['service', 'resell', 'food', 'agri'].indexOf(item.cat) !== -1) {
+        commitment = "10–15 hours/week";
+      } else if (item.capNum >= 50000) {
+        commitment = "15–20 hours/week";
+      }
+
+      var earnings = "₹5,000 - ₹15,000/mo";
+      if (item.capNum >= 75000) {
+        earnings = "₹30,000 - ₹75,000/mo";
+      } else if (item.capNum >= 30000) {
+        earnings = "₹15,000 - ₹40,000/mo";
+      } else if (item.capNum >= 5000) {
+        earnings = "₹10,000 - ₹25,000/mo";
+      } else if (['digital', 'creative'].indexOf(item.cat) !== -1) {
+        earnings = "₹8,000 - ₹20,000/mo";
+      }
+
+      var tools = "Smartphone, internet connection, basic communication";
+      var tagsStr = (item.tags.join(" ") + " " + item.n).toLowerCase();
+      var nameStr = item.n.toLowerCase();
+
+      if (tagsStr.indexOf("video") !== -1 || tagsStr.indexOf("design") !== -1 || tagsStr.indexOf("photo") !== -1) {
+        tools = "Smartphone/Laptop, CapCut/Canva, social media account";
+      } else if (tagsStr.indexOf("tech") !== -1 || tagsStr.indexOf("ai") !== -1 || tagsStr.indexOf("no-code") !== -1) {
+        tools = "Laptop, internet access, ChatGPT/Claude accounts, basic tech literacy";
+      } else if (tagsStr.indexOf("merch") !== -1 || tagsStr.indexOf("print") !== -1 || tagsStr.indexOf("commerce") !== -1) {
+        tools = "Smartphone/Laptop, Canva, UPI account, WhatsApp Business";
+      } else if (tagsStr.indexOf("food") !== -1 || tagsStr.indexOf("bakery") !== -1) {
+        tools = "Kitchen equipment, raw ingredients, FSSAI registration (simple online)";
+      } else if (tagsStr.indexOf("cleaning") !== -1 || tagsStr.indexOf("repair") !== -1 || tagsStr.indexOf("auto") !== -1) {
+        tools = "Basic cleaning supplies or toolkits, local marketing, transportation";
+      } else if (tagsStr.indexOf("agri") !== -1 || tagsStr.indexOf("organic") !== -1) {
+        tools = "Small garden space/pots, seeds, organic fertilizer, watering tools";
+      } else if (tagsStr.indexOf("teaching") !== -1 || tagsStr.indexOf("education") !== -1) {
+        tools = "Subject expertise, teaching materials, Zoom/WhatsApp, patience";
+      }
+
+      var firstStep = "Research local demand and list your service on WhatsApp status and local groups.";
+      if (nameStr.indexOf("video editing") !== -1 || nameStr.indexOf("capcut") !== -1) {
+        firstStep = "Create 3 sample edits of trending reels using CapCut, upload to a Google Drive link, and DM 10 local content creators.";
+      } else if (tagsStr.indexOf("ai") !== -1 || tagsStr.indexOf("prompt") !== -1) {
+        firstStep = "Complete a free 1-hour generative AI tutorial, create 3 custom prompt templates for small businesses, and showcase on LinkedIn.";
+      } else if (nameStr.indexOf("seo") !== -1 || nameStr.indexOf("google business") !== -1) {
+        firstStep = "Claim and optimize a local business profile on Google Maps for free, show the business owner the change, and request a testimonial.";
+      } else if (tagsStr.indexOf("campus") !== -1 || nameStr.indexOf("hostel") !== -1) {
+        firstStep = "Launch a WhatsApp group with your close hostel mates, announce the service, and print a simple flyer for the hostel notice board.";
+      } else if (tagsStr.indexOf("resell") !== -1 || nameStr.indexOf("thrift") !== -1) {
+        firstStep = "Select 5 unused high-quality clothing items or surplus gadgets, photograph them in bright natural light, and post on Instagram/OLX.";
+      } else if (tagsStr.indexOf("food") !== -1 || tagsStr.indexOf("bakery") !== -1) {
+        firstStep = "Bake a small test batch of cookies or prepare 3 test meals, distribute to neighbors for free feedback, and set up a WhatsApp business catalogue.";
+      } else if (tagsStr.indexOf("cleaning") !== -1 || tagsStr.indexOf("service") !== -1) {
+        firstStep = "Create a digital flyer of your service using Canva, post it in your apartment building's WhatsApp group, and offer a 20% discount on the first booking.";
+      } else if (tagsStr.indexOf("teaching") !== -1 || tagsStr.indexOf("education") !== -1) {
+        firstStep = "Identify your strongest academic subject, notify 5 parents in your neighborhood about weekend coaching, and conduct a free demo class.";
+      } else if (tagsStr.indexOf("agri") !== -1 || tagsStr.indexOf("organic") !== -1) {
+        firstStep = "Watch a 15-minute setup video on YouTube, purchase a basic starter kit, and set up your first experimental tray in a balcony or empty room.";
+      } else if (tagsStr.indexOf("pet") !== -1 || tagsStr.indexOf("dog") !== -1) {
+        firstStep = "Post in your neighborhood forum that you are available for dog-walking or pet-sitting on weekends, providing proof of trust/safety.";
+      } else if (nameStr.indexOf("astrology") !== -1 || nameStr.indexOf("chart") !== -1) {
+        firstStep = "Create a basic astro-report template using free online software, offer 5 free reports to friends on WhatsApp, and ask them to share their reviews.";
+      }
+
+      return { commitment: commitment, earnings: earnings, tools: tools, firstStep: firstStep };
+    }
+
+    window.currentModalIndex = undefined;
+
+    window.switchModalTab = function(tabName) {
+      var splitEl = document.querySelector('.modal-split');
+      if (!splitEl) return;
+
+      var tabBtns = document.querySelectorAll('.modal-tab-btn');
+      tabBtns.forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
+      });
+
+      if (tabName === 'overview') {
+        splitEl.classList.add('show-overview');
+        splitEl.classList.remove('show-blueprint');
+      } else {
+        splitEl.classList.add('show-blueprint');
+        splitEl.classList.remove('show-overview');
+      }
+    };
+
     function openModal(i) {
+      window.currentModalIndex = i;
       const d = DATA[i];
-      document.getElementById('mTag').textContent = d.tags[0];
-      document.getElementById('mTitle').textContent = d.n;
-      document.getElementById('mDesc').textContent = d.d;
-      document.getElementById('mCap').textContent = d.cap;
-      document.getElementById('mAdv').textContent = d.adv;
+      const enriched = getEnrichedDetails(d);
+
+      const modalContainer = document.getElementById('modalContainer');
+      const modalBody = document.getElementById('modalBody');
+      if (!modalContainer || !modalBody) return;
+
+      modalContainer.style.maxWidth = '840px';
+      modalBody.innerHTML = `
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-tab="overview" onclick="switchModalTab('overview')">Overview</button>
+          <button class="modal-tab-btn" data-tab="blueprint" onclick="switchModalTab('blueprint')">Roadmap</button>
+        </div>
+        <div class="modal-split show-overview">
+          <div class="split-left">
+            <div>
+              <div class="modal-tag" style="background: #FAF5FF; color: #7C3AED; border-color: #D8B4FE;">${d.tags[0]}</div>
+              <h2 style="margin-bottom: 12px;">${d.n}</h2>
+              <p style="color: var(--soft); font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">${d.d}</p>
+            </div>
+
+            <div style="background: var(--surface2); border: 1px solid var(--border); padding: 18px; border-radius: 12px; margin-bottom: 10px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Key Summary</div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Capital Needed:</span><strong>${d.cap}</strong></div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Key Advantage:</span><strong>${d.adv}</strong></div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Earnings:</span><strong style="color: var(--primary);">${enriched.earnings}</strong></div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Commitment:</span><strong style="color: var(--primary);">${enriched.commitment}</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-right">
+            <div style="flex: 1; display: flex; flex-direction: column;">
+              <!-- Progress Indicator -->
+              <div style="margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <h3 style="font-size: 15px; font-weight: 800; color: var(--ink);">Launch Roadmap</h3>
+                  <span id="stepIndicatorText" style="font-size: 12px; font-weight: 700; color: var(--primary);">Step 1 of 3</span>
+                </div>
+                <!-- Step progress line -->
+                <div style="width: 100%; height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden; border: 1px solid var(--border);">
+                  <div id="stepProgressBarFill" style="width: 33.33%; height: 100%; background: var(--primary); transition: width 0.3s ease;"></div>
+                </div>
+              </div>
+
+              <!-- Step Cards Deck -->
+              <div class="step-card-container" style="position: relative; min-height: 250px; margin-bottom: 20px; flex: 1;">
+
+                <div class="step-card" style="display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left;">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">Phase 1: Setup &amp; Tools</div>
+                  <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Gather Your Tools</h4>
+                  <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">To run this opportunity successfully, make sure you have: <strong style="color: var(--primary);">${enriched.tools}</strong></p>
+
+                  <!-- Phase steps list -->
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
+                      <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
+                      <span>Verify hardware and software are ready &amp; accessible</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
+                      <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
+                      <span>Create/configure required platform accounts</span>
+                    </div>
+                  </div>
+
+                  <!-- Pro-Tip Box -->
+                  <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
+                    <strong>💡 Pro-Tip:</strong> Download mobile versions of these tools to manage operations and reply to clients quickly while on campus.
+                  </div>
+                </div>
+
+                <div class="step-card" style="display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left;">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">Phase 2: First Action Step</div>
+                  <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Execute Launch Sequence</h4>
+                  <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">Your very first launch action: <span style="font-weight: 600; color: var(--primary);">${enriched.firstStep}</span></p>
+
+                  <!-- Phase steps list -->
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
+                      <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
+                      <span>Draft outreach template and pricing package</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
+                      <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
+                      <span>Prepare 3 high-quality portfolio samples</span>
+                    </div>
+                  </div>
+
+                  <!-- Pro-Tip Box -->
+                  <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
+                    <strong>💡 Pro-Tip:</strong> Your first sample is your credentials. Spend an extra hour making it look extremely polished. Quality sells itself.
+                  </div>
+                </div>
+
+                <div class="step-card" style="display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left;">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">Phase 3: Scale &amp; Community</div>
+                  <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Promote &amp; Connect</h4>
+                  <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">Pitch your service to 5 local clients on WhatsApp, and join our community to generate detailed fit assessments.</p>
+
+                  <!-- Phase steps list -->
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
+                      <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
+                      <span>Share your portfolio in 5 target WhatsApp/Telegram groups</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
+                      <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
+                      <span>Secure registration for custom launch matching</span>
+                    </div>
+                  </div>
+
+                  <!-- Pro-Tip Box -->
+                  <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
+                    <strong>💡 Pro-Tip:</strong> Offer your first client a "first-job free" or discounted trial in exchange for a testimonial or a Google Business review.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Controls and CTA -->
+            <div>
+              <div id="carouselControls" style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px;">
+                <button id="prevStepBtn" class="btn-step btn-step-secondary" disabled>← Back</button>
+                <button id="nextStepBtn" class="btn-step btn-step-primary">Next Step →</button>
+              </div>
+
+              <a href="waitlist.html" id="finishStepBtn" class="modal-cta" style="display: none; width: 100%;">Join the community →</a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Wire up step card switcher & progress bar
+      setTimeout(function() {
+        var activeStep = 0;
+        var steps = document.querySelectorAll('.step-card');
+        var prevBtn = document.getElementById('prevStepBtn');
+        var nextBtn = document.getElementById('nextStepBtn');
+        var indicator = document.getElementById('stepIndicatorText');
+        var finishBtn = document.getElementById('finishStepBtn');
+        var progressFill = document.getElementById('stepProgressBarFill');
+
+        function showStep(idx) {
+          steps.forEach(function(step, i) {
+            step.style.display = (i === idx) ? 'block' : 'none';
+          });
+          if (indicator) indicator.textContent = 'Step ' + (idx + 1) + ' of ' + steps.length;
+          if (progressFill) progressFill.style.width = Math.round(((idx + 1) / steps.length) * 100) + '%';
+          if (prevBtn) prevBtn.disabled = (idx === 0);
+          if (nextBtn) nextBtn.style.display = (idx === steps.length - 1) ? 'none' : 'inline-block';
+          if (finishBtn) finishBtn.style.display = (idx === steps.length - 1) ? 'inline-block' : 'none';
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function() {
+            if (activeStep > 0) {
+              activeStep--;
+              showStep(activeStep);
+            }
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function() {
+            if (activeStep < steps.length - 1) {
+              activeStep++;
+              showStep(activeStep);
+            }
+          });
+        }
+        showStep(0);
+      }, 50);
+
       const bg = document.getElementById('modalBg');
       bg.style.display = 'flex';
       requestAnimationFrame(() => bg.classList.add('show'));
       document.body.style.overflow = 'hidden';
     }
+
     function closeModal() {
       const bg = document.getElementById('modalBg');
       bg.classList.remove('show');
       setTimeout(() => { bg.style.display = 'none'; }, 300);
       document.body.style.overflow = '';
+      window.currentModalIndex = undefined;
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
@@ -1680,7 +1868,28 @@
     enrichOpportunityData(DATA);
     renderCards();
     setupExploreFilters();
+
+    // Auto-filter category from URL query parameter (?category=XYZ)
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var category = params.get('category');
+      if (category) {
+        var btns = document.querySelectorAll('.fbtn');
+        var targetBtn = null;
+        btns.forEach(function (btn) {
+          var onclickVal = btn.getAttribute('onclick') || '';
+          if (onclickVal.indexOf("filterCat('" + category + "'") !== -1) {
+            targetBtn = btn;
+          }
+        });
+        if (targetBtn) {
+          filterCat(category, targetBtn);
+        }
+      }
+    })();
+
   </script>
+  <script src="assets/early-access.js"></script>
 </body>
 
 </html>

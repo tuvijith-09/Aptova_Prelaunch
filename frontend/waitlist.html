@@ -4,249 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join the Waitlist — Aptova</title>
+  <title>Join the Community — Aptova</title>
   <meta name="description"
     content="Claim early access to Aptova — the AI tool that matches students to invisible opportunities based on their exact situation. No credit card required.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #F8FAFC;
-      --bg2: #FFFFFF;
-      --ink: #0F172A;
-      --soft: #334155;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --primary: #059669;
-      --phov: #047857;
-      --pl: #D1FAE5;
-      --dark: #022C22;
-      --dark2: #064E3B;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg);
-      background-image: url("wavy_grid.svg");
-      background-size: 1200px 1200px;
-      background-position: top center;
-      background-attachment: fixed;
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 13px 6%;
-      background: rgba(248, 250, 252, .9);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-    }
-
-    .logo {
-      font-family: 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: var(--primary);
-    }
-
-    .logo-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: white;
-      background: var(--primary);
-      border: 1px solid var(--phov);
-      padding: 3px 8px;
-      border-radius: 999px;
-      margin-left: 6px;
-      line-height: 1.3;
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 2px 8px rgba(5, 150, 105, .3);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 6px 0;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-links a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      text-shadow: 0 0 12px rgba(52, 168, 83, 0.4);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #34A853;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-      box-shadow: 0 0 8px rgba(52, 168, 83, 0.6);
-    }
-
-    .nav-links a.active::after,
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      transition: all .2s;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25);
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      font-size: 24px;
-      color: var(--ink);
-      line-height: 1;
-      z-index: 110;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .08);
-      padding: 16px 6% 24px;
-      flex-direction: column;
-      gap: 4px;
-      z-index: 105;
-      animation: menuSlide .25s ease-out;
-    }
-
-    .mobile-menu.open {
-      display: flex;
-    }
-
-    .mobile-menu a {
-      color: var(--soft);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      transition: all .2s;
-    }
-
-    .mobile-menu a:last-of-type {
-      border-bottom: none;
-    }
-
-    .mobile-menu a:hover {
-      color: var(--primary);
-    }
-
-    .mobile-menu a.active {
-      color: #34A853 !important;
-      font-weight: 600;
-      border-left: 3px solid #34A853;
-      padding-left: 12px !important;
-      background: rgba(52, 168, 83, 0.04);
-      box-shadow: inset 4px 0 12px rgba(52, 168, 83, 0.02);
-    }
-
-    .mobile-menu .mob-cta {
-      display: block;
-      text-align: center;
-      background: var(--primary);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      margin-top: 12px;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, .25);
-      opacity: .35;
-      pointer-events: none;
-    }
-
-    @keyframes menuSlide {
-      from {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .split-layout {
+.split-layout {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -542,44 +307,31 @@
       text-align: center;
     }
 
-    @media(max-width:768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      .hamburger {
-        display: block;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
   <nav>
-    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="logo.png" alt=""
+    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
         style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
         style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">Early Access</small></a>
+        class="logo-badge">ALPHA</small></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html" class="active">Join Waitlist</a>
+      <a href="waitlist.html" class="active">Join Community</a>
     </div>
-    <a href="#" class="nav-cta" style="opacity:.35;pointer-events:none;">On waitlist</a>
+    <a href="#" class="nav-cta" style="opacity:.35;pointer-events:none;">In community</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html" class="active">Join Waitlist</a>
+      <a href="waitlist.html" class="active">Join Community</a>
     </div>
   </nav>
   <script>
@@ -605,9 +357,7 @@
           sustainability. Spots are allocated strictly first-come, first-served.
         </p>
         <p class="left-sub" style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:12px;text-align:left;">
-          🎁 <strong>Instant Bonus</strong>: Join the waitlist today and instantly receive our curated
-          <strong>"₹0-Capital Starter Kit"</strong> — a step-by-step launch blueprint for India's top 5 invisible
-          opportunities, delivered straight to your inbox immediately.
+          🚀 <strong>Early Launch Perk</strong>: Join the community today to secure your <strong>Priority Fit Assessment</strong>. We process your skills, available hours, and budget to generate a custom match report as soon as we launch.
         </p>
       </div>
     </div>
@@ -616,9 +366,8 @@
       <div class="form-card">
 
         <div class="form-wrap" id="formWrap">
-          <div class="form-title">Secure your spot</div>
-          <div class="form-sub" style="margin-bottom:24px;">Reserve your priority queue spot and receive your free
-            ₹0-Capital Starter Kit instantly.</div>
+          <div class="form-title">Join the community</div>
+          <div class="form-sub" style="margin-bottom:24px;">Create your profile to get a personalized fit assessment and bypass public queue limits.</div>
 
           <form id="waitlistForm" onsubmit="event.preventDefault(); submitForm();">
             <div class="form-group">
@@ -635,10 +384,10 @@
             </div>
 
             <button type="submit" class="submit-btn" id="submitBtn">
-              <span>Join the Waitlist</span>
+              <span>Join the community</span>
             </button>
             <div class="err-msg" id="errMsg">An error occurred. Please try again.</div>
-            <div class="disclaimer">By joining the waitlist, you agree to our <a href="terms-and-conditions.html"
+            <div class="disclaimer">By joining the community, you agree to our <a href="terms-and-conditions.html"
                 style="color:var(--primary);text-decoration:underline;">Terms & Conditions</a> and <a
                 href="privacy-policy.html" style="color:var(--primary);text-decoration:underline;">Privacy Policy</a>.
             </div>
@@ -647,9 +396,8 @@
 
         <div class="success-state" id="successState">
           <div class="sc-icon" style="background:#E6F4EA;border-color:rgba(52,168,83,0.2);color:#34A853;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:32px;height:32px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
-          <h2 class="sc-title">You're on the list.</h2>
-          <p class="sc-desc">Thank you for joining. We've sent the <strong>"₹0-Capital Starter Kit"</strong> to your
-            inbox. Check your email (and spam folder) shortly!</p>
+          <h2 class="sc-title">You're in the community!</h2>
+          <p class="sc-desc">Thank you for joining. We've reserved your priority spot. We'll reach out to your inbox to draft your personalized fit assessment shortly!</p>
           <a href="index.html" class="sc-btn">← Back to home</a>
         </div>
 
@@ -664,8 +412,7 @@
       </div>
       <div class="benefit">
         <div class="b-icon">2</div>
-        <div class="b-text"><strong>Instant Starter Kit</strong> — Receive launch blueprints for India's top 5
-          zero-investment invisible opportunities emailed to you instantly.</div>
+        <div class="b-text"><strong>Custom Matching Report</strong> — Get a personalized, multi-dimensional assessment showing exactly which student opportunities fit your specific budget, time, and skills.</div>
       </div>
       <div class="benefit">
         <div class="b-icon">3</div>
@@ -692,7 +439,7 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Joining waitlist...</span>';
+      submitBtn.innerHTML = '<span>Joining community...</span>';
       errMsg.style.display = 'none';
 
       try {
@@ -710,16 +457,17 @@
           errMsg.textContent = data.message || "Something went wrong. Try again.";
           errMsg.style.display = 'block';
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>Join the Waitlist</span>';
+          submitBtn.innerHTML = '<span>Join the community</span>';
         }
       } catch (e) {
         errMsg.textContent = "Could not connect. Please try again later.";
         errMsg.style.display = 'block';
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Join the Waitlist</span>';
+        submitBtn.innerHTML = '<span>Join the community</span>';
       }
     }
   </script>
+  <script src="assets/early-access.js"></script>
 </body>
 
 </html>
