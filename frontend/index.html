@@ -44,8 +44,9 @@
       align-items: flex-start;
     }
 
+    /* Target badge hidden by default on mobile viewports */
     .h-eyebrow {
-      display: inline-flex;
+      display: none;
       align-items: center;
       gap: 8px;
       border: 1.5px solid var(--primary);
@@ -187,6 +188,7 @@
       margin: 0;
     }
 
+    /* Card background layer stack decorators (Desktop mode defaults) */
     .carousel-wrap::before,
     .carousel-wrap::after {
       content: '';
@@ -576,7 +578,14 @@
       font-size: 16px;
     }
 
-@media(max-width:900px) {
+    /* Desktop Media Viewport Enhancements */
+    @media(min-width:769px) {
+      .h-eyebrow {
+        display: inline-flex;
+      }
+    }
+
+    @media(max-width:900px) {
       .process-inner {
         grid-template-columns: 1fr;
         gap: 48px;
@@ -610,16 +619,9 @@
         flex: none;
       }
 
-      /* 2. Badge — don't stretch full width */
+      /* 2. Badge — completely hidden on mobile sizes */
       .h-eyebrow {
-        align-self: flex-start;
-        width: auto;
-        max-width: 100%;
-        margin-bottom: 18px;
-        padding: 7px 11px;
-        font-size: 11px;
-        line-height: 1.35;
-        letter-spacing: .02em;
+        display: none !important;
       }
 
       /* 3. H1 — tighter tracking on mobile */
@@ -698,7 +700,7 @@
         font-size: 12px;
       }
 
-      /* 6. Carousel — mobile sizing */
+      /* 6. Carousel — mobile sizing & removal of stacked layout decorations */
       .carousel-container {
         align-items: center;
         margin-top: 28px;
@@ -717,6 +719,13 @@
         height: 250px;
         max-width: 320px;
         margin: 0 auto;
+      }
+
+      /* Remove pseudo-element layers that generate the stacked deck look under mobile card views */
+      .carousel-wrap::before,
+      .carousel-wrap::after {
+        display: none !important;
+        content: none !important;
       }
 
       .slide {
@@ -816,7 +825,7 @@
         grid-template-columns: 1fr;
       }
 
-/* Final CTA */
+      /* Final CTA */
       .final {
         padding: 48px 6%;
       }
@@ -1043,19 +1052,25 @@
         flex-direction: column;
         gap: 0;
       }
+
       .modal-tabs {
         display: flex;
-        margin-right: 40px; /* Space for close x button */
+        margin-right: 40px;
+        /* Space for close x button */
       }
-      .split-left, .split-right {
+
+      .split-left,
+      .split-right {
         min-width: 0;
         width: 100%;
         border-left: none !important;
         padding-left: 0 !important;
       }
+
       .modal-split.show-overview .split-right {
         display: none !important;
       }
+
       .modal-split.show-blueprint .split-left {
         display: none !important;
       }
@@ -1155,7 +1170,8 @@
         For students, fresh graduates &amp; early earners
       </div>
       <h1 class="h-h1">Find your best-fit opportunity and start with <em>confidence</em>.</h1>
-      <p class="h-sub">Aptova matches students and graduates with practical income opportunities based on their skills, time, budget, and goals.</p>
+      <p class="h-sub">Aptova matches students and graduates with practical income opportunities based on their skills,
+        time, budget, and goals.</p>
       <div class="h-btns">
         <a href="explore.html" class="btn" style="font-size:16px;padding:18px 40px;">Explore Opportunities →</a>
         <a href="waitlist.html" class="btn-ghost" style="font-size:16px;padding:16.5px 32px;">Join the community</a>
@@ -1319,7 +1335,6 @@
       honest, AI validation of what you can actually do with the resources you have today.</p>
   </section>
 
-  <!-- ===== THE REALITY SECTION ===== -->
   <style>
     .reality-sec {
       padding: 100px 6%;
@@ -1658,7 +1673,6 @@
     </div>
   </section>
 
-  <!-- ===== THE PROCESS SECTION ===== -->
   <style>
     .process-section {
       padding: 100px 6%;
@@ -1722,7 +1736,7 @@
       font-weight: 400;
     }
 
-/* Right Column */
+    /* Right Column */
     .process-right {
       display: flex;
       flex-direction: column;
@@ -1835,7 +1849,6 @@
   <section class="process-section" id="the-process">
     <div class="process-inner">
 
-      <!-- LEFT COLUMN -->
       <div class="process-left">
         <div class="process-eyebrow">The Process</div>
         <h2 class="process-heading">Three steps from uncertainty to clarity</h2>
@@ -1844,10 +1857,8 @@
 
       </div>
 
-      <!-- RIGHT COLUMN -->
       <div class="process-right">
 
-        <!-- Step 1 -->
         <div class="process-step">
           <div class="step-number">1</div>
           <div class="step-body">
@@ -1858,7 +1869,6 @@
           </div>
         </div>
 
-        <!-- Step 2 -->
         <div class="process-step">
           <div class="step-number">2</div>
           <div class="step-body">
@@ -1869,7 +1879,6 @@
           </div>
         </div>
 
-        <!-- Step 3 -->
         <div class="process-step">
           <div class="step-number">3</div>
           <div class="step-body">
@@ -1883,8 +1892,6 @@
       </div>
     </div>
   </section>
-  <!-- ===== END THE PROCESS SECTION ===== -->
-
   <section class="ideas">
     <div class="i-top">
       <div>
@@ -2033,7 +2040,6 @@
     <div>© 2026 Aptova · Made for the Students by the Students</div>
   </footer>
 
-  <!-- MODAL -->
   <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
     <div class="modal" id="modalContainer" style="max-width: 560px; transition: max-width 0.3s ease;">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -2221,12 +2227,12 @@
 
     window.currentModalIndex = undefined;
 
-    window.switchModalTab = function(tabName) {
+    window.switchModalTab = function (tabName) {
       var splitEl = document.querySelector('.modal-split');
       if (!splitEl) return;
 
       var tabBtns = document.querySelectorAll('.modal-tab-btn');
-      tabBtns.forEach(function(btn) {
+      tabBtns.forEach(function (btn) {
         btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
       });
 
@@ -2275,19 +2281,16 @@
 
           <div class="split-right">
             <div style="flex: 1; display: flex; flex-direction: column;">
-              <!-- Progress Indicator -->
               <div style="margin-bottom: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                   <h3 style="font-size: 15px; font-weight: 800; color: var(--ink);">Launch Roadmap</h3>
                   <span id="stepIndicatorText" style="font-size: 12px; font-weight: 700; color: var(--primary);">Step 1 of 3</span>
                 </div>
-                <!-- Step progress line -->
                 <div style="width: 100%; height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden; border: 1px solid var(--border);">
                   <div id="stepProgressBarFill" style="width: 33.33%; height: 100%; background: var(--primary); transition: width 0.3s ease;"></div>
                 </div>
               </div>
 
-              <!-- Step Cards Deck -->
               <div class="step-card-container" style="position: relative; min-height: 250px; margin-bottom: 20px; flex: 1;">
 
                 <div class="step-card" style="display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left;">
@@ -2295,7 +2298,6 @@
                   <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Gather Your Tools</h4>
                   <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">To run this opportunity successfully, make sure you have: <strong style="color: var(--primary);">${enriched.tools}</strong></p>
 
-                  <!-- Phase steps list -->
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                     <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
                       <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
@@ -2307,7 +2309,6 @@
                     </div>
                   </div>
 
-                  <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
                     <strong>💡 Pro-Tip:</strong> Download mobile versions of these tools to manage operations and reply to clients quickly while on campus.
                   </div>
@@ -2318,7 +2319,6 @@
                   <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Execute Launch Sequence</h4>
                   <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">Your very first launch action: <span style="font-weight: 600; color: var(--primary);">${enriched.firstStep}</span></p>
 
-                  <!-- Phase steps list -->
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                     <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
                       <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
@@ -2330,7 +2330,6 @@
                     </div>
                   </div>
 
-                  <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
                     <strong>💡 Pro-Tip:</strong> Your first sample is your credentials. Spend an extra hour making it look extremely polished. Quality sells itself.
                   </div>
@@ -2341,7 +2340,6 @@
                   <h4 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">Promote &amp; Connect</h4>
                   <p style="font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 12px;">Pitch your service to 5 local clients on WhatsApp, and join our community to generate detailed fit assessments.</p>
 
-                  <!-- Phase steps list -->
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                     <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--soft); line-height: 1.45;">
                       <span style="display: inline-block; width: 5px; height: 5px; background: var(--primary); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></span>
@@ -2353,7 +2351,6 @@
                     </div>
                   </div>
 
-                  <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
                     <strong>💡 Pro-Tip:</strong> Offer your first client a "first-job free" or discounted trial in exchange for a testimonial or a Google Business review.
                   </div>
@@ -2362,7 +2359,6 @@
               </div>
             </div>
 
-            <!-- Controls and CTA -->
             <div>
               <div id="carouselControls" style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px;">
                 <button id="prevStepBtn" class="btn-step btn-step-secondary" disabled>← Back</button>
@@ -2376,7 +2372,7 @@
       `;
 
       // Wire up step card switcher & progress bar
-      setTimeout(function() {
+      setTimeout(function () {
         var activeStep = 0;
         var steps = document.querySelectorAll('.step-card');
         var prevBtn = document.getElementById('prevStepBtn');
@@ -2386,7 +2382,7 @@
         var progressFill = document.getElementById('stepProgressBarFill');
 
         function showStep(idx) {
-          steps.forEach(function(step, i) {
+          steps.forEach(function (step, i) {
             step.style.display = (i === idx) ? 'block' : 'none';
           });
           if (indicator) indicator.textContent = 'Step ' + (idx + 1) + ' of ' + steps.length;
@@ -2397,7 +2393,7 @@
         }
 
         if (prevBtn) {
-          prevBtn.addEventListener('click', function() {
+          prevBtn.addEventListener('click', function () {
             if (activeStep > 0) {
               activeStep--;
               showStep(activeStep);
@@ -2405,7 +2401,7 @@
           });
         }
         if (nextBtn) {
-          nextBtn.addEventListener('click', function() {
+          nextBtn.addEventListener('click', function () {
             if (activeStep < steps.length - 1) {
               activeStep++;
               showStep(activeStep);
