@@ -2,6 +2,12 @@
 <html lang="en">
 
 <head>
+  <link rel="icon" type="image/svg+xml" href="Zero.svg">
+  <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explore Domains — Aptova</title>
@@ -237,14 +243,27 @@
     .filter-bar {
       padding: 12px 6% 14px;
       display: flex;
-      gap: 8px;
-      overflow-x: auto;
+      gap: 12px;
       align-items: center;
-      scrollbar-width: none
+      width: 100%;
     }
 
-    .filter-bar::-webkit-scrollbar {
-      display: none
+    .search-wrap {
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .categories-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      align-items: center;
+      width: 100%;
+    }
+
+    .categories-scroll::-webkit-scrollbar {
+      display: none;
     }
 
     .search-input {
@@ -258,7 +277,7 @@
       background: var(--bg);
       color: var(--ink);
       transition: all .2s;
-      flex-shrink: 0
+      flex-shrink: 0;
     }
 
     .search-input:focus {
@@ -885,25 +904,39 @@
       }
 
       .filter-bar {
-        padding: 10px 4%
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .search-wrap {
+        width: 100%;
       }
 
       .search-input {
-        min-width: 160px;
-        font-size: 13px
+        width: 100%;
+        min-width: 100%;
+        font-size: 14px;
+        padding: 10px 16px;
+      }
+
+      .categories-scroll {
+        width: 100%;
+        padding-bottom: 4px;
       }
 
       .fbtn {
-        padding: 6px 11px;
-        font-size: 12px
+        padding: 8px 14px;
+        font-size: 13px;
       }
 
       .grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
       }
 
       .cat-sec {
-        padding: 32px 6% 16px
+        padding: 24px 16px 12px;
       }
 
       .bottom-cta {
@@ -1057,20 +1090,24 @@
       </div>
     </div>
     <div class="filter-bar">
-      <input class="search-input" type="text" id="searchBox" placeholder="Search opportunities..."
-        oninput="applyFilters()">
-      <button class="fbtn on" onclick="filterCat('all',this)">All</button>
-      <button class="fbtn" onclick="filterCat('digital',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>Tech</button>
-      <button class="fbtn" onclick="filterCat('campus',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>Campus</button>
-      <button class="fbtn" onclick="filterCat('creative',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Creative</button>
-      <button class="fbtn" onclick="filterCat('service',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>Services</button>
-      <button class="fbtn" onclick="filterCat('resell',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg>Commerce</button>
-      <button class="fbtn" onclick="filterCat('health',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;color:#059669;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>Health</button>
-      <button class="fbtn" onclick="filterCat('planet',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Eco</button>
-      <button class="fbtn" onclick="filterCat('agri',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M17 8C8 10 5.9 16.17 6 21c4.83.1 11-2 13-11 0 0-3-.5-6 1.5m-5.83 5c.43-1.6 1.4-3 2.83-4 1.43-1 3.1-1.5 4.83-1.5 0 0-2.1-4-7.83-3-5.73 1-5.9 7-2 8.5z"/></svg>Agri</button>
-      <button class="fbtn" onclick="filterCat('food',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>Food</button>
-      <button class="fbtn" onclick="filterCat('education',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>Education</button>
-      <button class="fbtn" onclick="filterCat('wow',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 10h3l-4 4-4-4h3V8h2v4z"/></svg>Wildcard</button>
+      <div class="search-wrap">
+        <input class="search-input" type="text" id="searchBox" placeholder="Search opportunities..."
+          oninput="applyFilters()">
+      </div>
+      <div class="categories-scroll">
+        <button class="fbtn on" onclick="filterCat('all',this)">All</button>
+        <button class="fbtn" onclick="filterCat('digital',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>Tech</button>
+        <button class="fbtn" onclick="filterCat('campus',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>Campus</button>
+        <button class="fbtn" onclick="filterCat('creative',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Creative</button>
+        <button class="fbtn" onclick="filterCat('service',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>Services</button>
+        <button class="fbtn" onclick="filterCat('resell',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg>Commerce</button>
+        <button class="fbtn" onclick="filterCat('health',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;color:#059669;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>Health</button>
+        <button class="fbtn" onclick="filterCat('planet',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Eco</button>
+        <button class="fbtn" onclick="filterCat('agri',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M17 8C8 10 5.9 16.17 6 21c4.83.1 11-2 13-11 0 0-3-.5-6 1.5m-5.83 5c.43-1.6 1.4-3 2.83-4 1.43-1 3.1-1.5 4.83-1.5 0 0-2.1-4-7.83-3-5.73 1-5.9 7-2 8.5z"/></svg>Agri</button>
+        <button class="fbtn" onclick="filterCat('food',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>Food</button>
+        <button class="fbtn" onclick="filterCat('education',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>Education</button>
+        <button class="fbtn" onclick="filterCat('wow',this)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 10h3l-4 4-4-4h3V8h2v4z"/></svg>Wildcard</button>
+      </div>
     </div>
     <div class="filter-suggest">
       Have an opportunity idea not listed here? <a href="./suggest.html" class="suggest-link">Suggest an opportunity
@@ -1688,7 +1725,7 @@
 
                   <!-- Pro-Tip Box -->
                   <div style="background: rgba(5, 150, 105, 0.06); border-left: 3px solid var(--primary); padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: var(--soft);">
-                    <strong>💡 Pro-Tip:</strong> Offer your first client a "first-job free" or discounted trial in exchange for a testimonial or a Google Business review.
+                    <strong>💡 Pro-Tip:</strong> Offer your first client a "first-gig free" or discounted trial in exchange for a testimonial or a Google Business review.
                   </div>
                 </div>
 
@@ -1847,17 +1884,46 @@
 
       var minSlider = document.getElementById('investSliderMin');
       var maxSlider = document.getElementById('investSliderMax');
+      var container = document.querySelector('.range-slider-container');
+
+      function updateActiveSlider(clientX) {
+        var rect = minSlider.getBoundingClientRect();
+        var x = clientX - rect.left;
+        var pct = x / rect.width;
+        var val = pct * (parseInt(minSlider.max, 10) - parseInt(minSlider.min, 10)) + parseInt(minSlider.min, 10);
+
+        var minVal = parseInt(minSlider.value, 10);
+        var maxVal = parseInt(maxSlider.value, 10);
+
+        // Determine which thumb the pointer is closer to
+        if (Math.abs(val - minVal) < Math.abs(val - maxVal)) {
+          minSlider.style.pointerEvents = 'auto';
+          maxSlider.style.pointerEvents = 'none';
+          minSlider.style.zIndex = '5';
+          maxSlider.style.zIndex = '4';
+        } else {
+          minSlider.style.pointerEvents = 'none';
+          maxSlider.style.pointerEvents = 'auto';
+          minSlider.style.zIndex = '4';
+          maxSlider.style.zIndex = '5';
+        }
+      }
+
+      if (container) {
+        container.addEventListener('pointermove', function (e) {
+          updateActiveSlider(e.clientX);
+        });
+        container.addEventListener('pointerdown', function (e) {
+          updateActiveSlider(e.clientX);
+        });
+      }
 
       minSlider.addEventListener('input', function () {
-        minSlider.style.zIndex = '4';
-        maxSlider.style.zIndex = '3';
         updateSliderFill.call(this);
         applyFilters();
       });
 
       maxSlider.addEventListener('input', function () {
-        maxSlider.style.zIndex = '4';
-        minSlider.style.zIndex = '3';
         updateSliderFill.call(this);
         applyFilters();
       });

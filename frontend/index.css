@@ -57,6 +57,9 @@ nav {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: 'Inter', sans-serif;
   font-weight: 800;
   font-size: 22px;
@@ -354,7 +357,7 @@ footer {
 
   .logo {
     font-size: 20px;
-    gap: 5px !important;
+    gap: 4px !important;
     min-width: 0;
   }
 
