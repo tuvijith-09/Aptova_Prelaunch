@@ -36,10 +36,8 @@ DOWNLOAD_SECRET = os.getenv("DOWNLOAD_SECRET", "aptova2026")
 
 DATABASE_URL = (
     f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
+    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4&ssl_disabled=true"
 )
-
-
 
 # ----------------------------------------------------------------
 # DB setup
@@ -52,12 +50,13 @@ Base         = declarative_base()
 # ----------------------------------------------------------------
 # Models
 # ----------------------------------------------------------------
-class Waitlist(Base):
-    __tablename__ = "waitlist"
+class Community(Base):
+    __tablename__ = "community"
     id         = Column(Integer,      primary_key=True, autoincrement=True)
     full_name  = Column(String(150),  nullable=False)
     email      = Column(String(255),  nullable=False, unique=True)
     phone      = Column(String(20),   nullable=True)
+    city       = Column(String(100),  nullable=True)
     ip_address = Column(String(45),   nullable=True)
     created_at = Column(DateTime,     default=datetime.utcnow)
 
@@ -101,12 +100,9 @@ app.add_middleware(
 
 @app.on_event("startup")
 def startup():
-    try:
-        Base.metadata.create_all(bind=engine)
-        print("[OK] Database connected and tables ready.")
-    except Exception as e:
-        print(f"[WARNING] DB connection at startup failed: {e}")
-        print("[INFO] App will still start. DB will connect on first request.")
+    Base.metadata.create_all(bind=engine)
+    print("[OK] Database connected and tables ready.")
+
 
 def get_db():
     db = SessionLocal()
@@ -119,10 +115,11 @@ def get_db():
 # ----------------------------------------------------------------
 # Schemas
 # ----------------------------------------------------------------
-class WaitlistIn(BaseModel):
+class CommunityIn(BaseModel):
     full_name: str
     email: EmailStr
     phone: Optional[str] = None
+    city: Optional[str] = None
 
 
 class SuggestionIn(BaseModel):
@@ -144,15 +141,16 @@ class QuestionIn(BaseModel):
 # ENDPOINT 1: Waitlist
 # ----------------------------------------------------------------
 @app.post("/waitlist")
-def join_waitlist(payload: WaitlistIn, request: Request, db=Depends(get_db)):
-    existing = db.query(Waitlist).filter(Waitlist.email == payload.email.lower()).first()
+def join_community(payload: CommunityIn, request: Request, db=Depends(get_db)):
+    existing = db.query(Community).filter(Community.email == payload.email.lower()).first()
     if existing:
         return {"success": False, "message": "You're already on the waitlist!"}
 
-    entry = Waitlist(
+    entry = Community(
         full_name  = payload.full_name.strip(),
         email      = payload.email.lower().strip(),
         phone      = payload.phone,
+        city       = payload.city,
         ip_address = request.client.host,
     )
     db.add(entry)
@@ -244,17 +242,17 @@ def download_waitlist(key: str = Query(...), db=Depends(get_db)):
     if key != DOWNLOAD_SECRET:
         return {"error": "Invalid key"}
 
-    rows     = db.query(Waitlist).order_by(Waitlist.created_at.desc()).all()
+    rows     = db.query(Community).order_by(Community.created_at.desc()).all()
     wb       = Workbook()
     ws       = wb.active
-    ws.title = "Waitlist"
-    headers  = ["ID", "Full Name", "Email", "Phone", "IP Address", "Created At"]
+    ws.title = "Community"
+    headers  = ["ID", "Full Name", "Email", "Phone", "City", "IP Address", "Created At"]
     style_excel(wb, ws, headers)
 
     for row in rows:
         ws.append([
             row.id, row.full_name, row.email,
-            row.phone or "", row.ip_address or "",
+            row.phone or "", row.city or "", row.ip_address or "",
             str(row.created_at) if row.created_at else "",
         ])
 
