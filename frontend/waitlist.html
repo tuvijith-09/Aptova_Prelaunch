@@ -17,7 +17,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="index.css">
   <style>
-.split-layout {
+    .split-layout {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -312,8 +312,7 @@
       margin-top: 10px;
       text-align: center;
     }
-
-</style>
+  </style>
 </head>
 
 <body>
@@ -321,8 +320,8 @@
   <nav>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
         style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
-        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small
-        class="logo-badge">ALPHA</small></a>
+        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
+          style="color:#34A853;">ova</span></span><small class="logo-badge">ALPHA</small></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
@@ -363,7 +362,9 @@
           sustainability. Spots are allocated strictly first-come, first-served.
         </p>
         <p class="left-sub" style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:12px;text-align:left;">
-          🚀 <strong>Early Launch Perk</strong>: Join the community today to secure your <strong>Priority Fit Assessment</strong>. We process your skills, available hours, and budget to generate a custom match report as soon as we launch.
+          🚀 <strong>Early Launch Perk</strong>: Join the community today to secure your <strong>Priority Fit
+            Assessment</strong>. We process your skills, available hours, and budget to generate a custom match report
+          as soon as we launch.
         </p>
       </div>
     </div>
@@ -373,7 +374,8 @@
 
         <div class="form-wrap" id="formWrap">
           <div class="form-title">Join the community</div>
-          <div class="form-sub" style="margin-bottom:24px;">Create your profile to get a personalized fit assessment and bypass public queue limits.</div>
+          <div class="form-sub" style="margin-bottom:24px;">Create your profile to get a personalized fit assessment and
+            bypass public queue limits.</div>
 
           <form id="waitlistForm" onsubmit="event.preventDefault(); submitForm();">
             <div class="form-group">
@@ -385,8 +387,12 @@
               <input type="email" id="wEmail" class="form-input" placeholder="you@example.com" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="wPhone">Phone Number (Optional)</label>
-              <input type="tel" id="wPhone" class="form-input" placeholder="+91 98765 43210">
+              <label class="form-label" for="wPhone">Phone Number</label>
+              <input type="tel" id="wPhone" class="form-input" placeholder="+91 98765 43210" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wCity">City</label>
+              <input type="text" id="wCity" class="form-input" placeholder="e.g. Hyderabad" required>
             </div>
 
             <button type="submit" class="submit-btn" id="submitBtn">
@@ -401,9 +407,15 @@
         </div>
 
         <div class="success-state" id="successState">
-          <div class="sc-icon" style="background:#E6F4EA;border-color:rgba(52,168,83,0.2);color:#34A853;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:32px;height:32px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+          <div class="sc-icon"
+            style="background:#E6F4EA;border-color:rgba(52,168,83,0.2);color:#34A853;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:32px;height:32px;">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg></div>
           <h2 class="sc-title">You're in the community!</h2>
-          <p class="sc-desc">Thank you for joining. We've reserved your priority spot. We'll reach out to your inbox to draft your personalized fit assessment shortly!</p>
+          <p class="sc-desc">Thank you for joining. We've reserved your priority spot. We'll reach out to your inbox to
+            draft your personalized fit assessment shortly!</p>
           <a href="index.html" class="sc-btn">← Back to home</a>
         </div>
 
@@ -418,7 +430,8 @@
       </div>
       <div class="benefit">
         <div class="b-icon">2</div>
-        <div class="b-text"><strong>Custom Matching Report</strong> — Get a personalized, multi-dimensional assessment showing exactly which student opportunities fit your specific budget, time, and skills.</div>
+        <div class="b-text"><strong>Custom Matching Report</strong> — Get a personalized, multi-dimensional assessment
+          showing exactly which student opportunities fit your specific budget, time, and skills.</div>
       </div>
       <div class="benefit">
         <div class="b-icon">3</div>
@@ -437,9 +450,10 @@
       const full_name = document.getElementById('wName').value.trim();
       const email = document.getElementById('wEmail').value.trim();
       const phone = document.getElementById('wPhone').value.trim();
+      const city = document.getElementById('wCity').value.trim();
 
-      if (!full_name || !email) {
-        errMsg.textContent = "Please enter your name and email.";
+      if (!full_name || !email || !phone || !city) {
+        errMsg.textContent = "Please fill in all the required fields.";
         errMsg.style.display = 'block';
         return;
       }
@@ -452,7 +466,7 @@
         const res = await fetch('https://aptova-prelaunch.onrender.com/waitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ full_name, email, phone: phone || null })
+          body: JSON.stringify({ full_name, email, phone, city })
         });
         const data = await res.json();
 
