@@ -795,23 +795,6 @@
         text-align: right;
       }
 
-      /* Comparison */
-      .why-Aptova {
-        padding: 60px 6%;
-      }
-
-      .wb-heading {
-        font-size: 28px;
-      }
-
-      .wb-card {
-        padding: 24px 20px;
-      }
-
-      .wb-list li {
-        font-size: 13px;
-      }
-
       /* AI Explain */
       .ai-explain {
         padding: 60px 6%;
@@ -904,18 +887,20 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html" class="active">How it works</a>
+      <a href="whats-different.html">What's Different</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Community</a>
+      <a href="join the community.html">Join Community</a>
     </div>
     <a href="explore.html" class="nav-cta">Explore Opportunities</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Home</a>
       <a href="how-it-works.html" class="active">How it works</a>
+      <a href="whats-different.html">What's Different</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Community</a>
+      <a href="join the community.html">Join Community</a>
       <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
     </div>
   </nav>
@@ -1002,185 +987,6 @@
           </div>
           <div class="poll-voted" id="pollVotedMsg"></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    /* WHY Aptova COMPARISON SECTION */
-    .why-Aptova {
-      padding: 88px 6%;
-      background: #18120C url("wavy_grid.svg");
-      background-size: 1200px 1200px;
-      background-position: top center;
-      background-attachment: fixed;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .why-Aptova::before {
-      content: '';
-      position: absolute;
-      top: -120px;
-      right: -80px;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(5, 150, 105, .08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .wb-header {
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .wb-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .wb-heading {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      font-size: clamp(28px, 3.5vw, 46px);
-      font-weight: 700;
-      color: #F5F0E8;
-      line-height: 1.15;
-      letter-spacing: -1.5px;
-    }
-
-    .wb-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .wb-card {
-      border-radius: 14px;
-      padding: 32px 28px;
-    }
-
-    .wb-card.left {
-      background: #221A12;
-      border: 1px solid #2E2318;
-    }
-
-    .wb-card.right {
-      background: #2A2018;
-      border: 1px solid #3A3020;
-    }
-
-    .wb-card-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .wb-card.left .wb-card-eyebrow {
-      color: #7A6E62;
-    }
-
-    .wb-card.right .wb-card-eyebrow {
-      color: var(--primary);
-    }
-
-    .wb-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      list-style: none;
-    }
-
-    .wb-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .wb-card.left .wb-list li {
-      color: #9A8E82;
-    }
-
-    .wb-card.right .wb-list li {
-      color: #F0EBE3;
-    }
-
-    .wb-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .wb-icon.x {
-      background: rgba(220, 38, 38, .15);
-      color: #F87171;
-      border: 1px solid rgba(220, 38, 38, .2);
-    }
-
-    .wb-icon.check {
-      background: rgba(5, 150, 105, .15);
-      color: #34D399;
-      border: 1px solid rgba(5, 150, 105, .25);
-    }
-
-    @media (max-width: 768px) {
-      .wb-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-
-  <section class="why-Aptova" id="why-Aptova">
-    <div class="wb-header">
-      <div class="wb-eyebrow">Why Aptova</div>
-      <h2 class="wb-heading">What makes this different</h2>
-    </div>
-
-    <div class="wb-grid">
-      <!-- Left card — what you've tried -->
-      <div class="wb-card left">
-        <div class="wb-card-eyebrow">What you've tried before</div>
-        <ul class="wb-list">
-          <li><span class="wb-icon x">✕</span>Generic advice that fits everyone and helps no one</li>
-          <li><span class="wb-icon x">✕</span>Only shows popular options, not the right ones</li>
-          <li><span class="wb-icon x">✕</span>No way to know if you're personally ready</li>
-          <li><span class="wb-icon x">✕</span>Same output regardless of your budget or location</li>
-          <li><span class="wb-icon x">✕</span>No honest risk or gap analysis</li>
-        </ul>
-      </div>
-
-      <!-- Right card — what Aptova does -->
-      <div class="wb-card right">
-        <div class="wb-card-eyebrow">What Aptova does</div>
-        <ul class="wb-list">
-          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>AI-powered — adaptive questions, no two interviews the same</li>
-          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Matches 200+ opportunities including ones most people never consider
-          </li>
-          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Validation tells you your real readiness before you commit</li>
-          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Scored against your exact location, capital, and time</li>
-          <li><span class="wb-icon check" style="background:#E6F4EA;border-color:rgba(52,168,83,0.25);color:#34A853;display:inline-flex;align-items:center;justify-content:center;height:20px;width:20px;padding:2px;"><svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>No credit card required — get started in under 2 minutes</li>
-        </ul>
       </div>
     </div>
   </section>
@@ -2008,9 +1814,10 @@
     <div class="fl">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
+      <a href="whats-different.html">What's Different</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="waitlist.html">Join Community</a>
+      <a href="join the community.html">Join Community</a>
       <a href="mailto:hello@Aptova.com">Ask a question</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms & Conditions</a>
