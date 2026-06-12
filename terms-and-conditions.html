@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="frontend/Zero.svg">
+  <link rel="alternate icon" type="image/x-icon" href="frontend/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="frontend/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="frontend/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="frontend/apple-touch-icon.png">
+  <link rel="manifest" href="frontend/site.webmanifest">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions — Aptova</title>
+<meta name="description" content="Aptova's Terms and Conditions. The rules that govern your use of the Aptova platform.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root {
+  --bg: #F8FAFC;
+  --bg2: #FFFFFF;
+  --ink: #0F172A;
+  --soft: #334155;
+  --muted: #64748B;
+  --border: #E2E8F0;
+  --primary: #059669;
+  --phov: #047857;
+  --pl: #D1FAE5;
+  --dark: #022C22;
+  --dark2: #064E3B;
+}
+html{scroll-behavior:smooth;}
+body{background-color:var(--bg);background-image:url("frontend/wavy_grid.svg");background-size:1200px 1200px;background-position:top center;background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:13px 6%;background:rgba(248,250,252,.9);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-1px;}.logo span{color:var(--primary);}.logo-badge{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;background:var(--primary);border:1px solid var(--phov);padding:3px 8px;border-radius:999px;margin-left:6px;line-height:1.3;white-space:nowrap;flex-shrink:0;font-family:'Inter',sans-serif;box-shadow:0 2px 8px rgba(5,150,105,.3);}
+.nav-links{display:flex;gap:26px;align-items:center;}.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:all .3s ease;position:relative;padding:6px 0;}.nav-links a:hover{color:var(--ink);}
+.nav-links a.active{color:#34A853!important;font-weight:600;text-shadow:0 0 12px rgba(52,168,83,.4);}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:#34A853;border-radius:2px;transition:all .3s ease;transform:translateX(-50%);box-shadow:0 0 8px rgba(52,168,83,.6);}
+.nav-links a.active::after,.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--primary);color:white;border:none;padding:10px 24px;border-radius:50px;font-weight:600;font-size:13px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:.02em;transition:all .2s;box-shadow:0 4px 12px rgba(5,150,105,.25);}.nav-cta:hover{background:var(--phov);transform:translateY(-1px);}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;font-size:24px;color:var(--ink);line-height:1;z-index:110;}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:white;border-bottom:1px solid var(--border);box-shadow:0 12px 36px rgba(0,0,0,.08);padding:16px 6% 24px;flex-direction:column;gap:4px;z-index:105;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--soft);text-decoration:none;font-size:15px;font-weight:500;padding:12px 0;border-bottom:1px solid var(--border);transition:all .2s;}.mobile-menu a:last-of-type{border-bottom:none;}.mobile-menu a:hover{color:var(--primary);}
+.mobile-menu a.active{color:#34A853!important;font-weight:600;border-left:3px solid #34A853;padding-left:12px!important;background:rgba(52,168,83,.04);box-shadow:inset 4px 0 12px rgba(52,168,83,.02);}
+.mobile-menu .mob-cta{display:block;text-align:center;background:var(--primary);color:white;padding:14px 24px;border-radius:50px;font-weight:600;font-size:14px;font-family:'Inter',sans-serif;text-decoration:none;text-transform:uppercase;letter-spacing:.02em;margin-top:12px;}
+
+/* PAGE HEADER */
+.page-header{padding:72px 6% 56px;border-bottom:1px solid var(--border);background:transparent;}
+.page-header-inner{max-width:760px;margin:0 auto;}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--primary);background:rgba(5,150,105,.04);padding:6px 16px;border-radius:6px;font-size:12px;color:var(--primary);font-weight:600;margin-bottom:24px;letter-spacing:.04em;}
+.page-title{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-2px;color:var(--ink);line-height:1.08;margin-bottom:16px;}
+.page-meta{font-size:13px;color:var(--muted);font-weight:500;display:flex;gap:24px;flex-wrap:wrap;}
+.page-meta span{display:flex;align-items:center;gap:6px;}
+.page-meta span::before{content:'';width:6px;height:6px;background:var(--primary);border-radius:50%;display:inline-block;}
+
+/* CONTENT */
+.content-wrap{max-width:760px;margin:0 auto;padding:64px 6% 100px;}
+
+/* TOC */
+.toc{background:white;border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:56px;box-shadow:0 4px 16px rgba(0,0,0,.02);}
+.toc-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.toc-list li a{color:var(--soft);text-decoration:none;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.toc-list li a:hover{color:var(--primary);}
+.toc-num{font-size:11px;font-weight:700;color:var(--primary);min-width:20px;}
+
+/* SECTIONS */
+.policy-section{margin-bottom:56px;scroll-margin-top:100px;}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.section-num{width:36px;height:36px;background:var(--pl);border:1px solid rgba(5,150,105,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--primary);flex-shrink:0;}
+.section-title{font-family:'Lora','Georgia',serif;font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-0.5px;}
+.policy-section p{font-size:15px;color:var(--soft);line-height:1.75;margin-bottom:16px;}
+.policy-section p:last-child{margin-bottom:0;}
+
+.subsection{margin:24px 0;}
+.subsection-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px;}
+
+.policy-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:16px 0;}
+.policy-list li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--soft);line-height:1.65;}
+.policy-list li::before{content:'';width:6px;height:6px;background:var(--primary);border-radius:50%;flex-shrink:0;margin-top:8px;}
+
+.highlight-box{background:rgba(5,150,105,.04);border:1px solid rgba(5,150,105,.15);border-radius:10px;padding:20px 24px;margin:20px 0;}
+.highlight-box p{font-size:14px;color:var(--soft);margin:0;line-height:1.65;}
+
+.contact-box{background:white;border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-top:20px;}
+.contact-box p{font-size:15px;color:var(--soft);margin-bottom:8px;}
+.contact-box a{color:var(--primary);font-weight:600;text-decoration:none;}.contact-box a:hover{text-decoration:underline;}
+
+/* FOOTER */
+footer{padding:24px 6%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);background:transparent;flex-wrap:wrap;gap:10px;}
+.fl{display:flex;gap:20px;}.fl a{color:var(--muted);text-decoration:none;}.fl a:hover{color:var(--primary);}
+.fl a.active{color:var(--primary);font-weight:600;}
+
+@media(max-width:768px){
+  nav{padding:12px 6%;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:block;flex-shrink:0;margin-left:auto;}
+  .page-header{padding:48px 6% 36px;}
+  .content-wrap{padding:40px 6% 64px;}
+  .toc{padding:20px;}
+  .contact-box{padding:20px;}
+  footer{flex-direction:column;text-align:center;gap:16px;}
+  .fl{flex-wrap:wrap;justify-content:center;gap:12px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="frontend/index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="frontend/Zero.svg" alt="" style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small class="logo-badge">&alpha;</small></a>
+  <div class="nav-links">
+    <a href="frontend/index.html">Home</a>
+    <a href="frontend/how-it-works.html">How it works</a>
+    <a href="frontend/whats-different.html">What's Different</a>
+    <a href="frontend/explore.html">Explore Opportunities</a>
+    <a href="frontend/about.html">About Us</a>
+    <a href="frontend/join the community.html">Join Community</a>
+  </div>
+  <a href="frontend/explore.html" class="nav-cta">Explore Opportunities</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="frontend/index.html">Home</a>
+    <a href="frontend/how-it-works.html">How it works</a>
+    <a href="frontend/whats-different.html">What's Different</a>
+    <a href="frontend/explore.html">Explore Opportunities</a>
+    <a href="frontend/about.html">About Us</a>
+    <a href="frontend/join the community.html">Join Community</a>
+    <a href="frontend/explore.html" class="mob-cta">Explore Opportunities →</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Legal</div>
+    <h1 class="page-title">Terms & Conditions</h1>
+    <div class="page-meta">
+      <span>Effective Date: May 29, 2025</span>
+      <span>Last Updated: May 29, 2025</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <p style="font-size:15px;color:var(--soft);line-height:1.75;margin-bottom:40px;">Welcome to Aptova. These Terms and Conditions ("Terms") set out the rules that govern your use of the Aptova platform, available at <strong>www.aptova.in</strong>. By creating an account, starting an assessment, or simply browsing the Platform, you confirm that you are at least 16 years old and that you agree to these Terms in full.</p>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span> What Aptova Is</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> Eligibility</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> Your Account</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> Using the Platform Responsibly</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> Understanding Your Reports</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> Intellectual Property</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> Privacy</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> Third-Party Services</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> Platform Availability</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span> Future Revenue Model</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span> Our Liability to You</a></li>
+      <li><a href="#s12"><span class="toc-num">12</span> Indemnification</a></li>
+      <li><a href="#s13"><span class="toc-num">13</span> Changes to These Terms</a></li>
+      <li><a href="#s14"><span class="toc-num">14</span> Governing Law</a></li>
+      <li><a href="#s15"><span class="toc-num">15</span> Severability</a></li>
+      <li><a href="#s16"><span class="toc-num">16</span> Get in Touch</a></li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="policy-section" id="s1">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title">What Aptova Is</div>
+    </div>
+    <p>Aptova is a smart, AI-assisted platform built to help individuals explore business and income opportunities that suit their personal circumstances, skills, and goals. Through a conversational, adaptive interview process, the Platform builds a picture of who you are and what might work well for you, then surfaces opportunities tailored to that profile — along with a deeper validation of the option you find most interesting.</p>
+    <p>The Platform is built to be a meaningful starting point for your journey. It is a discovery and exploration tool, and the insights it generates are intended to inform and inspire your thinking as you research and plan your next steps.</p>
+    <div class="highlight-box">
+      <p>Aptova is currently offered as a free platform. As we continue to grow, we may introduce premium features, subscription plans, or other commercial offerings in the future. Any such changes will be communicated to you clearly and in advance, and existing users will always be given fair notice before any paid model takes effect.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="policy-section" id="s2">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title">Eligibility</div>
+    </div>
+    <p>To use Aptova independently, you must be at least 18 years of age (the age of majority under the Indian DPDP Act 2023) and have the legal capacity to enter into a binding agreement. If you are between 16 and 18 years of age, you may only use the Platform under the supervision and with the consent of a parent or legal guardian who agrees to be bound by these Terms on your behalf. By using the Platform, you confirm that you meet these requirements.</p>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="policy-section" id="s3">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title">Your Account</div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Creating an Account</div>
+      <p>Registering gives you access to the full Aptova experience, including saving your progress and accessing your completed report at any time. When you register, you agree to:</p>
+      <ul class="policy-list">
+        <li>Provide accurate and truthful information</li>
+        <li>Keep your password private and not share access with others</li>
+        <li>Take responsibility for all activity that takes place under your account</li>
+        <li>Contact us straight away at <a href="mailto:support@aptova.in" style="color:var(--primary);font-weight:600;text-decoration:none;">support@aptova.in</a> if you ever suspect your account has been accessed without your permission</li>
+      </ul>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Guest Access</div>
+      <p>You can try Aptova without registering. Guest sessions are temporary, and your responses and results will not be retained once the session ends. Some features are available exclusively to registered users.</p>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Closing or Suspending an Account</div>
+      <p>You are free to close your account at any time through your account settings. We may suspend or close an account if we have reason to believe that these Terms have been seriously or repeatedly breached. Where possible, we will let you know before taking any such action.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="policy-section" id="s4">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title">Using the Platform Responsibly</div>
+    </div>
+    <p>Aptova is built to be a helpful, honest tool, and we ask that you use it in that spirit. When using the Platform, you agree not to:</p>
+    <ul class="policy-list">
+      <li>Use it in any way that is unlawful or that could harm others</li>
+      <li>Provide intentionally false or misleading information during your assessment, as this will affect the quality of your Report</li>
+      <li>Attempt to copy, extract, or systematically collect data or content from the Platform</li>
+      <li>Try to access another user's account or interfere with our security systems</li>
+      <li>Use automated tools, bots, or scripts to interact with the Platform</li>
+      <li>Attempt to reverse-engineer any part of the Platform's technology or scoring logic</li>
+      <li>Use any output, data, or reports from the Platform to develop or train AI models without our prior written agreement</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="policy-section" id="s5">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title">Understanding Your Reports</div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">How Aptova Works</div>
+      <p>Your Report is shaped by the information you provide throughout the assessment. Aptova's engine extracts key details from your answers and maps them against a structured scoring framework built around real-world business considerations. The more thoughtfully and accurately you engage with the assessment, the more relevant and useful your Report will be.</p>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">The Nature of Your Matched Opportunities</div>
+      <p>Aptova's matched opportunities are designed to open doors — to surface possibilities you may not have considered and to give you a structured framework for thinking about your options. They reflect the combination of your unique Profile and our business scoring logic at the time of your assessment.</p>
+      <p>As with any discovery process, the insights the Platform generates are a starting point rather than a final verdict. Business decisions involve many layers — local conditions, timing, personal readiness, and factors that evolve over time — and we encourage you to use your Aptova Report as one valuable input alongside your own research and, where appropriate, guidance from people with relevant expertise.</p>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Your Reports Are Personal to You</div>
+      <p>Your Report is generated based on what you share with us. Because it is tailored to your specific inputs, it may not reflect every detail of your situation. We recommend approaching your Report with curiosity and using it to guide the questions you explore further.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="policy-section" id="s6">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title">Intellectual Property</div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">What Belongs to Aptova</div>
+      <p>Everything that makes Aptova work — the Platform design, the scoring engine, the business logic, the AI prompt architecture, the templates, the branding, and all associated content — is the intellectual property of Aptova or its licensors. It is protected under applicable copyright, trademark, and intellectual property law. You may not reproduce, distribute, or build upon any part of it without our express written permission.</p>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">What Belongs to You</div>
+      <p>Your answers are yours. You retain full ownership of everything you share during your assessment. By using the Platform, you give us a limited permission to process and store your responses for the sole purpose of delivering your Report and improving the service. We do not claim any rights over what you share.</p>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Your Report</div>
+      <p>Your completed report is generated for your personal use. You are welcome to download it and share it with people you trust. Commercial use, resale, or redistribution of Aptova-generated reports requires our prior written consent.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="policy-section" id="s7">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title">Privacy</div>
+    </div>
+    <p>How we collect and use your personal information is described in full in our <a href="privacy-policy.html" style="color:var(--primary);font-weight:600;text-decoration:none;">Privacy Policy</a>, which forms part of these Terms. We encourage you to read it — it is written to be clear and straightforward.</p>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="policy-section" id="s8">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-title">Third-Party Services</div>
+    </div>
+    <p>Aptova works with a small number of trusted third-party providers to deliver the Platform, including OpenAI for our AI capabilities and cloud infrastructure partners for hosting and data storage. These providers operate under agreements that require them to handle your data responsibly.</p>
+    <p>We do not control third-party platforms and are not responsible for their practices. Where relevant, we recommend reviewing their own terms and policies.</p>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="policy-section" id="s9">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div class="section-title">Platform Availability</div>
+    </div>
+    <p>We work hard to keep Aptova reliable and available. From time to time, however, we may need to carry out maintenance, make improvements, or address technical issues that temporarily affect access. We will do our best to minimise disruption and, where planned, give you advance notice.</p>
+    <p>We reserve the right to update, modify, or discontinue any feature or aspect of the Platform. Where changes are significant, we will communicate them to registered users in advance wherever this is reasonably practicable.</p>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="policy-section" id="s10">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div class="section-title">Future Revenue Model</div>
+    </div>
+    <p>Aptova is currently offered as a free platform. As we continue to grow and develop, we may introduce premium features, subscription plans, or other commercial offerings in the future. Any such changes will be communicated to you clearly and well in advance. Existing users will always be given fair notice before any paid model takes effect, and your continued use of the Platform at that time will reflect your acceptance of any updated Terms.</p>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="policy-section" id="s11">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div class="section-title">Disclaimer of Advice & Limit of Liability</div>
+    </div>
+    <div class="highlight-box" style="border-left: 4px solid #dc2626; background: rgba(220, 38, 38, 0.02); margin-bottom: 24px;">
+      <p style="font-weight: 700; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.05em; font-size: 13px; margin-bottom: 8px;">Important Professional & Financial Advice Disclaimer</p>
+      <p style="font-size: 14px; line-height: 1.6; color: var(--soft);"><strong>APTOVA IS AN AI-POWERED DISCOVERY AND EXPLORATION ENGINE. THE PLATFORM DOES NOT PROVIDE ANY FINANCIAL, LEGAL, TAX, BUSINESS, OR INVESTMENT ADVICE.</strong> Any matched opportunities, profiles, reports, or scores generated by the Platform are for educational and inspirational purposes only. Starting a business, investing capital, or executing side hustles involves real financial risk. You must perform your own independent due diligence, evaluate local regulations, and consult with qualified professionals before making any financial or business commitments.</p>
+    </div>
+    <p><strong>Warranty Disclaimer ("As-Is" / "As-Available"):</strong> Aptova is provided in good faith and with genuine care for the experience it delivers. At the same time, the Platform is a discovery tool and we make no warranties of any kind, express or implied, including but not limited to warranties of accuracy, completeness, viability, success of matched opportunities, or that the Platform will be uninterrupted or error-free.</p>
+    <p>To the extent permitted by applicable law, Aptova's liability in connection with your use of the Platform is limited to direct losses only, and our total liability for any claim shall not exceed the greater of the total fees you have paid to Aptova in the twelve months prior to the claim or INR 1,000. We are not liable for any indirect, consequential, or speculative losses — including but not limited to lost profits, missed opportunities, or decisions made on the basis of the Platform's output.</p>
+    <p>Nothing in these Terms limits liability for fraud, death or personal injury caused by our negligence, or any other liability that cannot be excluded by law.</p>
+  </div>
+
+  <!-- SECTION 12 -->
+  <div class="policy-section" id="s12">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <div class="section-title">Indemnification</div>
+    </div>
+    <p>You agree to indemnify and hold Aptova and its team harmless from any claims, losses, or expenses — including reasonable legal costs — that arise from your misuse of the Platform, your violation of these Terms, or any harm caused to a third party through content or actions associated with your account.</p>
+  </div>
+
+  <!-- SECTION 13 -->
+  <div class="policy-section" id="s13">
+    <div class="section-header">
+      <div class="section-num">13</div>
+      <div class="section-title">Changes to These Terms</div>
+    </div>
+    <p>We may update these Terms as the Platform grows and evolves. When we make changes that matter, we will update the "Last Updated" date at the top of this page and let registered users know by email or through the Platform. Continuing to use Aptova after an update means you are happy with the revised Terms.</p>
+  </div>
+
+  <!-- SECTION 14 -->
+  <div class="policy-section" id="s14">
+    <div class="section-header">
+      <div class="section-num">14</div>
+      <div class="section-title">Governing Law</div>
+    </div>
+    <p>These Terms are governed by the laws of India. Any disputes that cannot be resolved through good-faith discussion between both parties shall be referred to the competent courts of India.</p>
+  </div>
+
+  <!-- SECTION 15 -->
+  <div class="policy-section" id="s15">
+    <div class="section-header">
+      <div class="section-num">15</div>
+      <div class="section-title">Severability</div>
+    </div>
+    <p>If any part of these Terms is found to be unenforceable, it will be adjusted to the minimum extent needed to make it enforceable, or removed entirely, without affecting the rest of the Terms.</p>
+  </div>
+
+  <!-- SECTION 16 -->
+  <div class="policy-section" id="s16">
+    <div class="section-header">
+      <div class="section-num">16</div>
+      <div class="section-title">Get in Touch & Grievance Redressal</div>
+    </div>
+    <p>Questions about these Terms? Or do you have any grievance to raise under the Indian DPDP Act 2023? We are happy to help.</p>
+    <div class="contact-box">
+      <p><strong>Aptova Support & Legal</strong></p>
+      <p>Email: <a href="mailto:legal@aptova.in">legal@aptova.in</a></p>
+      <p>Grievance Officer Email: <a href="mailto:privacy@aptova.in">privacy@aptova.in</a></p>
+      <p>Website: <a href="https://www.aptova.in">www.aptova.in</a></p>
+    </div>
+    <p style="margin-top:24px;font-size:13px;color:var(--muted);">© 2026 Aptova. All rights reserved.</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="frontend/index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img src="frontend/Zero.svg" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span style="color:#34A853;">ova</span></span><small class="logo-badge">&alpha;</small></a>
+  <div class="fl">
+    <a href="frontend/index.html">Home</a>
+    <a href="frontend/how-it-works.html">How it works</a>
+    <a href="frontend/whats-different.html">What's Different</a>
+    <a href="frontend/explore.html">Explore Opportunities</a>
+    <a href="frontend/about.html">About Us</a>
+    <a href="frontend/join the community.html">Join Community</a>
+    <a href="mailto:hello@aptova.in">Ask a question</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-and-conditions.html" class="active">Terms & Conditions</a>
+  </div>
+  <div>© 2026 Aptova · Made for the Students by the Students</div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  const b=document.querySelector('.hamburger');
+  m.classList.toggle('open');
+  b.textContent=m.classList.contains('open')?'✕':'☰';
+}
+</script>
+  <script src="frontend/assets/early-access.js"></script>
+</body>
+</html>
