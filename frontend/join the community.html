@@ -64,17 +64,9 @@
     }
 
     @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(5, 150, 105, .4);
-      }
-
-      70% {
-        box-shadow: 0 0 0 6px rgba(5, 150, 105, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
-      }
+      0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, .4); }
+      70% { box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
     }
 
     .left-h1 {
@@ -197,6 +189,7 @@
       color: var(--ink);
       outline: none;
       transition: border-color .2s;
+      box-sizing: border-box;
     }
 
     .form-input:focus {
@@ -249,6 +242,196 @@
       text-align: center;
     }
 
+    /* ── FEEDBACK FORM STYLES ── */
+    .feedback-form-wrap {
+      display: none;
+    }
+
+    .feedback-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .feedback-icon {
+      width: 56px;
+      height: 56px;
+      background: #E6F4EA;
+      border: 2px solid rgba(52, 168, 83, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #34A853;
+      margin: 0 auto 16px;
+    }
+
+    .feedback-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .feedback-header p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .feedback-q-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+
+    .feedback-q-num {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 22px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Star Rating */
+    .star-rating {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .star-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #D1D5DB;
+      transition: color .15s, transform .1s;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .star-btn:hover,
+    .star-btn.active {
+      color: #F59E0B;
+      transform: scale(1.15);
+    }
+
+    .star-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Radio options */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .radio-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      font-size: 14px;
+      color: var(--soft);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .radio-opt:hover {
+      border-color: var(--primary);
+      background: var(--pl);
+    }
+
+    .radio-opt input {
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .radio-opt.selected {
+      border-color: var(--primary);
+      background: var(--pl);
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* Checkbox options */
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checkbox-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      font-size: 14px;
+      color: var(--soft);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .checkbox-opt:hover {
+      border-color: var(--primary);
+      background: var(--pl);
+    }
+
+    .checkbox-opt input {
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .checkbox-opt.selected {
+      border-color: var(--primary);
+      background: var(--pl);
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .feedback-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .skip-link {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    .skip-link:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* ── FINAL SUCCESS STATE ── */
     .success-state {
       display: none;
       text-align: center;
@@ -374,7 +557,8 @@
     <div class="right">
       <div class="form-card">
 
-        <div class="form-wrap" id="formWrap">
+        <!-- ── STEP 1: JOIN FORM ── -->
+        <div id="formWrap">
           <div class="form-title">Join the community</div>
           <div class="form-sub" style="margin-bottom:24px;">Create your profile to get a personalized fit assessment and
             bypass public queue limits.</div>
@@ -408,16 +592,126 @@
           </form>
         </div>
 
+        <!-- ── STEP 2: FEEDBACK FORM (shown after successful join) ── -->
+        <div class="feedback-form-wrap" id="feedbackWrap">
+
+          <div class="feedback-header">
+            <div class="feedback-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:28px;height:28px;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h2>You're in! 🎉</h2>
+            <p>You've secured your spot. Before you go, help us build a better Aptova — takes under 60 seconds.</p>
+          </div>
+
+          <form id="feedbackForm" onsubmit="event.preventDefault(); submitFeedback();">
+
+            <!-- Q1: First impression -->
+            <div class="form-group">
+              <label class="feedback-q-label" for="q1">
+                <span class="feedback-q-num">1</span>What was your first impression of Aptova?
+              </label>
+              <textarea id="q1" class="form-input" placeholder="Share your honest first impression..." rows="3"></textarea>
+            </div>
+
+            <hr class="feedback-divider">
+
+            <!-- Q2: Star rating -->
+            <div class="form-group">
+              <label class="feedback-q-label">
+                <span class="feedback-q-num">2</span>How useful do you think Aptova can be for people exploring new opportunities?
+              </label>
+              <div class="star-rating" id="starRating">
+                <button type="button" class="star-btn" data-val="1" onclick="setRating(1)">★</button>
+                <button type="button" class="star-btn" data-val="2" onclick="setRating(2)">★</button>
+                <button type="button" class="star-btn" data-val="3" onclick="setRating(3)">★</button>
+                <button type="button" class="star-btn" data-val="4" onclick="setRating(4)">★</button>
+                <button type="button" class="star-btn" data-val="5" onclick="setRating(5)">★</button>
+              </div>
+              <div class="star-labels">
+                <span>1 — Not useful</span>
+                <span>5 — Extremely useful</span>
+              </div>
+              <input type="hidden" id="q2Rating" value="">
+            </div>
+
+            <hr class="feedback-divider">
+
+            <!-- Q3: Improvement suggestion -->
+            <div class="form-group">
+              <label class="feedback-q-label" for="q3">
+                <span class="feedback-q-num">3</span>What is one thing you think we should improve, change, or add?
+              </label>
+              <textarea id="q3" class="form-input" placeholder="Be specific — we read every response..." rows="3"></textarea>
+            </div>
+
+            <hr class="feedback-divider">
+
+            <!-- Q4: Interested in helping -->
+            <div class="form-group">
+              <label class="feedback-q-label">
+                <span class="feedback-q-num">4</span>Would you be interested in helping us grow and improve Aptova?
+              </label>
+              <div class="radio-group" id="q4Group">
+                <label class="radio-opt" onclick="selectRadio(this, 'q4')">
+                  <input type="radio" name="q4" value="Yes, I'd love to help"> Yes, I'd love to help
+                </label>
+                <label class="radio-opt" onclick="selectRadio(this, 'q4')">
+                  <input type="radio" name="q4" value="Maybe"> Maybe
+                </label>
+                <label class="radio-opt" onclick="selectRadio(this, 'q4')">
+                  <input type="radio" name="q4" value="Not right now"> Not right now
+                </label>
+              </div>
+            </div>
+
+            <hr class="feedback-divider">
+
+            <!-- Q5: How to contribute (checkbox) -->
+            <div class="form-group" id="q5Section">
+              <label class="feedback-q-label">
+                <span class="feedback-q-num">5</span>If yes, how would you like to contribute? <span style="font-weight:400;color:var(--muted);">(select all that apply)</span>
+              </label>
+              <div class="checkbox-group">
+                <label class="checkbox-opt" onclick="toggleCheckbox(this)">
+                  <input type="checkbox" name="q5" value="Share Aptova with friends/classmates"> Share Aptova with friends/classmates
+                </label>
+                <label class="checkbox-opt" onclick="toggleCheckbox(this)">
+                  <input type="checkbox" name="q5" value="Give feedback and suggestions"> Give feedback and suggestions
+                </label>
+                <label class="checkbox-opt" onclick="toggleCheckbox(this)">
+                  <input type="checkbox" name="q5" value="Test early versions and new features"> Test early versions and new features
+                </label>
+                <label class="checkbox-opt" onclick="toggleCheckbox(this)">
+                  <input type="checkbox" name="q5" value="Help create content or spread awareness"> Help create content or spread awareness
+                </label>
+                <label class="checkbox-opt" onclick="toggleCheckbox(this)">
+                  <input type="checkbox" name="q5" value="Other"> Other
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="feedbackSubmitBtn">
+              <span>Submit Feedback →</span>
+            </button>
+            <div class="err-msg" id="feedbackErrMsg">Something went wrong. Please try again.</div>
+
+          </form>
+
+          <span class="skip-link" onclick="showFinalSuccess()">Skip for now →</span>
+        </div>
+
+        <!-- ── STEP 3: FINAL SUCCESS ── -->
         <div class="success-state" id="successState">
           <div class="sc-icon"
             style="background:#E6F4EA;border-color:rgba(52,168,83,0.2);color:#34A853;display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 24 24" fill="currentColor" style="width:32px;height:32px;">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-            </svg></div>
-          <h2 class="sc-title">You're in the community!</h2>
-          <p class="sc-desc" style="margin-bottom: 24px;">Thank you for joining. We've reserved your priority spot. To help us build a better platform, please take a moment to share your expectations and feedback.</p>
-          <a href="https://forms.gle/UZjTds6APotWwtEq9" target="_blank" class="submit-btn" style="margin-bottom: 16px; text-decoration: none;">Share Your Feedback →</a>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
+          </div>
+          <h2 class="sc-title">Thank you! 🙌</h2>
+          <p class="sc-desc">Your spot is secured and your feedback means the world to us. We'll notify you the moment Aptova launches.</p>
           <a href="index.html" class="sc-btn">← Back to home</a>
         </div>
 
@@ -464,6 +758,9 @@
   </footer>
 
   <script>
+    // ── STEP 1: Join form submit ──
+    let joinedEmail = '';
+
     async function submitForm() {
       const submitBtn = document.getElementById('submitBtn');
       const errMsg = document.getElementById('errMsg');
@@ -492,8 +789,12 @@
         const data = await res.json();
 
         if (data.success) {
+          joinedEmail = email; // store for feedback submission
+          // Hide join form, show feedback form
           document.getElementById('formWrap').style.display = 'none';
-          document.getElementById('successState').style.display = 'block';
+          document.getElementById('feedbackWrap').style.display = 'block';
+          // Scroll card into view smoothly
+          document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
           errMsg.textContent = data.message || "Something went wrong. Try again.";
           errMsg.style.display = 'block';
@@ -506,6 +807,84 @@
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<span>Join the community</span>';
       }
+    }
+
+    // ── Star rating ──
+    function setRating(val) {
+      document.getElementById('q2Rating').value = val;
+      document.querySelectorAll('.star-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.val) <= val);
+      });
+    }
+
+    // ── Radio select ──
+    function selectRadio(label, groupName) {
+      document.querySelectorAll(`input[name="${groupName}"]`).forEach(inp => {
+        inp.closest('label').classList.remove('selected');
+      });
+      label.classList.add('selected');
+    }
+
+    // ── Checkbox toggle ──
+    function toggleCheckbox(label) {
+      // toggled by browser naturally; we just sync the visual class
+      setTimeout(() => {
+        const cb = label.querySelector('input[type="checkbox"]');
+        label.classList.toggle('selected', cb.checked);
+      }, 0);
+    }
+
+    // ── STEP 2: Feedback submit ──
+    async function submitFeedback() {
+      const btn = document.getElementById('feedbackSubmitBtn');
+      const errMsg = document.getElementById('feedbackErrMsg');
+
+      const q1 = document.getElementById('q1').value.trim();
+      const q2 = document.getElementById('q2Rating').value;
+      const q3 = document.getElementById('q3').value.trim();
+      const q4 = document.querySelector('input[name="q4"]:checked')?.value || '';
+      const q5 = Array.from(document.querySelectorAll('input[name="q5"]:checked')).map(c => c.value).join(', ');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>Submitting...</span>';
+      errMsg.style.display = 'none';
+
+      try {
+        const res = await fetch('https://aptova-prelaunch.onrender.com/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: joinedEmail,
+            first_impression: q1,
+            usefulness_rating: q2 ? parseInt(q2) : null,
+            improvement_suggestion: q3,
+            willing_to_help: q4,
+            contribution_ways: q5
+          })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          showFinalSuccess();
+        } else {
+          errMsg.textContent = data.message || "Something went wrong. Please try again.";
+          errMsg.style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = '<span>Submit Feedback →</span>';
+        }
+      } catch (e) {
+        errMsg.textContent = "Could not connect. Please try again later.";
+        errMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '<span>Submit Feedback →</span>';
+      }
+    }
+
+    // ── Show final success screen ──
+    function showFinalSuccess() {
+      document.getElementById('feedbackWrap').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   </script>
   <script src="assets/early-access.js"></script>
