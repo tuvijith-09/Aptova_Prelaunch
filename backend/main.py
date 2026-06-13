@@ -1,9 +1,10 @@
 """
 main.py — Aptova Prelaunch Backend
-Only 3 endpoints for the 3 static page forms:
-  POST /waitlist    → waitlist.html
+Endpoints:
+  POST /waitlist    → join the community.html
   POST /suggest     → suggest.html
   POST /question    → how-it-works.html
+  POST /feedback    → feedback form (shown after join)  ← NEW
 Run: uvicorn main:app --reload
 """
 
@@ -86,9 +87,25 @@ class Question(Base):
 
 
 # ----------------------------------------------------------------
+# NEW: Feedback model
+# ----------------------------------------------------------------
+class Feedback(Base):
+    __tablename__ = "feedback"
+    id                      = Column(Integer,     primary_key=True, autoincrement=True)
+    email                   = Column(String(255), nullable=False)          # links back to community table
+    first_impression        = Column(Text,        nullable=True)           # Q1
+    usefulness_rating       = Column(SmallInteger, nullable=True)          # Q2  (1-5)
+    improvement_suggestion  = Column(Text,        nullable=True)           # Q3
+    willing_to_help         = Column(String(50),  nullable=True)           # Q4  ("Yes", "Maybe", "Not right now")
+    contribution_ways       = Column(Text,        nullable=True)           # Q5  comma-separated checkboxes
+    ip_address              = Column(String(45),  nullable=True)
+    created_at              = Column(DateTime,    default=datetime.utcnow)
+
+
+# ----------------------------------------------------------------
 # FastAPI app
 # ----------------------------------------------------------------
-app = FastAPI(title="Aptova Prelaunch API", version="1.0.0")
+app = FastAPI(title="Aptova Prelaunch API", version="1.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -135,6 +152,18 @@ class QuestionIn(BaseModel):
     full_name: str
     email: EmailStr
     question: str
+
+
+# ----------------------------------------------------------------
+# NEW: Feedback schema
+# ----------------------------------------------------------------
+class FeedbackIn(BaseModel):
+    email: EmailStr
+    first_impression: Optional[str] = None
+    usefulness_rating: Optional[int] = None          # 1-5
+    improvement_suggestion: Optional[str] = None
+    willing_to_help: Optional[str] = None
+    contribution_ways: Optional[str] = None           # comma-separated string from frontend
 
 
 # ----------------------------------------------------------------
@@ -191,6 +220,30 @@ def ask_question(payload: QuestionIn, request: Request, db=Depends(get_db)):
     db.add(entry)
     db.commit()
     return {"success": True, "message": "Got it! We reply to every question within 24 hours."}
+
+
+# ----------------------------------------------------------------
+# ENDPOINT 4 (NEW): Feedback
+# ----------------------------------------------------------------
+@app.post("/feedback")
+def submit_feedback(payload: FeedbackIn, request: Request, db=Depends(get_db)):
+    # Validate rating range if provided
+    if payload.usefulness_rating is not None:
+        if not (1 <= payload.usefulness_rating <= 5):
+            return {"success": False, "message": "Rating must be between 1 and 5."}
+
+    entry = Feedback(
+        email                  = payload.email.lower().strip(),
+        first_impression       = payload.first_impression.strip() if payload.first_impression else None,
+        usefulness_rating      = payload.usefulness_rating,
+        improvement_suggestion = payload.improvement_suggestion.strip() if payload.improvement_suggestion else None,
+        willing_to_help        = payload.willing_to_help.strip() if payload.willing_to_help else None,
+        contribution_ways      = payload.contribution_ways.strip() if payload.contribution_ways else None,
+        ip_address             = request.client.host,
+    )
+    db.add(entry)
+    db.commit()
+    return {"success": True, "message": "Thank you for your feedback! It means a lot to us."}
 
 
 # ----------------------------------------------------------------
@@ -322,6 +375,47 @@ def download_questions(key: str = Query(...), db=Depends(get_db)):
     wb.save(buf)
     buf.seek(0)
     filename = f"questions_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
+    return StreamingResponse(buf,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f"attachment; filename={filename}"})
+
+
+# ----------------------------------------------------------------
+# DOWNLOAD (NEW): Feedback as Excel
+# ----------------------------------------------------------------
+@app.get("/download/feedback")
+def download_feedback(key: str = Query(...), db=Depends(get_db)):
+    if key != DOWNLOAD_SECRET:
+        return {"error": "Invalid key"}
+
+    rows     = db.query(Feedback).order_by(Feedback.created_at.desc()).all()
+    wb       = Workbook()
+    ws       = wb.active
+    ws.title = "Feedback"
+    headers  = [
+        "ID", "Email", "First Impression", "Usefulness Rating (1-5)",
+        "Improvement Suggestion", "Willing to Help", "Contribution Ways",
+        "IP Address", "Created At"
+    ]
+    style_excel(wb, ws, headers)
+
+    for row in rows:
+        ws.append([
+            row.id,
+            row.email,
+            row.first_impression or "",
+            row.usefulness_rating if row.usefulness_rating is not None else "",
+            row.improvement_suggestion or "",
+            row.willing_to_help or "",
+            row.contribution_ways or "",
+            row.ip_address or "",
+            str(row.created_at) if row.created_at else "",
+        ])
+
+    buf = io.BytesIO()
+    wb.save(buf)
+    buf.seek(0)
+    filename = f"feedback_{datetime.utcnow().strftime('%Y%m%d_%H%M')}.xlsx"
     return StreamingResponse(buf,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         headers={"Content-Disposition": f"attachment; filename={filename}"})
