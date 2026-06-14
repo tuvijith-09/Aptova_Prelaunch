@@ -248,6 +248,7 @@ nav {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -331,17 +332,21 @@ footer {
 /* Hide scrollbar on horizontal scrollbars for clean mobile appearance */
 .i-tabs,
 .filter-bar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 .i-tabs::-webkit-scrollbar,
 .filter-bar::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Opera */
+  display: none;
+  /* Chrome/Safari/Opera */
 }
 
 /* Responsive Overrides (max-width: 768px) */
 @media (max-width: 768px) {
+
   html,
   body {
     width: 100%;
@@ -397,4 +402,27 @@ footer {
     justify-content: center;
     gap: 12px;
   }
+}
+
+/* Top Banner Styles */
+.top-banner {
+  background: var(--dark);
+  color: var(--pl);
+  text-align: center;
+  padding: 8px 6%;
+  font-size: 13px;
+  font-weight: 600;
+  width: 100%;
+  position: relative;
+  z-index: 101;
+  border-bottom: 1px solid rgba(5, 150, 105, 0.2);
+}
+.top-banner a {
+  color: #FFFFFF;
+  text-decoration: underline;
+  margin-left: 6px;
+  transition: color 0.2s;
+}
+.top-banner a:hover {
+  color: var(--primary);
 }

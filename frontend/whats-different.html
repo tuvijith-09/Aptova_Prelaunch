@@ -10,7 +10,7 @@
   <link rel="manifest" href="site.webmanifest">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What's Different — Aptova</title>
+  <title>Why Aptova — Aptova</title>
   <meta name="description"
     content="Aptova is a constraint-matching engine, not another generic chatbot. See how we filter out impossible side hustles to find your real fit.">
   <link
@@ -694,10 +694,62 @@
         margin: 0 auto;
       }
     }
+    .final {
+      padding: 80px 6%;
+      text-align: center;
+      border-top: 4px solid var(--primary);
+      background: transparent;
+    }
+
+    .final-h {
+      font-family: 'Lora', 'Georgia', serif;
+      font-size: clamp(26px, 3.5vw, 48px);
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -1px;
+    }
+
+    .final-h em {
+      color: var(--primary);
+      font-style: italic;
+    }
+
+    .final-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-weight: 400;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.65;
+    }
+
+    .final-incentive {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pl);
+      border: 1px solid #6EE7B7;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #065F46;
+      margin-bottom: 28px;
+    }
+
+    .final-incentive span {
+      font-size: 16px;
+    }
   </style>
 </head>
 
 <body>
+
+  <div class="top-banner">
+    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join the community.html">Join the community →</a></span>
+  </div>
 
   <nav>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
@@ -707,7 +759,7 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html" class="active">What's Different</a>
+      <a href="whats-different.html" class="active">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
       <a href="join the community.html">Join Community</a>
@@ -717,7 +769,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html" class="active">What's Different</a>
+      <a href="whats-different.html" class="active">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
       <a href="join the community.html">Join Community</a>
@@ -734,13 +786,47 @@
   </script>
 
   <section class="ph">
-    <div class="eyebrow-badge">THE DIFFERENCE</div>
-    <h1 class="ph-h1">Designed for Real <span class="accent">Constraints</span></h1>
+    <div class="eyebrow-badge">WHY APTOVA</div>
+    <h1 class="ph-h1">Why Aptova? Designed for Real <span class="accent">Constraints</span></h1>
     <p class="ph-sub">Traditional search engines give you generic lists. Aptova filters by your real-world budget, time, and skills to find what actually works.</p>
   </section>
 
   <!-- Bento Section containing Bento Grid Rows -->
   <section class="bento-section">
+    
+    <!-- Bento Row 3: How Aptova Compares (Moved to Top) -->
+    <div class="bento-grid">
+      <div class="bento-card col-12 dark-theme">
+        <div class="comp-layout">
+          <div class="comp-header">
+            <h2>How Aptova Compares</h2>
+          </div>
+          <div class="comp-grid">
+            <div class="comp-card left">
+              <div class="comp-card-eyebrow">What you've tried before</div>
+              <ul class="comp-list">
+                <li><span class="comp-icon x">✕</span>Generic advice that fits everyone and helps no one</li>
+                <li><span class="comp-icon x">✕</span>Only shows popular options, ignoring personal constraints</li>
+                <li><span class="comp-icon x">✕</span>No way to evaluate if you are personally ready</li>
+                <li><span class="comp-icon x">✕</span>Same output regardless of your budget or region</li>
+                <li><span class="comp-icon x">✕</span>No honest risk or gap analysis</li>
+              </ul>
+            </div>
+
+            <div class="comp-card right">
+              <div class="comp-card-eyebrow">What Aptova does</div>
+              <ul class="comp-list">
+                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Adaptive assessment — no two queries get the same path</li>
+                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Matches 135+ curated regional, campus, and digital niches</li>
+                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Validates skill readiness and highlights setup gaps</li>
+                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Scores specifically for your capital, time, and location</li>
+                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Takes less than 2 minutes to discover your real opportunities</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Bento Grid Row 1 -->
     <div class="bento-grid">
@@ -981,39 +1067,7 @@
 
     </div>
 
-    <!-- Bento Row 3: How Aptova Compares -->
-    <div class="bento-grid">
-      <div class="bento-card col-12 dark-theme">
-        <div class="comp-layout">
-          <div class="comp-header">
-            <h2>How Aptova Compares</h2>
-          </div>
-          <div class="comp-grid">
-            <div class="comp-card left">
-              <div class="comp-card-eyebrow">What you've tried before</div>
-              <ul class="comp-list">
-                <li><span class="comp-icon x">✕</span>Generic advice that fits everyone and helps no one</li>
-                <li><span class="comp-icon x">✕</span>Only shows popular options, ignoring personal constraints</li>
-                <li><span class="comp-icon x">✕</span>No way to evaluate if you are personally ready</li>
-                <li><span class="comp-icon x">✕</span>Same output regardless of your budget or region</li>
-                <li><span class="comp-icon x">✕</span>No honest risk or gap analysis</li>
-              </ul>
-            </div>
 
-            <div class="comp-card right">
-              <div class="comp-card-eyebrow">What Aptova does</div>
-              <ul class="comp-list">
-                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Adaptive assessment — no two queries get the same path</li>
-                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Matches 135+ curated regional, campus, and digital niches</li>
-                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Validates skill readiness and highlights setup gaps</li>
-                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Scores specifically for your capital, time, and location</li>
-                <li><span class="comp-icon check"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>Takes less than 2 minutes to discover your real opportunities</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Bento Row 4: CTA -->
     <div class="bento-grid">
@@ -1029,6 +1083,15 @@
 
   </section>
 
+  <section class="final">
+    <h2 class="final-h">Ready to find your <br><em>perfect fit?</em></h2>
+    <p class="final-sub">We're opening early access to just 1,000 students. Every AI report uses real compute — capping
+      the beta keeps early access fast and accessible.</p>
+    <div class="final-incentive"><span>🤝</span> Early members get direct access to the founding team + priority support
+    </div><br>
+    <a href="join the community.html" class="btn" style="font-size:16px;padding:16px 44px;margin:0 auto;">Join the community →</a>
+  </section>
+
   <footer>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img
         src="Zero.svg" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
@@ -1037,7 +1100,7 @@
     <div class="fl">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html" class="active">What's Different</a>
+      <a href="whats-different.html" class="active">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
       <a href="join the community.html">Join Community</a>

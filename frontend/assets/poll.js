@@ -5,11 +5,11 @@
   var STORAGE_KEY = 'aptova_poll_vote';
 
   var OPTIONS = [
-    { id: 'saw_someone', label: 'Saw someone else do it', pct: 41 },
-    { id: 'youtube', label: 'YouTube / social media', pct: 28 },
-    { id: 'family', label: 'Family suggested it', pct: 19 },
-    { id: 'skills', label: 'Matched my actual skills', pct: 8 },
-    { id: 'tool', label: 'Used a tool or analysis', pct: 4 }
+    { id: 'no_idea', label: 'Not sure which idea to pick', pct: 36 },
+    { id: 'no_skills', label: 'Not sure if I have the right skills', pct: 24 },
+    { id: 'no_money', label: 'Lack of startup capital / budget', pct: 18 },
+    { id: 'no_time', label: 'Not enough time (busy with studies)', pct: 14 },
+    { id: 'fear', label: 'Fear of failure or self-doubt', pct: 8 }
   ];
 
   var card = document.getElementById('pollCard');

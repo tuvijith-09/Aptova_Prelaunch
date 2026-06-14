@@ -429,11 +429,7 @@
     }
 
     .reality-inner {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 72px;
-      align-items: start;
-      max-width: 1160px;
+      max-width: 680px;
       margin: 0 auto;
     }
 
@@ -461,7 +457,7 @@
       color: var(--muted);
       line-height: 1.7;
       margin-bottom: 40px;
-      max-width: 460px;
+      max-width: 100%;
     }
 
     .reality-stats {
@@ -1407,6 +1403,10 @@
 
 <body>
 
+  <div class="top-banner">
+    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join the community.html">Join the community →</a></span>
+  </div>
+
   <nav>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
         style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
@@ -1415,7 +1415,7 @@
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html">What's Different</a>
+      <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
       <a href="join the community.html">Join Community</a>
@@ -1425,7 +1425,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" class="active">Home</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html">What's Different</a>
+      <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
       <a href="join the community.html">Join Community</a>
@@ -1451,10 +1451,11 @@
         For students, fresh graduates &amp; early earners
       </div>
       <h1 class="h-h1">Turn <em>spare</em> hours into your first <em>income</em> stream.</h1>
-      <p class="h-sub">Stop copying random side hustles. Discover best-fit opportunities before you waste months on the wrong one.</p>
+      <p class="h-sub">Find practical opportunities that match your skills, goals, budget, location, and availability - built for students and freshers ready to move ahead with clarity.</p>
       <div class="h-btns">
         <a href="explore.html" class="btn" style="font-size:16px;padding:18px 40px;">Explore Opportunities →</a>
-        <a href="join the community.html" class="btn-ghost" style="font-size:16px;padding:16.5px 32px;">Join the community</a>
+        <a href="join the community.html" class="btn-ghost" style="font-size:16px;padding:16.5px 32px;">Join the
+          community</a>
       </div>
     </div>
 
@@ -1574,7 +1575,7 @@
               d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
           </svg>
         </span>
-        No credit card required
+        No Experience Required
       </div>
       <div class="strip-item">
         <span class="strip-icon" style="background:#E6F4EA;border-color:rgba(52,168,83,0.15);color:#34A853;">
@@ -1601,7 +1602,7 @@
               d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
           </svg>
         </span>
-        30-second registration
+        200+ Vetted Ideas
       </div>
     </div>
   </div>
@@ -1645,21 +1646,6 @@
               <div class="rs-src">Source: KVIC Annual Report, 2024</div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="survey-card" id="pollCard">
-        <div class="poll-active">
-          <div class="survey-title">Quick poll</div>
-          <p class="poll-question">How did you pick your last side hustle or business idea?</p>
-          <div class="poll-options"></div>
-          <button type="button" class="poll-submit" disabled>See how others answered</button>
-        </div>
-        <div class="poll-results" hidden>
-          <div class="poll-results-title">2024 survey results</div>
-          <p class="poll-results-head">How students chose their last opportunity</p>
-          <div class="poll-results-rows"></div>
-          <div class="survey-note">Benchmark: survey of 200 students &amp; recent graduates across India — 2024</div>
-          <a href="join the community.html" class="poll-cta">Want a fit-based pick next time? Join the community →</a>
         </div>
       </div>
     </div>
@@ -1901,7 +1887,7 @@
       <div class="i-tabs">
         <div class="i-tab active" onclick="switchGrid('zero', this)">Zero Capital</div>
         <div class="i-tab" onclick="switchGrid('parttime', this)">Part-Time</div>
-        <div class="i-tab" onclick="switchGrid('tier3', this)">Tier 3 / Rural</div>
+        <div class="i-tab" onclick="switchGrid('tier3', this)">Local & Offline</div>
       </div>
     </div>
 
@@ -2008,6 +1994,24 @@
         document.getElementById('grid-' + gridId).style.display = 'grid';
       }
     </script>
+    <div class="poll-wrapper" style="max-width: 500px; margin: 60px auto 0 auto; text-align: left;">
+      <div class="survey-card" id="pollCard">
+        <div class="poll-active">
+          <div class="survey-title">Quick poll</div>
+          <p class="poll-question">What holds you back the most from starting?</p>
+          <div class="poll-options"></div>
+          <button type="button" class="poll-submit" disabled>See how others answered</button>
+        </div>
+        <div class="poll-results" hidden>
+          <div class="poll-results-title">Quick Poll Results</div>
+          <p class="poll-results-head">What holds students back the most from starting</p>
+          <div class="poll-results-rows"></div>
+          <div class="survey-note">Benchmark: survey of 200 students &amp; recent graduates across India — 2024</div>
+          <a href="join the community.html" class="poll-cta">Want a fit-based pick next time? Join the community →</a>
+        </div>
+      </div>
+    </div>
+
     <div style="text-align:center;margin-top:40px;">
       <a href="explore.html" class="btn-ghost" style="padding:14px 28px;">Explore all 200+ opportunities →</a>
     </div>
@@ -2019,7 +2023,8 @@
       the beta keeps early access fast and accessible.</p>
     <div class="final-incentive"><span>🤝</span> Early members get direct access to the founding team + priority support
     </div><br>
-    <a href="join the community.html" class="btn" style="font-size:16px;padding:16px 44px;margin:0 auto;">Join the community →</a>
+    <a href="join the community.html" class="btn" style="font-size:16px;padding:16px 44px;margin:0 auto;">Join the
+      community →</a>
   </section>
 
   <footer>
@@ -2030,7 +2035,7 @@
     <div class="fl">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html">What's Different</a>
+      <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
       <a href="join the community.html">Join Community</a>
