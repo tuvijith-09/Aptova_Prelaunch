@@ -101,6 +101,13 @@ class Feedback(Base):
     ip_address              = Column(String(45),  nullable=True)
     created_at              = Column(DateTime,    default=datetime.utcnow)
 
+class OpportunityDetail(Base):
+    __tablename__ = "opportunity_details"
+    id              = Column(Integer,  primary_key=True, autoincrement=True)
+    opportunity_key = Column(String(255), nullable=False, unique=True)
+    long_description = Column(Text, nullable=False)
+    created_at      = Column(DateTime, default=datetime.utcnow)
+    updated_at      = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 # ----------------------------------------------------------------
 # FastAPI app
@@ -165,6 +172,15 @@ class FeedbackIn(BaseModel):
     willing_to_help: Optional[str] = None
     contribution_ways: Optional[str] = None           # comma-separated string from frontend
 
+class QuestionIn(BaseModel):
+    full_name: str
+    email: EmailStr
+    question: str
+
+
+class OpportunityDetailIn(BaseModel):
+    opportunity_key: str
+    long_description: str
 
 # ----------------------------------------------------------------
 # ENDPOINT 1: Waitlist
@@ -245,6 +261,39 @@ def submit_feedback(payload: FeedbackIn, request: Request, db=Depends(get_db)):
     db.commit()
     return {"success": True, "message": "Thank you for your feedback! It means a lot to us."}
 
+@app.get("/opportunities/detail")
+def get_opportunity_detail(key: str = Query(...), db=Depends(get_db)):
+    row = db.query(OpportunityDetail).filter(OpportunityDetail.opportunity_key == key).first()
+    if not row:
+        return {"success": False, "message": "No details found for this opportunity"}
+    return {"success": True, "long_description": row.long_description}
+
+@app.get("/opportunities/detail")
+def get_opportunity_detail(key: str = Query(...), db=Depends(get_db)):
+    row = db.query(OpportunityDetail).filter(OpportunityDetail.opportunity_key == key).first()
+    if not row:
+        return {"success": False, "message": "No details found for this opportunity"}
+    return {"success": True, "long_description": row.long_description}
+
+
+@app.post("/opportunities/detail")
+def upsert_opportunity_detail(payload: OpportunityDetailIn, db=Depends(get_db)):
+    row = db.query(OpportunityDetail).filter(
+        OpportunityDetail.opportunity_key == payload.opportunity_key
+    ).first()
+
+    if row:
+        row.long_description = payload.long_description
+        row.updated_at = datetime.utcnow()
+    else:
+        row = OpportunityDetail(
+            opportunity_key=payload.opportunity_key,
+            long_description=payload.long_description
+        )
+        db.add(row)
+
+    db.commit()
+    return {"success": True, "message": "Saved"}
 
 # ----------------------------------------------------------------
 # Health check
