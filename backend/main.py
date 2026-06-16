@@ -1,7 +1,7 @@
 """
 main.py — Aptova Prelaunch Backend
 Endpoints:
-  POST /waitlist    → join the community.html
+  POST /waitlist    → join-the-community.html
   POST /suggest     → suggest.html
   POST /question    → how-it-works.html
   POST /feedback    → feedback form (shown after join)  ← NEW

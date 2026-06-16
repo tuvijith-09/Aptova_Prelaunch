@@ -500,8 +500,9 @@
 
 <body>
 
-  <div class="top-banner">
-    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join the community.html">Join the community →</a></span>
+  <header class="site-header">
+<div class="top-banner">
+    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join-the-community.html">Join the community →</a></span>
   </div>
 
   <nav>
@@ -515,7 +516,7 @@
       <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="join the community.html" class="active">Join Community</a>
+      <a href="join-the-community.html" class="active">Join Community</a>
     </div>
     <a href="#" class="nav-cta" style="opacity:.35;pointer-events:none;">In community</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
@@ -525,9 +526,10 @@
       <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="join the community.html" class="active">Join Community</a>
+      <a href="join-the-community.html" class="active">Join Community</a>
     </div>
   </nav>
+  </header>
   <script>
     function toggleMenu() {
       const m = document.getElementById('mobileMenu');
@@ -753,8 +755,8 @@
       <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="join the community.html" class="active">Join Community</a>
-      <a href="mailto:hello@Aptova.com">Ask a question</a>
+      <a href="join-the-community.html" class="active">Join Community</a>
+      <a href="mailto:aptovaai@gmail.com">Ask a question</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms & Conditions</a>
     </div>
@@ -764,6 +766,28 @@
   <script>
     // ── STEP 1: Join form submit ──
     let joinedEmail = '';
+    let postJoinRedirectUrl = null;  // URL to redirect to after joining
+
+    // Capture ?from= redirect param on page load
+    (function () {
+      const p = new URLSearchParams(window.location.search);
+      const from = p.get('from');
+      if (from) {
+        try {
+          const url = new URL(from);
+          // Only redirect to same-origin pages for security
+          if (url.origin === window.location.origin || from.startsWith('opportunity-detail')) {
+            // Append ?joined=true so detail page skips the gate on return
+            const redirectUrl = from.includes('?') ? from + '&joined=true' : from + '?joined=true';
+            postJoinRedirectUrl = redirectUrl;
+          }
+        } catch (e) {
+          // Relative URL — allow it
+          const redirectUrl = from.includes('?') ? from + '&joined=true' : from + '?joined=true';
+          postJoinRedirectUrl = redirectUrl;
+        }
+      }
+    })();
 
     async function submitForm() {
       const submitBtn = document.getElementById('submitBtn');
@@ -794,6 +818,8 @@
 
         if (data.success) {
           joinedEmail = email; // store for feedback submission
+          // Mark the user as permanently joined
+          localStorage.setItem('aptova_joined', 'true');
           // Hide join form, show feedback form
           document.getElementById('formWrap').style.display = 'none';
           document.getElementById('feedbackWrap').style.display = 'block';
@@ -889,6 +915,13 @@
       document.getElementById('feedbackWrap').style.display = 'none';
       document.getElementById('successState').style.display = 'block';
       document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // If user came from a detail page, redirect them back after a short moment
+      if (postJoinRedirectUrl) {
+        setTimeout(function () {
+          window.location.href = postJoinRedirectUrl;
+        }, 2500);
+      }
     }
   </script>
   <script src="assets/early-access.js"></script>

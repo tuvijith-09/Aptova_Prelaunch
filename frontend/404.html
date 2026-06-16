@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/svg+xml" href="Zero.svg">
+  <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opportunity Not Found — Aptova</title>
+  <meta name="description" content="The opportunity or page you are looking for isn't available or couldn't be loaded. Explore other student business models on Aptova.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    /* HERO HEADER */
+    .ph {
+      padding: 120px 6% 80px;
+      text-align: center;
+      background: transparent;
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ph::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, rgba(5, 150, 105, 0.03) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ph * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-code {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(80px, 12vw, 150px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -4px;
+      color: var(--ink);
+      opacity: 0.8;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--ink) 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .eyebrow-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #EF4444;
+      background: #FEF2F2;
+      border: 1px solid #FEE2E2;
+      padding: 4px 12px;
+      border-radius: 99px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .ph-h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    .ph-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .action-buttons .btn {
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+    }
+
+    .action-buttons .btn-ghost {
+      padding: 11px 26px;
+      border: 1.5px solid var(--border);
+      color: var(--soft);
+      background: transparent;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .action-buttons .btn-ghost:hover {
+      background: var(--bg2);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="top-banner">
+      <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join-the-community.html">Join the community →</a></span>
+    </div>
+
+    <nav>
+      <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
+          style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
+          style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
+            style="color:#34A853;">ova</span></span><small class="logo-badge">ALPHA</small></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="whats-different.html">Why Aptova</a>
+        <a href="explore.html">Explore Opportunities</a>
+        <a href="about.html">About Us</a>
+        <a href="join-the-community.html">Join Community</a>
+      </div>
+      <a href="explore.html" class="nav-cta">Explore Opportunities</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="whats-different.html">Why Aptova</a>
+        <a href="explore.html">Explore Opportunities</a>
+        <a href="about.html">About Us</a>
+        <a href="join-the-community.html">Join Community</a>
+        <a href="explore.html" class="mob-cta">Explore Opportunities →</a>
+      </div>
+    </nav>
+  </header>
+
+  <script>
+    function toggleMenu() {
+      const m = document.getElementById('mobileMenu');
+      const b = document.querySelector('.hamburger');
+      m.classList.toggle('open');
+      b.textContent = m.classList.contains('open') ? '✕' : '☰';
+    }
+  </script>
+
+  <section class="ph">
+    <div class="error-code">404</div>
+    <div class="eyebrow-badge">OPPORTUNITY OUT OF REACH</div>
+    <h1 class="ph-h1">Page or Details Not Available</h1>
+    <p class="ph-sub">We couldn't load the opportunity details. The link may have changed, or full roadmap blueprints for this key are still being compiled by our team.</p>
+    <div class="action-buttons">
+      <a href="explore.html" class="btn">Explore Opportunities</a>
+      <a href="join-the-community.html" class="btn-ghost">Join the Community</a>
+      <a href="index.html" class="btn-ghost">Return Home</a>
+    </div>
+  </section>
+
+  <footer>
+    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img
+        src="Zero.svg" alt="" style="height:34px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
+        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
+          style="color:#34A853;">ova</span></span><small class="logo-badge">ALPHA</small></a>
+    <div class="fl">
+      <a href="index.html">Home</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="whats-different.html">Why Aptova</a>
+      <a href="explore.html">Explore Opportunities</a>
+      <a href="about.html">About Us</a>
+      <a href="join-the-community.html">Join Community</a>
+      <a href="mailto:aptovaai@gmail.com">Ask a question</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-and-conditions.html">Terms & Conditions</a>
+    </div>
+    <div>© 2026 Aptova · Made for the Students by the Students</div>
+  </footer>
+
+  <script src="assets/early-access.js"></script>
+</body>
+
+</html>

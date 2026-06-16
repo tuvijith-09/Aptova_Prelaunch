@@ -16,12 +16,12 @@
     rel="stylesheet">
   <link rel="stylesheet" href="index.css">
   <style>
-    /* ============ PAGE HEADER ============ */
+        /* ============ PAGE HEADER ============ */
     .detail-hero {
-      padding: 64px 6% 40px;
-      text-align: left;
+      padding: 50px 6% 32px;
       background: transparent;
       position: relative;
+      border-bottom: 1px solid var(--border);
     }
 
     .detail-hero::before {
@@ -32,13 +32,14 @@
       transform: translateX(-50%);
       width: 800px;
       height: 600px;
-      background: radial-gradient(circle, rgba(5, 150, 105, .06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(5, 150, 105, .04) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .detail-hero-inner {
-      max-width: 880px;
+      max-width: 1280px;
       margin: 0 auto;
+      padding: 0 32px;
       position: relative;
       z-index: 2;
     }
@@ -51,7 +52,7 @@
       font-weight: 600;
       color: var(--muted);
       text-decoration: none;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       transition: color .2s;
     }
 
@@ -73,55 +74,275 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1.5px solid var(--primary);
-      background: rgba(5, 150, 105, .04);
-      padding: 6px 16px;
-      border-radius: 6px;
-      font-size: 12px;
+      border: 1px solid #6EE7B7;
+      background: var(--plight);
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11px;
       color: var(--primary);
-      font-weight: 600;
-      margin-bottom: 20px;
-      letter-spacing: .04em;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      width: fit-content;
     }
 
     .detail-title {
       font-family: 'Lora', 'Georgia', serif;
-      font-size: clamp(28px, 4vw, 48px);
+      font-size: clamp(32px, 5vw, 44px);
       font-weight: 600;
-      letter-spacing: -1px;
+      letter-spacing: -1.2px;
       color: var(--ink);
       line-height: 1.15;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
-    .detail-meta-row {
+    .detail-desc {
+      font-size: 16px;
+      color: var(--soft);
+      line-height: 1.6;
+      max-width: 760px;
+      margin-bottom: 0;
+    }
+
+    /* ============ DASHBOARD GRID LAYOUT ============ */
+    .detail-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      align-items: start;
+      min-width: 0;
+    }
+
+    /* ============ SIDEBAR / LEFT COLUMN ============ */
+    .detail-sidebar {
+      position: sticky;
+      top: 90px;
+      z-index: 10;
+    }
+
+    .sticky-sidebar-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .02);
+    }
+
+    .sidebar-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .sidebar-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .sidebar-badge-item {
       display: flex;
       gap: 12px;
-      flex-wrap: wrap;
+      align-items: center;
     }
 
-    .detail-meta-chip {
-      display: inline-flex;
+    .badge-icon {
+      font-size: 18px;
+      background: var(--surface2);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .badge-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .badge-lbl {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-val {
       font-size: 13px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    /* ============ VISUAL METRICS GRID ============ */
+    .metrics-section {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .metric-progress-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+    }
+
+    .metric-name {
       font-weight: 600;
       color: var(--soft);
-      background: white;
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: 8px;
     }
 
-    .detail-meta-chip strong {
+    .metric-value {
+      font-weight: 700;
       color: var(--primary);
     }
 
-    /* ============ CONTENT LAYOUT ============ */
-    .detail-content {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 24px 6% 100px;
+    .progress-bar-track {
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      width: 100%;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.1, 0.8, 0.25, 1);
+    }
+
+    /* ============ CONTENT CARDS / RIGHT COLUMN ============ */
+    .detail-main {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      min-width: 0; /* prevent CSS grid column overflow */
+    }
+
+    .section-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .02);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .04);
+    }
+
+    .section-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--plight);
+      border: 1px solid rgba(5, 150, 105, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .section-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .section-title {
+      font-family: 'Lora', 'Georgia', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+    }
+
+    .section-body {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .point-takeaway {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.6;
+      border-left: 3.5px solid var(--primary);
+      padding-left: 18px;
+      margin-bottom: 12px;
+    }
+
+    .point-row-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding-top: 14px;
+      border-top: 1px solid rgba(226, 232, 240, 0.6);
+    }
+
+    .point-row-grid:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .point-label-col {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-top: 2px;
+    }
+
+    .point-text-col {
+      font-size: 14.5px;
+      color: var(--soft);
+      line-height: 1.65;
     }
 
     /* Loading / error states */
@@ -129,6 +350,9 @@
       text-align: center;
       padding: 80px 20px;
       color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
     }
 
     .state-box .spinner {
@@ -159,90 +383,14 @@
       margin: 0 auto;
     }
 
-    /* ============ SECTION CARDS ============ */
-    .section-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .03);
-    }
-
-    .section-card-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--pl);
-      border: 1px solid rgba(5, 150, 105, .2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-
-    .section-icon svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .section-title {
-      font-family: 'Lora', 'Georgia', serif;
-      font-size: 19px;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.3px;
-    }
-
-    .section-body {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .point-row {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .point-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .point-text {
-      font-size: 15px;
-      color: var(--soft);
-      line-height: 1.7;
-    }
-
-    /* ============ CTA AT BOTTOM ============ */
+    /* ============ CTA BOX ============ */
     .detail-cta {
       text-align: center;
-      padding: 48px 32px;
-      background: linear-gradient(135deg, rgba(5,150,105,.04), rgba(52,211,153,.06));
-      border: 1px solid rgba(5, 150, 105, .15);
+      padding: 44px 32px;
+      background: linear-gradient(135deg, rgba(5,150,105,.02), rgba(52,211,153,.05));
+      border: 1px solid rgba(5, 150, 105, .12);
       border-radius: 16px;
-      margin-top: 32px;
+      margin-top: 16px;
     }
 
     .detail-cta h3 {
@@ -264,19 +412,379 @@
       line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
-      .detail-hero {
-        padding: 40px 6% 28px;
+    /* ============ SYLLABUS MENU ============ */
+    .syllabus-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .syllabus-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      border-left: 2.5px solid transparent;
+    }
+
+    .syllabus-item:hover {
+      color: var(--primary);
+      background: var(--surface2);
+    }
+
+    .syllabus-item.active {
+      color: var(--primary);
+      background: var(--plight);
+      border-left-color: var(--primary);
+      box-shadow: inset 3px 0 6px rgba(5, 150, 105, 0.02);
+    }
+
+    .syllabus-num {
+      font-size: 10px;
+      font-weight: 700;
+      opacity: 0.6;
+    }
+
+    /* ============ ROADMAP STEPPER ============ */
+    .roadmap-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      margin-top: 16px;
+    }
+
+    .roadmap-timeline::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 16px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .roadmap-step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    .step-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg2);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      z-index: 2;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px var(--bg2);
+    }
+
+    .step-content {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .step-phase {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 13.5px;
+      color: var(--soft);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .step-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .step-check-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--soft);
+      line-height: 1.4;
+    }
+
+    .step-check-item input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .step-protip {
+      background: rgba(5, 150, 105, 0.06);
+      border-left: 3.5px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--soft);
+    }
+
+    .step-protip strong {
+      color: var(--primary);
+    }
+
+    /* Reading time badge in headers */
+    .reading-time-badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface2);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ============ COMMUNITY GATE POPUP ============ */
+    #communityGateOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    #communityGateOverlay.visible {
+      opacity: 1;
+    }
+
+    .gate-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 44px 40px 36px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(226,232,240,0.8);
+      text-align: center;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.22, 0.9, 0.36, 1);
+    }
+
+    #communityGateOverlay.visible .gate-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .gate-lock-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--plight);
+      border: 2px solid rgba(5,150,105,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--primary);
+    }
+
+    .gate-social-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--plight);
+      border: 1px solid rgba(5,150,105,0.25);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .gate-social-proof-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: gatePulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes gatePulse {
+      0% { box-shadow: 0 0 0 0 rgba(5,150,105,.5); }
+      70% { box-shadow: 0 0 0 5px rgba(5,150,105,0); }
+      100% { box-shadow: 0 0 0 0 rgba(5,150,105,0); }
+    }
+
+    .gate-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .gate-subtitle {
+      font-size: 14.5px;
+      color: var(--soft);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gate-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .gate-benefit-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--soft);
+      font-weight: 500;
+    }
+
+    .gate-benefit-check {
+      width: 22px;
+      height: 22px;
+      background: var(--plight);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .gate-join-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 15px 24px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(5,150,105,0.3);
+      transition: all 0.2s ease;
+      margin-bottom: 14px;
+    }
+
+    .gate-join-btn:hover {
+      background: var(--phov);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(5,150,105,0.35);
+    }
+
+    .gate-skip-btn {
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 0;
+      transition: color 0.2s;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .gate-skip-btn:hover {
+      color: var(--soft);
+    }
+
+    /* ============ RESPONSIVE MEDIA QUERIES ============ */
+    @media (max-width: 900px) {
+      .detail-container {
+        padding: 32px 20px 60px;
+      }
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .detail-sidebar {
+        position: relative;
+        top: 0;
       }
       .section-card {
-        padding: 22px 20px;
+        padding: 28px 24px;
       }
-      .detail-meta-row {
-        gap: 8px;
+      .point-row-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
-      .detail-meta-chip {
-        font-size: 12px;
-        padding: 6px 12px;
+    }
+
+    @media (max-width: 768px) {
+      .detail-hero {
+        padding: 40px 20px 24px;
+      }
+      .detail-hero-inner {
+        padding: 0;
+      }
+      .detail-title {
+        font-size: 30px;
+        letter-spacing: -0.8px;
+      }
+      .detail-container {
+        padding: 24px 16px 48px;
+      }
+      .gate-card {
+        padding: 36px 24px 28px;
+      }
+      .gate-title {
+        font-size: 21px;
       }
     }
   </style>
@@ -284,8 +792,57 @@
 
 <body>
 
-  <div class="top-banner">
-    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join the community.html">Join the community →</a></span>
+  <!-- ============ COMMUNITY GATE POPUP ============ -->
+  <div id="communityGateOverlay" role="dialog" aria-modal="true" aria-label="Join the community to access full details">
+    <div class="gate-card">
+      <div class="gate-lock-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+
+      <div class="gate-social-proof">
+        <div class="gate-social-proof-dot"></div>
+        750+ students already inside
+      </div>
+
+      <h2 class="gate-title">You're one step away from the full breakdown</h2>
+      <p class="gate-subtitle">Join the community to get free access to every opportunity's launch roadmap, market insights, and earning potential.</p>
+
+      <div class="gate-benefits">
+        <div class="gate-benefit-row">
+          <div class="gate-benefit-check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          Full launch roadmap & step-by-step blueprint
+        </div>
+        <div class="gate-benefit-row">
+          <div class="gate-benefit-check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          Real income ranges & market data
+        </div>
+        <div class="gate-benefit-row">
+          <div class="gate-benefit-check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          Priority fit assessment when we launch
+        </div>
+      </div>
+
+      <a id="gateJoinBtn" href="#" class="gate-join-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Join the Community — Free
+      </a>
+
+      <button class="gate-skip-btn" id="gateSkipBtn">I'll explore on my own for now →</button>
+    </div>
+  </div>
+
+  <header class="site-header">
+<div class="top-banner">
+    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join-the-community.html">Join the community →</a></span>
   </div>
 
   <nav>
@@ -299,9 +856,9 @@
       <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html" class="active">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="join the community.html">Join Community</a>
+      <a href="join-the-community.html">Join Community</a>
     </div>
-    <a href="join the community.html" class="nav-cta">Join the community</a>
+    <a href="join-the-community.html" class="nav-cta">Join the community</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Home</a>
@@ -309,10 +866,11 @@
       <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html" class="active">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="join the community.html">Join Community</a>
-      <a href="join the community.html" class="mob-cta">Join the community →</a>
+      <a href="join-the-community.html">Join Community</a>
+      <a href="join-the-community.html" class="mob-cta">Join the community →</a>
     </div>
   </nav>
+  </header>
   <script>
     function toggleMenu() {
       const m = document.getElementById('mobileMenu');
@@ -330,14 +888,127 @@
       </a>
       <div class="detail-tag" id="domainTag">Opportunity Deep Dive</div>
       <h1 class="detail-title" id="oppTitle">Loading…</h1>
-      <div class="detail-meta-row" id="metaRow"></div>
+      <p class="detail-desc" id="oppDesc"></p>
     </div>
   </section>
 
-  <section class="detail-content" id="detailContent">
-    <div class="state-box" id="loadingState">
-      <div class="spinner"></div>
-      <p>Pulling together the full breakdown…</p>
+  <section class="detail-container">
+    <div class="detail-grid">
+      <!-- Left Column: Sticky Sidebar -->
+      <aside class="detail-sidebar">
+        <div class="sticky-sidebar-card">
+          <div class="sidebar-section-title">Quick Stats</div>
+          <div class="sidebar-badges">
+            <div class="sidebar-badge-item">
+              <div class="badge-icon">💰</div>
+              <div class="badge-info">
+                <span class="badge-lbl">Capital Needed</span>
+                <strong class="badge-val" id="badgeCapital">-</strong>
+              </div>
+            </div>
+            <div class="sidebar-badge-item">
+              <div class="badge-icon">⏳</div>
+              <div class="badge-info">
+                <span class="badge-lbl">Commitment</span>
+                <strong class="badge-val" id="badgeTime">-</strong>
+              </div>
+            </div>
+            <div class="sidebar-badge-item">
+              <div class="badge-icon">📈</div>
+              <div class="badge-info">
+                <span class="badge-lbl">Earnings</span>
+                <strong class="badge-val" id="badgeEarnings">-</strong>
+              </div>
+            </div>
+            <div class="sidebar-badge-item">
+              <div class="badge-icon">⭐️</div>
+              <div class="badge-info">
+                <span class="badge-lbl">Key Advantage</span>
+                <strong class="badge-val" id="badgeAdvantage">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section-title">Assessment</div>
+          <div class="metrics-section">
+            <div class="metric-progress-group">
+              <div class="metric-header">
+                <span class="metric-name">Start Difficulty</span>
+                <span class="metric-value" id="valDifficulty">0%</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="fillDifficulty" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="metric-progress-group">
+              <div class="metric-header">
+                <span class="metric-name">Time Commitment</span>
+                <span class="metric-value" id="valTime">0%</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="fillTime" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="metric-progress-group">
+              <div class="metric-header">
+                <span class="metric-name">Earnings Potential</span>
+                <span class="metric-value" id="valEarnings">0%</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="fillEarnings" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="metric-progress-group">
+              <div class="metric-header">
+                <span class="metric-name">Income Stability</span>
+                <span class="metric-value" id="valStability">0%</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="fillStability" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section-title" style="margin-top: 24px;">Syllabus</div>
+          <div class="syllabus-menu" id="syllabusMenu">
+            <a href="#overview" class="syllabus-item active" onclick="scrollToSection('overview', event)">
+              <span class="syllabus-num">01</span> Overview
+            </a>
+            <a href="#daily_work" class="syllabus-item" onclick="scrollToSection('daily_work', event)">
+              <span class="syllabus-num">02</span> The Operations
+            </a>
+            <a href="#requirements" class="syllabus-item" onclick="scrollToSection('requirements', event)">
+              <span class="syllabus-num">03</span> Tools Needed
+            </a>
+            <a href="#roadmap" class="syllabus-item" onclick="scrollToSection('roadmap', event)">
+              <span class="syllabus-num">04</span> Launch Blueprint
+            </a>
+            <a href="#market_income" class="syllabus-item" onclick="scrollToSection('market_income', event)">
+              <span class="syllabus-num">05</span> Income Reality
+            </a>
+            <a href="#growth" class="syllabus-item" onclick="scrollToSection('growth', event)">
+              <span class="syllabus-num">06</span> Growth Path
+            </a>
+            <a href="#challenges" class="syllabus-item" onclick="scrollToSection('challenges', event)">
+              <span class="syllabus-num">07</span> Challenges
+            </a>
+            <a href="#fit" class="syllabus-item" onclick="scrollToSection('fit', event)">
+              <span class="syllabus-num">08</span> Suitability
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Column: Scrolling Detailed Sections -->
+      <main class="detail-main" id="detailContent">
+        <div class="state-box" id="loadingState">
+          <div class="spinner"></div>
+          <p>Pulling together the full breakdown…</p>
+        </div>
+      </main>
     </div>
   </section>
 
@@ -352,50 +1023,18 @@
       <a href="whats-different.html">Why Aptova</a>
       <a href="explore.html">Explore Opportunities</a>
       <a href="about.html">About Us</a>
-      <a href="join the community.html">Join Community</a>
-      <a href="mailto:hello@Aptova.com">Ask a question</a>
+      <a href="join-the-community.html">Join Community</a>
+      <a href="mailto:aptovaai@gmail.com">Ask a question</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms-and-conditions.html">Terms & Conditions</a>
     </div>
     <div>© 2026 Aptova · Made for the Students by the Students</div>
   </footer>
 
+  <script src="assets/explore-filters.js"></script>
+  <script src="assets/opportunities-data.js"></script>
   <script>
-    // ----------------------------------------------------------------
-    // Section display config: key -> { title, icon svg path(s) }
-    // ----------------------------------------------------------------
-    const SECTION_CONFIG = {
-      overview: {
-        title: "Opportunity Overview",
-        icon: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>'
-      },
-      daily_work: {
-        title: "What You'll Actually Do",
-        icon: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'
-      },
-      requirements: {
-        title: "What You Need To Start",
-        icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/>'
-      },
-      market_income: {
-        title: "Market & Income Reality",
-        icon: '<path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.1-2.8-2.8L7 14"/>'
-      },
-      growth: {
-        title: "Getting Started & Growth Potential",
-        icon: '<path d="M2 12h6l3-9 4 18 3-9h4"/>'
-      },
-      challenges: {
-        title: "Common Challenges",
-        icon: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>'
-      },
-      fit: {
-        title: "Who This Opportunity Is Best Suited For",
-        icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'
-      }
-    };
 
-    const SECTION_ORDER = ["overview", "daily_work", "requirements", "market_income", "growth", "challenges", "fit"];
 
     // ----------------------------------------------------------------
     // Get opportunity name from URL
@@ -409,42 +1048,227 @@
       return div.innerHTML;
     }
 
-    function renderSections(sections) {
+    // Smooth scroll to section
+    window.scrollToSection = function(id, event) {
+      if (event) event.preventDefault();
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Scroll smoothly with header offset (navbar height is about 70px)
+      const yOffset = -90;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+
+      // Highlight target item instantly
+      const items = document.querySelectorAll('.syllabus-item');
+      items.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+      });
+    };
+
+    // Scroll-Spy observer setup
+    function setupScrollSpy() {
+      const sections = document.querySelectorAll('.section-card');
+      const navItems = document.querySelectorAll('.syllabus-item');
+      
+      const observerOptions = {
+        root: null,
+        rootMargin: '-120px 0px -60% 0px', // Trigger close to top of viewport
+        threshold: 0
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navItems.forEach(item => {
+              item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, observerOptions);
+      
+      sections.forEach(section => observer.observe(section));
+    }
+
+    function renderSections(sections, enriched) {
       const container = document.getElementById('detailContent');
       let html = '';
 
-      SECTION_ORDER.forEach(key => {
-        const config = SECTION_CONFIG[key];
-        const items = sections[key];
-        if (!config || !items || !items.length) return;
+      const lessons = [
+        {
+          key: "overview",
+          num: "01",
+          title: "Opportunity Overview",
+          icon: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+          readTime: "1 min read",
+          items: sections.overview
+        },
+        {
+          key: "daily_work",
+          num: "02",
+          title: "What You'll Actually Do",
+          icon: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+          readTime: "2 min read",
+          items: sections.daily_work
+        },
+        {
+          key: "requirements",
+          num: "03",
+          title: "What You Need To Start",
+          icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/>',
+          readTime: "2 min read",
+          items: sections.requirements
+        },
+        {
+          key: "roadmap",
+          num: "04",
+          title: "Step-by-Step Launch Sequence",
+          icon: '<path d="M9 20l-5.4-3.6A2 2 0 0 1 3 14.7V5.8a2 2 0 0 1 1.2-1.8L9 2m0 18l6-3.6m-6 3.6V2m6 14.4l4.8 3.2A2 2 0 0 0 21 17.8V8.9a2 2 0 0 0-1.2-1.8L15 4m0 12.4V4"/>',
+          readTime: "3 min read",
+          isRoadmap: true
+        },
+        {
+          key: "market_income",
+          num: "05",
+          title: "Market & Income Reality",
+          icon: '<path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.1-2.8-2.8L7 14"/>',
+          readTime: "2 min read",
+          items: sections.market_income
+        },
+        {
+          key: "growth",
+          num: "06",
+          title: "Getting Started & Growth Potential",
+          icon: '<path d="M2 12h6l3-9 4 18 3-9h4"/>',
+          readTime: "2 min read",
+          items: sections.growth
+        },
+        {
+          key: "challenges",
+          num: "07",
+          title: "Common Challenges",
+          icon: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>',
+          readTime: "1 min read",
+          items: sections.challenges
+        },
+        {
+          key: "fit",
+          num: "08",
+          title: "Who This Opportunity Is Best Suited For",
+          icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+          readTime: "1 min read",
+          items: sections.fit
+        }
+      ];
 
+      lessons.forEach(les => {
         html += `
-          <div class="section-card">
+          <div class="section-card" id="${les.key}">
             <div class="section-card-header">
               <div class="section-icon">
-                <svg viewBox="0 0 24 24">${config.icon}</svg>
+                <svg viewBox="0 0 24 24">${les.icon}</svg>
               </div>
-              <div class="section-title">${config.title}</div>
+              <div class="section-title">
+                <span style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; display: block; letter-spacing: 0.05em; margin-bottom: 2px;">Lesson ${les.num}</span>
+                ${les.title}
+              </div>
+              <span class="reading-time-badge">⏱️ ${les.readTime}</span>
             </div>
             <div class="section-body">
         `;
 
-        items.forEach(item => {
-          if (item.label) {
-            html += `
-              <div class="point-row">
-                <span class="point-label">${escapeHtml(item.label)}</span>
-                <span class="point-text">${escapeHtml(item.text)}</span>
+        if (les.isRoadmap) {
+          html += `
+            <div class="roadmap-timeline">
+              <!-- Phase 1 -->
+              <div class="roadmap-step">
+                <div class="step-badge">1</div>
+                <div class="step-content">
+                  <div class="step-phase">Phase 1: Setup &amp; Tools</div>
+                  <h4 class="step-title">Gather Your Tools</h4>
+                  <p class="step-desc">To run this opportunity successfully, make sure you have: <strong style="color: var(--primary);">${escapeHtml(enriched.tools)}</strong></p>
+                  <div class="step-checklist">
+                    <label class="step-check-item">
+                      <input type="checkbox">
+                      <span>Verify hardware and software are ready &amp; accessible</span>
+                    </label>
+                    <label class="step-check-item">
+                      <input type="checkbox">
+                      <span>Create/configure required platform accounts</span>
+                    </label>
+                  </div>
+                  <div class="step-protip">
+                    <strong>💡 Pro-Tip:</strong> Download mobile versions of these tools to manage operations and reply to clients quickly while on campus.
+                  </div>
+                </div>
               </div>
-            `;
-          } else {
-            html += `
-              <div class="point-row">
-                <span class="point-text">${escapeHtml(item.text)}</span>
+
+              <!-- Phase 2 -->
+              <div class="roadmap-step">
+                <div class="step-badge">2</div>
+                <div class="step-content">
+                  <div class="step-phase">Phase 2: First Action Step</div>
+                  <h4 class="step-title">Execute Launch Sequence</h4>
+                  <p class="step-desc">Your very first launch action: <span style="font-weight: 600; color: var(--primary);">${escapeHtml(enriched.firstStep)}</span></p>
+                  <div class="step-checklist">
+                    <label class="step-check-item">
+                      <input type="checkbox">
+                      <span>Draft outreach template and pricing package</span>
+                    </label>
+                    <label class="step-check-item">
+                      <input type="checkbox">
+                      <span>Prepare 3 high-quality portfolio samples</span>
+                    </label>
+                  </div>
+                  <div class="step-protip">
+                    <strong>💡 Pro-Tip:</strong> Your first sample is your credentials. Spend an extra hour making it look extremely polished. Quality sells itself.
+                  </div>
+                </div>
               </div>
-            `;
-          }
-        });
+
+              <!-- Phase 3 -->
+              <div class="roadmap-step">
+                <div class="step-badge">3</div>
+                <div class="step-content">
+                  <div class="step-phase">Phase 3: Scale &amp; Community</div>
+                  <h4 class="step-title">Promote &amp; Connect</h4>
+                  <p class="step-desc">Pitch your service to 5 local clients on WhatsApp, and join our community to generate detailed fit assessments.</p>
+                  <div class="step-checklist">
+                    <label class="step-check-item">
+                      <input type="checkbox">
+                      <span>Share your portfolio in 5 target WhatsApp/Telegram groups</span>
+                    </label>
+                    <label class="step-check-item">
+                      <input type="checkbox">
+                      <span>Secure registration for custom launch matching</span>
+                    </label>
+                  </div>
+                  <div class="step-protip">
+                    <strong>💡 Pro-Tip:</strong> Offer your first client a "first-gig free" or discounted trial in exchange for a testimonial or a Google Business review.
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (les.items && les.items.length) {
+          les.items.forEach((item, index) => {
+            if (index === 0) {
+              html += `
+                <div class="point-takeaway">
+                  ${escapeHtml(item.text)}
+                </div>
+              `;
+            } else {
+              html += `
+                <div class="point-row-grid">
+                  <div class="point-label-col">${escapeHtml(item.label || "Detail")}</div>
+                  <div class="point-text-col">${escapeHtml(item.text)}</div>
+                </div>
+              `;
+            }
+          });
+        }
 
         html += `</div></div>`;
       });
@@ -453,11 +1277,12 @@
         <div class="detail-cta">
           <h3>Want a personalized read on this?</h3>
           <p>Join the community to get a custom fit assessment based on your own budget, time, skills, and location — not a generic overview.</p>
-          <a href="join the community.html" class="btn" style="display:inline-flex;">Join the community →</a>
+          <a href="join-the-community.html" class="btn" style="display:inline-flex;">Join the community →</a>
         </div>
       `;
 
       container.innerHTML = html;
+      setupScrollSpy();
     }
 
     function renderError(message) {
@@ -481,23 +1306,176 @@
       document.getElementById('oppTitle').textContent = oppName;
       document.title = oppName + ' — Aptova';
 
+      // Fallback enriched details if item not in dataset
+      let enriched = {
+        commitment: "5–10 hours/week",
+        earnings: "₹5,000 - ₹15,000/mo",
+        tools: "Smartphone, internet connection, basic communication",
+        firstStep: "Research local demand and list your service on WhatsApp status and local groups."
+      };
+
+      // Load static metadata from DATA
+      const item = DATA.find(d => d.n === oppName);
+      if (item) {
+        if (typeof item.capNum === 'undefined') {
+          enrichOpportunityData(DATA);
+        }
+        enriched = getEnrichedDetails(item);
+
+        const categoryMap = {
+          digital: "Technology & Digital",
+          campus: "Campus & Student Gigs",
+          service: "Local Services",
+          creative: "Creative & Content",
+          resell: "Commerce & Reselling",
+          health: "Health & Wellness",
+          planet: "Eco & Planet",
+          agri: "Agriculture & Land",
+          food: "Food & Beverage",
+          education: "Education & Skilling",
+          wow: "Wildcard Opportunities"
+        };
+        const catLabel = categoryMap[item.cat] || "Opportunity Deep Dive";
+        
+        document.getElementById('domainTag').textContent = catLabel;
+        document.getElementById('oppDesc').textContent = item.d;
+
+        // Populate badges
+        document.getElementById('badgeCapital').textContent = item.cap;
+        document.getElementById('badgeTime').textContent = enriched.commitment;
+        document.getElementById('badgeEarnings').textContent = enriched.earnings;
+        document.getElementById('badgeAdvantage').textContent = item.adv;
+
+        // Calculate progress scores
+        let capNum = item.capNum;
+        let difficulty = 15;
+        if (capNum > 50000) difficulty = 80;
+        else if (capNum > 20000) difficulty = 60;
+        else if (capNum > 5000) difficulty = 40;
+        else if (capNum > 0) difficulty = 25;
+        if (['service', 'food', 'agri'].includes(item.cat)) difficulty += 10;
+        difficulty = Math.min(difficulty, 100);
+
+        let time = 30;
+        let comm = enriched.commitment;
+        if (comm.includes("15–20") || comm.includes("15-20")) time = 75;
+        else if (comm.includes("10–15") || comm.includes("10-15")) time = 50;
+        else if (comm.includes("5–10") || comm.includes("5-10")) time = 30;
+
+        let earnVal = 35;
+        let earn = enriched.earnings;
+        if (earn.includes("30,000") || earn.includes("75,000")) earnVal = 85;
+        else if (earn.includes("15,000") || earn.includes("40,000")) earnVal = 65;
+        else if (earn.includes("10,000") || earn.includes("25,000")) earnVal = 50;
+
+        let stability = 45;
+        let adv = item.adv.toLowerCase();
+        if (adv.includes("recurring") || adv.includes("retainer") || adv.includes("subscription")) {
+          stability = 85;
+        } else if (adv.includes("demand") || adv.includes("always") || adv.includes("repeat")) {
+          stability = 70;
+        }
+
+        // Animate metrics progress bars
+        setTimeout(() => {
+          document.getElementById('fillDifficulty').style.width = difficulty + '%';
+          document.getElementById('valDifficulty').textContent = difficulty + '%';
+
+          document.getElementById('fillTime').style.width = time + '%';
+          document.getElementById('valTime').textContent = time + '%';
+
+          document.getElementById('fillEarnings').style.width = earnVal + '%';
+          document.getElementById('valEarnings').textContent = earnVal + '%';
+
+          document.getElementById('fillStability').style.width = stability + '%';
+          document.getElementById('valStability').textContent = stability + '%';
+        }, 150);
+      } else {
+        document.getElementById('oppDesc').textContent = "In-depth breakdown of a student business opportunity — what it takes, what to expect, and whether it fits you.";
+      }
+
       try {
         const res = await fetch(`https://aptova-prelaunch.onrender.com/opportunities/detail?key=${encodeURIComponent(oppName)}`);
         const data = await res.json();
 
         if (!data.success) {
-          renderError("Full details for this opportunity aren't available yet. Check back soon — we're adding new write-ups regularly.");
+          window.location.href = "404.html";
           return;
         }
 
         const sections = JSON.parse(data.long_description);
-        renderSections(sections);
+        renderSections(sections, enriched);
       } catch (e) {
-        renderError("Could not connect to the server. Please check your connection and try again.");
+        window.location.href = "404.html";
       }
     }
 
     loadOpportunity();
+
+    // ── COMMUNITY GATE LOGIC ──────────────────────────────────
+    (function initGate() {
+      const overlay = document.getElementById('communityGateOverlay');
+      const joinBtn  = document.getElementById('gateJoinBtn');
+      const skipBtn  = document.getElementById('gateSkipBtn');
+
+      // Build the return URL including current opportunity name
+      const currentUrl = window.location.href;
+      const fromEncoded = encodeURIComponent(currentUrl);
+
+      // Wire up Join button → go to join page with ?from= param
+      joinBtn.href = 'join-the-community.html?from=' + fromEncoded;
+
+      // Check if user has already joined (persistent localStorage flag)
+      const alreadyJoined = localStorage.getItem('aptova_joined') === 'true';
+
+      // Check if redirected back here after joining (?joined=true)
+      const urlParams = new URLSearchParams(window.location.search);
+      const justJoined = urlParams.get('joined') === 'true';
+
+      if (justJoined) {
+        // Mark as permanently joined and clean up URL
+        localStorage.setItem('aptova_joined', 'true');
+        const cleanUrl = window.location.pathname + (oppName ? '?name=' + encodeURIComponent(oppName) : '');
+        history.replaceState(null, '', cleanUrl);
+        // No popup — fall through silently
+        overlay.style.display = 'none';
+        return;
+      }
+
+      if (alreadyJoined) {
+        overlay.style.display = 'none';
+        return;
+      }
+
+      // Show the gate popup with animation
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          overlay.classList.add('visible');
+        });
+      });
+
+      // Skip button: dismiss popup, restore scroll — no memory
+      skipBtn.addEventListener('click', function () {
+        overlay.classList.remove('visible');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 350);
+      });
+
+      // Close on backdrop click (not on card click)
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) skipBtn.click();
+      });
+
+      // ESC key closes
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+          skipBtn.click();
+        }
+      });
+    })();
   </script>
 
   <script src="assets/early-access.js"></script>

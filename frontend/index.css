@@ -41,10 +41,17 @@ body {
   overflow-x: hidden;
 }
 
-/* Nav */
-nav {
+/* Header Container */
+.site-header {
   position: sticky;
   top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Nav */
+nav {
+  position: relative;
   z-index: 100;
   display: flex;
   justify-content: space-between;
@@ -414,7 +421,6 @@ footer {
   font-weight: 600;
   width: 100%;
   position: relative;
-  z-index: 101;
   border-bottom: 1px solid rgba(5, 150, 105, 0.2);
 }
 .top-banner a {
