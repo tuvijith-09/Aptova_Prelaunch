@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Financial Reality</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#F8FAFC;
+    color:#0F172A;
+    padding:40px 6%;
+}
+
+.financial-section{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.lesson-tag{
+    color:#059669;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.main-title{
+    font-size:42px;
+    font-weight:800;
+    letter-spacing:-1.5px;
+}
+
+.read-time{
+    color:#64748B;
+    margin-top:8px;
+    margin-bottom:40px;
+}
+
+
+/* GRID */
+
+.finance-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+
+/* CARD */
+
+.card{
+    background:white;
+    border:1px solid #E2E8F0;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+
+.card.large{
+    grid-column:span 2;
+}
+
+
+.icon{
+    width:46px;
+    height:46px;
+    background:#D1FAE5;
+    color:#059669;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+
+h2{
+    font-size:20px;
+    margin-bottom:18px;
+}
+
+
+ul{
+    list-style:none;
+}
+
+
+li{
+    padding:10px 0;
+    border-bottom:1px solid #F1F5F9;
+    color:#334155;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+
+li:last-child{
+    border:none;
+}
+
+
+strong{
+    color:#0F172A;
+}
+
+
+/* HIGHLIGHT BOX */
+
+.highlight{
+    margin-top:20px;
+    background:#ECFDF5;
+    border:1px solid #A7F3D0;
+    padding:18px;
+    border-radius:14px;
+    color:#047857;
+    font-weight:700;
+}
+
+
+/* TIMELINE */
+
+.timeline{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.month{
+    background:#F8FAFC;
+    border-radius:14px;
+    padding:18px;
+}
+
+.month span{
+    color:#059669;
+    font-weight:800;
+    font-size:13px;
+}
+
+.month h3{
+    margin:8px 0;
+}
+
+.month p{
+    color:#64748B;
+    font-size:14px;
+}
+
+
+
+/* RISK */
+
+.risk-list li::before{
+    content:"⚠️";
+    margin-right:8px;
+}
+
+
+.note{
+    margin-top:18px;
+    background:#FFF7ED;
+    border:1px solid #FED7AA;
+    padding:16px;
+    border-radius:12px;
+    color:#9A3412;
+    font-weight:600;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+.finance-grid{
+    grid-template-columns:1fr;
+}
+
+.card.large{
+    grid-column:auto;
+}
+
+.timeline{
+    grid-template-columns:1fr;
+}
+
+.main-title{
+    font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<section class="financial-section">
+
+
+<div class="lesson-tag">Lesson 05</div>
+
+<h1 class="main-title">
+Financial Reality
+</h1>
+
+<div class="read-time">
+⏱️ 3 min read
+</div>
+
+
+
+<div class="finance-grid">
+
+
+<!-- INVESTMENT -->
+
+
+<div class="card">
+
+<div class="icon">💰</div>
+
+<h2>Initial Investment Breakdown</h2>
+
+<ul>
+
+<li>
+Inventory
+<strong>₹1,000–₹5,000</strong>
+</li>
+
+
+<li>
+Cleaning & Preparation
+<strong>₹200–₹500</strong>
+</li>
+
+
+<li>
+Packaging Material
+<strong>₹300–₹1,000</strong>
+</li>
+
+
+<li>
+Photo Setup (Optional)
+<strong>₹0–₹1,000</strong>
+</li>
+
+</ul>
+
+
+<div class="highlight">
+Minimum practical start: ₹1,500–₹3,000
+</div>
+
+</div>
+
+
+
+
+<!-- UNIT ECONOMICS -->
+
+
+<div class="card">
+
+<div class="icon">📊</div>
+
+<h2>Unit Economics</h2>
+
+
+<ul>
+
+<li>
+Sourcing Cost
+<strong>₹100–₹300/item</strong>
+</li>
+
+
+<li>
+Selling Price
+<strong>₹300–₹900/item</strong>
+</li>
+
+
+<li>
+Extra Costs
+<strong>₹50–₹150/item</strong>
+</li>
+
+
+<li>
+Profit Per Sale
+<strong>₹150–₹500</strong>
+</li>
+
+
+</ul>
+
+
+<div class="highlight">
+Typical margin: 40–70%
+</div>
+
+</div>
+
+
+
+
+<!-- BREAK EVEN -->
+
+
+<div class="card">
+
+<div class="icon">⏳</div>
+
+<h2>Break-even Reality</h2>
+
+
+<ul>
+
+<li>
+Sales Needed
+<strong>10–20 sales</strong>
+</li>
+
+
+<li>
+Strong Execution
+<strong>3–6 weeks</strong>
+</li>
+
+
+<li>
+Average Execution
+<strong>2–3 months</strong>
+</li>
+
+</ul>
+
+
+<div class="highlight">
+Depends on sourcing quality, pricing & trust building.
+</div>
+
+</div>
+
+
+
+
+
+<!-- MONTHLY COST -->
+
+
+<div class="card">
+
+<div class="icon">🔁</div>
+
+<h2>Monthly Operating Costs</h2>
+
+
+<ul>
+
+<li>
+Inventory
+<strong>₹3k–₹10k</strong>
+</li>
+
+
+<li>
+Packaging
+<strong>₹500–₹2k</strong>
+</li>
+
+
+<li>
+Marketing/tools
+<strong>₹0–₹2k</strong>
+</li>
+
+</ul>
+
+
+<div class="highlight">
+Running cost: ₹2,000–₹5,000/month
+</div>
+
+</div>
+
+
+
+
+
+<!-- TIMELINE -->
+
+
+<div class="card large">
+
+<div class="icon">📈</div>
+
+<h2>Realistic Income Timeline</h2>
+
+
+<div class="timeline">
+
+
+<div class="month">
+
+<span>MONTH 1</span>
+
+<h3>₹0–₹5k</h3>
+
+<p>
+Build trust, upload products, get first buyers.
+</p>
+
+</div>
+
+
+
+<div class="month">
+
+<span>MONTH 2-3</span>
+
+<h3>₹5k–₹15k</h3>
+
+<p>
+Consistent posting and repeat customers.
+</p>
+
+</div>
+
+
+
+<div class="month">
+
+<span>6+ MONTHS</span>
+
+<h3>₹20k+</h3>
+
+<p>
+Scale suppliers, inventory and branding.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- RISKS -->
+
+
+<div class="card large">
+
+<div class="icon">⚠️</div>
+
+<h2>Financial Risks</h2>
+
+
+<ul class="risk-list">
+
+<li>Buying products without understanding demand</li>
+
+<li>Too much money stuck in inventory</li>
+
+<li>Poor product photos reducing sales</li>
+
+<li>Pricing too high before building trust</li>
+
+<li>Slow customer acquisition</li>
+
+</ul>
+
+
+<div class="note">
+
+Start with 10–20 products, validate demand, then reinvest profits.
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+</body>
+</html>
