@@ -2312,7 +2312,6 @@
     function openCarouselModal(i) {
       window.currentModalIndex = i;
       const d = CAROUSEL_DATA[i];
-      const rating = getStarRating(d.n);
       const enriched = getEnrichedDetails(d);
 
       const modalContainer = document.getElementById('modalContainer');
@@ -2329,10 +2328,7 @@
           <div class="split-left">
             <div>
               <div class="modal-tag" style="background: #FAF5FF; color: #7C3AED; border-color: #D8B4FE;">${d.tag}</div>
-              <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                ${d.n}
-                <span style="font-size: 16px; color: #D97706; font-weight: 700; background: #FEF3C7; border: 1px solid #FDE68A; padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 2px;">★ ${rating}</span>
-              </h2>
+              <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600;">${d.n}</h2>
               <p style="color: var(--soft); font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">${d.d}</p>
             </div>
 

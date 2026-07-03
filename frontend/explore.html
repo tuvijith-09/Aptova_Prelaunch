@@ -1331,7 +1331,6 @@
         card.setAttribute('data-tiers', item.tiers.join(','));
         card.onclick = () => openModal(i);
         const isWow = item.cat === 'wow';
-        const rating = getStarRating(item.n);
         card.innerHTML = `
       <div class="card-top">
         <div class="card-name">${item.n}</div>
@@ -1340,7 +1339,6 @@
       <div class="card-chips">
         <span class="chip green">${item.cap}</span>
         <span class="chip ${isWow ? 'wow' : ''}">${item.adv}</span>
-        <span class="chip" style="background: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; padding: 2px 8px; border-radius: 4px; font-size: 11px;">★ ${rating}</span>
       </div>
       <div class="card-peek">${item.d}</div>
       <button class="card-hover-btn">View Full Details →</button>`;
@@ -1387,14 +1385,10 @@
       };
       const catLabel = categoryMap[d.cat] || d.tags[0] || "Opportunity";
 
-      const rating = getStarRating(d.n);
       modalBody.innerHTML = `
         <div style="text-align: left;">
           <div class="modal-tag" style="background: var(--plight); color: var(--primary); border-color: #6EE7B7; text-transform: uppercase;">${catLabel}</div>
-          <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.5px; color: var(--ink); display: flex; align-items: center; gap: 8px;">
-            ${d.n}
-            <span style="font-size: 16px; color: #D97706; font-weight: 700; background: #FEF3C7; border: 1px solid #FDE68A; padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 2px;">★ ${rating}</span>
-          </h2>
+          <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.5px; color: var(--ink);">${d.n}</h2>
           <p style="color: var(--soft); font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">${d.d}</p>
 
           <div class="teaser-info-box">

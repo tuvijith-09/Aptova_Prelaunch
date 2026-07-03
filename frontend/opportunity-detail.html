@@ -1703,8 +1703,6 @@
       // Extract hero badges from financial data
       const fc = sections.financial_condition;
       const badges = [];
-      const rating = getStarRating(oppName);
-      badges.push({ label: "Student Rating", value: `★ ${rating}`, cls: "hb-amber" });
 
       if (fc && fc.length) {
         const d = fc[0]?.data;
