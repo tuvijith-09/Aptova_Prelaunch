@@ -995,10 +995,237 @@
       align-items: center;
       padding: 0 48px;
     }
+
+    /* ============ COMMUNITY GATE POPUP ============ */
+    #communityGateOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    #communityGateOverlay.visible {
+      opacity: 1;
+    }
+
+    .gate-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 44px 40px 36px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(226,232,240,0.8);
+      text-align: center;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.22, 0.9, 0.36, 1);
+    }
+
+    #communityGateOverlay.visible .gate-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .gate-lock-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--plight);
+      border: 2px solid rgba(5,150,105,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--primary);
+    }
+
+    .gate-social-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--plight);
+      border: 1px solid rgba(5,150,105,0.25);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: 12px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #065F46;
+    }
+
+    .gate-social-proof-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: gatePulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes gatePulse {
+      0% { box-shadow: 0 0 0 0 rgba(5,150,105,.5); }
+      70% { box-shadow: 0 0 0 5px rgba(5,150,105,0); }
+      100% { box-shadow: 0 0 0 0 rgba(5,150,105,0); }
+    }
+
+    .gate-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .gate-subtitle {
+      font-size: 14.5px;
+      color: var(--soft);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gate-benefits {
+      margin-bottom: 28px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gate-benefit-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--soft);
+    }
+
+    .gate-benefit-check {
+      width: 22px;
+      height: 22px;
+      background: var(--plight);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .gate-join-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 15px 24px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(5,150,105,0.3);
+      transition: all 0.2s ease;
+      margin-bottom: 14px;
+      box-sizing: border-box;
+    }
+
+    .gate-join-btn:hover {
+      background: var(--phov);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(5,150,105,0.35);
+    }
+
+    .gate-skip-btn {
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 0;
+      transition: color 0.2s;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .gate-skip-btn:hover {
+      color: var(--soft);
+    }
+
+    @media (max-width: 600px) {
+      .gate-card {
+        padding: 36px 24px 28px;
+      }
+      .gate-title {
+        font-size: 21px;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- ============ COMMUNITY GATE POPUP ============ -->
+  <div id="communityGateOverlay" style="display: none;" role="dialog" aria-modal="true" aria-label="Join the community to access full details">
+    <div class="gate-card">
+      <div class="gate-lock-icon">
+        <i data-lucide="lock" style="width: 26px; height: 26px;"></i>
+      </div>
+
+      <div class="gate-social-proof">
+        <div class="gate-social-proof-dot"></div>
+        750+ students already inside
+      </div>
+
+      <h2 class="gate-title">You're one step away from the full breakdown</h2>
+      <p class="gate-subtitle">Join the community to get free access to every opportunity's launch roadmap, market insights, and earning potential.</p>
+
+      <div class="gate-benefits">
+        <div class="gate-benefit-row">
+          <div class="gate-benefit-check">
+            <i data-lucide="check" style="width:12px; height:12px;"></i>
+          </div>
+          Full launch roadmap & step-by-step blueprint
+        </div>
+        <div class="gate-benefit-row">
+          <div class="gate-benefit-check">
+            <i data-lucide="check" style="width:12px; height:12px;"></i>
+          </div>
+          Real income ranges & market data
+        </div>
+        <div class="gate-benefit-row">
+          <div class="gate-benefit-check">
+            <i data-lucide="check" style="width:12px; height:12px;"></i>
+          </div>
+          Priority fit assessment when we launch
+        </div>
+      </div>
+
+      <a id="gateJoinBtn" href="#" class="gate-join-btn">
+        <i data-lucide="users" style="width:16px; height:16px;"></i>
+        Join the Community — Free
+      </a>
+
+      <button class="gate-skip-btn" id="gateSkipBtn">I'll explore on my own for now →</button>
+    </div>
+  </div>
+
   <div class="reading-progress-bar-top" id="readingProgressBar"></div>
 
   <div class="top-banner">
@@ -1931,6 +2158,74 @@
     if (window.lucide) {
       lucide.createIcons();
     }
+
+    // ── COMMUNITY GATE LOGIC ──────────────────────────────────
+    (function initGate() {
+      const overlay = document.getElementById('communityGateOverlay');
+      const joinBtn  = document.getElementById('gateJoinBtn');
+      const skipBtn  = document.getElementById('gateSkipBtn');
+
+      if (!overlay || !joinBtn || !skipBtn) return;
+
+      // Build the return URL including current opportunity name
+      const currentUrl = window.location.href;
+      const fromEncoded = encodeURIComponent(currentUrl);
+
+      // Wire up Join button → go to join page with ?from= param
+      joinBtn.href = 'join-the-community.html?from=' + fromEncoded;
+
+      // Check if user has already joined (persistent localStorage flag)
+      const alreadyJoined = localStorage.getItem('aptova_joined') === 'true';
+
+      // Check if redirected back here after joining (?joined=true)
+      const urlParams = new URLSearchParams(window.location.search);
+      const justJoined = urlParams.get('joined') === 'true';
+
+      if (justJoined) {
+        // Mark as permanently joined and clean up URL
+        localStorage.setItem('aptova_joined', 'true');
+        const cleanUrl = window.location.pathname + (oppName ? '?name=' + encodeURIComponent(oppName) : '');
+        history.replaceState(null, '', cleanUrl);
+        // No popup — fall through silently
+        overlay.style.display = 'none';
+        return;
+      }
+
+      if (alreadyJoined) {
+        overlay.style.display = 'none';
+        return;
+      }
+
+      // Show the gate popup with animation
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          overlay.classList.add('visible');
+        });
+      });
+
+      // Skip button: dismiss popup, restore scroll — no memory
+      skipBtn.addEventListener('click', function () {
+        overlay.classList.remove('visible');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 350);
+      });
+
+      // Close on backdrop click (not on card click)
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) skipBtn.click();
+      });
+
+      // ESC key closes
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+          skipBtn.click();
+        }
+      });
+    })();
   </script>
 
   <script src="assets/early-access.js"></script>
