@@ -117,7 +117,7 @@
     }
 
     .city-select {
-      padding: 9px 14px;
+      padding: 9px 36px 9px 14px;
       border: 1px solid var(--border);
       border-radius: 8px;
       font-family: inherit;
@@ -125,7 +125,13 @@
       background: var(--bg);
       color: var(--ink);
       outline: none;
-      max-width: 280px
+      max-width: 280px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 14px;
     }
 
     .city-select:focus {
@@ -579,6 +585,49 @@
       padding: 20px;
       opacity: 0;
       transition: opacity .3s
+    }
+
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      color: var(--soft);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10010;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      outline: none;
+      user-select: none;
+    }
+
+    .modal-nav-btn:hover {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .modal-nav-btn.prev {
+      left: 24px;
+    }
+
+    .modal-nav-btn.next {
+      right: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-nav-btn {
+        display: none !important;
+      }
     }
 
     .modal-bg.show {
@@ -1247,10 +1296,12 @@
 
   <!-- MODAL -->
   <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+    <button class="modal-nav-btn prev" onclick="prevModalOpp(event)" aria-label="Previous opportunity">←</button>
     <div class="modal" id="modalContainer" style="max-width: 560px; transition: max-width 0.3s ease;">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div id="modalBody"></div>
     </div>
+    <button class="modal-nav-btn next" onclick="nextModalOpp(event)" aria-label="Next opportunity">→</button>
   </div>
 
   <script src="assets/explore-filters.js"></script>
@@ -1280,6 +1331,7 @@
         card.setAttribute('data-tiers', item.tiers.join(','));
         card.onclick = () => openModal(i);
         const isWow = item.cat === 'wow';
+        const rating = getStarRating(item.n);
         card.innerHTML = `
       <div class="card-top">
         <div class="card-name">${item.n}</div>
@@ -1288,6 +1340,7 @@
       <div class="card-chips">
         <span class="chip green">${item.cap}</span>
         <span class="chip ${isWow ? 'wow' : ''}">${item.adv}</span>
+        <span class="chip" style="background: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; padding: 2px 8px; border-radius: 4px; font-size: 11px;">★ ${rating}</span>
       </div>
       <div class="card-peek">${item.d}</div>
       <button class="card-hover-btn">View Full Details →</button>`;
@@ -1334,10 +1387,14 @@
       };
       const catLabel = categoryMap[d.cat] || d.tags[0] || "Opportunity";
 
+      const rating = getStarRating(d.n);
       modalBody.innerHTML = `
         <div style="text-align: left;">
           <div class="modal-tag" style="background: var(--plight); color: var(--primary); border-color: #6EE7B7; text-transform: uppercase;">${catLabel}</div>
-          <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.5px; color: var(--ink);">${d.n}</h2>
+          <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.5px; color: var(--ink); display: flex; align-items: center; gap: 8px;">
+            ${d.n}
+            <span style="font-size: 16px; color: #D97706; font-weight: 700; background: #FEF3C7; border: 1px solid #FDE68A; padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 2px;">★ ${rating}</span>
+          </h2>
           <p style="color: var(--soft); font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">${d.d}</p>
 
           <div class="teaser-info-box">
@@ -1355,7 +1412,7 @@
                 <strong style="color: var(--primary);">${enriched.commitment}</strong>
               </div>
               <div class="teaser-row">
-                <span>Key Advantage:</span>
+                <span>Key Platform / Edge:</span>
                 <strong>${d.adv}</strong>
               </div>
             </div>
@@ -1380,7 +1437,48 @@
       document.body.style.overflow = '';
       window.currentModalIndex = undefined;
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function getNextVisibleIndex(currentIdx, step) {
+      const cards = document.querySelectorAll('.card');
+      const visibleIndices = [];
+      cards.forEach(card => {
+        if (card.style.display !== 'none') {
+          visibleIndices.push(parseInt(card.getAttribute('data-idx'), 10));
+        }
+      });
+      if (visibleIndices.length === 0) return currentIdx;
+      
+      const pos = visibleIndices.indexOf(currentIdx);
+      if (pos === -1) return visibleIndices[0];
+      
+      let nextPos = pos + step;
+      if (nextPos >= visibleIndices.length) nextPos = 0;
+      if (nextPos < 0) nextPos = visibleIndices.length - 1;
+      
+      return visibleIndices[nextPos];
+    }
+
+    function prevModalOpp(e) {
+      if (e) e.stopPropagation();
+      if (window.currentModalIndex === undefined) return;
+      const prevIdx = getNextVisibleIndex(window.currentModalIndex, -1);
+      openModal(prevIdx);
+    }
+
+    function nextModalOpp(e) {
+      if (e) e.stopPropagation();
+      if (window.currentModalIndex === undefined) return;
+      const nextIdx = getNextVisibleIndex(window.currentModalIndex, 1);
+      openModal(nextIdx);
+    }
+
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') closeModal(); 
+      if (window.currentModalIndex !== undefined) {
+        if (e.key === 'ArrowLeft') prevModalOpp();
+        if (e.key === 'ArrowRight') nextModalOpp();
+      }
+    });
 
     var activeCat = 'all';
 

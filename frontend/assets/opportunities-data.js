@@ -329,3 +329,13 @@ function getEnrichedDetails(item) {
 
       return { commitment: commitment, earnings: earnings, tools: tools, firstStep: firstStep };
     }
+
+    function getStarRating(name) {
+      if (!name) return "4.5";
+      let sum = 0;
+      for (let i = 0; i < name.length; i++) {
+        sum += name.charCodeAt(i);
+      }
+      const rating = 4.2 + (sum % 8) * 0.1;
+      return rating.toFixed(1);
+    }

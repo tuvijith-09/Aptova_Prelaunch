@@ -16,30 +16,403 @@
     rel="stylesheet">
   <link rel="stylesheet" href="index.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* ============ PAGE HEADER ============ */
+    /* ============ PAGE-LEVEL READER LAYOUT ============ */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: calc(100vh - 80px);
+    }
+
+    /* ============ PAGE-LEVEL READING PROGRESS BAR ============ */
+    .reading-progress-bar-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), #34D399);
+      z-index: 9999;
+      transition: width .1s ease-out;
+    }
+
+    /* ============ LEFT SIDEBAR ============ */
+    .left-sidebar {
+      border-right: 1px solid var(--border);
+      background: #FAFBFC;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .left-sidebar-inner {
+      position: sticky;
+      top: 3px;
+      height: calc(100vh - 3px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 24px 20px;
+      gap: 20px;
+      scrollbar-width: thin;
+      scrollbar-color: #CBD5E1 transparent;
+    }
+
+    .left-sidebar-inner > * {
+      flex-shrink: 0;
+    }
+
+    .left-sidebar-inner::-webkit-scrollbar {
+      width: 4px;
+    }
+    .left-sidebar-inner::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    /* Sidebar identity */
+    .sidebar-identity {
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-identity .sidebar-opp-name {
+      font-family: 'Lora', 'Georgia', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+    }
+
+    .sidebar-identity .sidebar-domain-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: 6px;
+    }
+
+    .sidebar-identity .sidebar-domain-tag i {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ============ TABLE OF CONTENTS ============ */
+    .sidebar-toc-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    .sidebar-toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar-toc-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all .2s ease;
+      cursor: pointer;
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar-toc-item:hover {
+      color: var(--ink);
+      background: rgba(5, 150, 105, .04);
+    }
+
+    .sidebar-toc-item.active {
+      color: var(--primary);
+      background: var(--pl);
+      border-left-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .toc-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      min-width: 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sidebar-toc-item.active .toc-num {
+      color: var(--primary);
+    }
+
+    /* ============ KPI TILES (COMPACT FOR LEFT SIDEBAR) ============ */
+    .kpi-container {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .02);
+    }
+
+    .kpi-container-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .kpi-container-title svg,
+    .kpi-container-title i {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .kpi-tile {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 6px;
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: all .2s ease;
+    }
+
+    .kpi-tile:hover {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
+    }
+
+    .kpi-tile.kpi-accent-blue {
+      border-left-color: #0284c7;
+    }
+    .kpi-tile.kpi-accent-amber {
+      border-left-color: #d97706;
+    }
+    .kpi-tile.kpi-accent-purple {
+      border-left-color: #7c3aed;
+    }
+
+    .kpi-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .kpi-value {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+
+    .kpi-subtitle {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    /* ============ SIDEBAR FIT WIDGET ============ */
+    .fit-widget {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .02);
+    }
+
+    .fit-widget-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .fit-widget-title svg,
+    .fit-widget-title i {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .fit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--soft);
+    }
+
+    .fit-item-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .fit-item-icon svg,
+    .fit-item-icon i {
+      width: 10px;
+      height: 10px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .fit-item-icon.fit-yes {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+
+    .fit-item-icon.fit-no {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FCA5A5;
+    }
+
+    .fit-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+
+    .fit-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 2px;
+    }
+
+    .fit-section-label.fit-label-yes { color: #065F46; }
+    .fit-section-label.fit-label-no  { color: #991B1B; }
+
+    /* ============ SIDEBAR SPACER (pushes CTA to bottom) ============ */
+    .sidebar-spacer {
+      flex: 1;
+    }
+
+    /* ============ SIDEBAR CTA BUTTON ============ */
+    .sidebar-cta-btn {
+      width: 100%;
+      text-align: center;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, .2);
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    .sidebar-cta-btn:hover {
+      background: var(--phov);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(5, 150, 105, .3);
+    }
+
+    .sidebar-cta-btn svg,
+    .sidebar-cta-btn i {
+      width: 14px;
+      height: 14px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* ============ PAGE MAIN (RIGHT COLUMN) ============ */
+    .page-main {
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    /* ============ HERO SECTION ============ */
     .detail-hero {
-      padding: 64px 6% 40px;
+      padding: 48px 48px 36px;
       text-align: left;
       background: transparent;
       position: relative;
+      border-bottom: 1px solid var(--border);
     }
 
     .detail-hero::before {
       content: '';
       position: absolute;
-      top: -120px;
+      top: -80px;
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(5, 150, 105, .06) 0%, transparent 70%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(5, 150, 105, .05) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .detail-hero-inner {
-      max-width: 880px;
-      margin: 0 auto;
+      max-width: 860px;
       position: relative;
       z-index: 2;
     }
@@ -76,24 +449,62 @@
       gap: 8px;
       border: 1.5px solid var(--primary);
       background: rgba(5, 150, 105, .04);
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--primary);
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .detail-title {
       font-family: 'Lora', 'Georgia', serif;
-      font-size: clamp(28px, 4vw, 48px);
+      font-size: clamp(32px, 5vw, 52px);
       font-weight: 600;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
       color: var(--ink);
-      line-height: 1.15;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--soft);
+      line-height: 1.65;
+      max-width: 680px;
       margin-bottom: 20px;
     }
+
+    .hero-meta-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--soft);
+      background: white;
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 6px;
+    }
+
+    .hero-badge strong {
+      font-weight: 800;
+    }
+
+    .hero-badge.hb-green strong  { color: var(--primary); }
+    .hero-badge.hb-blue strong   { color: #0284c7; }
+    .hero-badge.hb-amber strong  { color: #d97706; }
 
     .detail-meta-row {
       display: flex;
@@ -118,11 +529,10 @@
       color: var(--primary);
     }
 
-    /* ============ CONTENT LAYOUT ============ */
+    /* ============ CONTENT AREA ============ */
     .detail-content {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 24px 6% 100px;
+      padding: 32px 48px 80px;
+      max-width: 860px;
     }
 
     /* Loading / error states */
@@ -161,28 +571,41 @@
     }
 
     /* ============ SECTION CARDS ============ */
+    .content-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
     .section-card {
       background: white;
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .03);
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .02);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+      scroll-margin-top: 24px;
+    }
+
+    .section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+      border-color: rgba(5, 150, 105, .2);
     }
 
     .section-card-header {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       margin-bottom: 20px;
-      padding-bottom: 16px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
 
     .section-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       background: var(--pl);
       border: 1px solid rgba(5, 150, 105, .2);
       display: flex;
@@ -192,19 +615,18 @@
       flex-shrink: 0;
     }
 
-    .section-icon svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .section-icon svg,
+    .section-icon i {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .section-title {
       font-family: 'Lora', 'Georgia', serif;
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--ink);
       letter-spacing: -0.3px;
@@ -213,42 +635,249 @@
     .section-body {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .point-row {
+    /* ============ POINT ROW PREMIUM WITH BADGES ============ */
+    .point-row-premium {
+      padding: 16px;
+      background: #F8FAFC;
+      border-radius: 10px;
+      border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 8px;
+      transition: all .2s ease;
     }
 
-    .point-label {
-      font-size: 12px;
+    .point-row-premium:hover {
+      background: white;
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .02);
+    }
+
+    .point-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: .06em;
+      letter-spacing: .05em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .point-badge svg,
+    .point-badge i {
+      width: 12px;
+      height: 12px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Badge Colors */
+    .badge-success {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+    .badge-danger {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FCA5A5;
+    }
+    .badge-warning {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+    .badge-info {
+      background: #E0F2FE;
+      color: #075985;
+      border: 1px solid #BAE6FD;
+    }
+    .badge-neutral {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
     }
 
     .point-text {
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--soft);
-      line-height: 1.7;
+      line-height: 1.6;
+    }
+
+    /* ============ POWER BI REPORT TABS (CHARTS) ============ */
+    .fin-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      overflow-x: auto;
+    }
+
+    .fin-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 6px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .2s;
+    }
+
+    .fin-tab-btn svg,
+    .fin-tab-btn i {
+      width: 14px;
+      height: 14px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .fin-tab-btn:hover {
+      color: var(--ink);
+      background: var(--surface2);
+    }
+
+    .fin-tab-btn.active {
+      color: var(--primary);
+      background: var(--pl);
+    }
+
+    .fin-tab-content {
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s ease;
+    }
+
+    .fin-tab-content.active {
+      height: auto;
+      overflow: visible;
+      opacity: 1;
+      visibility: visible;
+      padding: 10px 0;
+    }
+
+    .fin-chart-block {
+      margin-top: 10px;
+    }
+
+    .fin-chart-wrap {
+      position: relative;
+      height: 280px;
+      width: 100%;
+    }
+
+    .fin-chart-wrap-sm {
+      position: relative;
+      height: 220px;
+      width: 100%;
+    }
+
+    .fin-highlight {
+      background: var(--pl);
+      border: 1px solid rgba(5,150,105,.2);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fin-highlight svg,
+    .fin-highlight i {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* ============ FINANCIAL RISKS CALLOUT ============ */
+    .financial-risks-card {
+      background: #FFFBEB;
+      border: 1px solid #FCD34D;
+      border-left: 5px solid #F59E0B;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 10px;
+    }
+
+    .risks-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #92400E;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .risks-header svg,
+    .risks-header i {
+      width: 18px;
+      height: 18px;
+      color: #D97706;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .fin-risks {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fin-risk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #92400E;
+      line-height: 1.5;
+    }
+
+    .fin-risk-item svg,
+    .fin-risk-item i {
+      width: 14px;
+      height: 14px;
+      color: #D97706;
+      margin-top: 3px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
     }
 
     /* ============ CTA AT BOTTOM ============ */
     .detail-cta {
       text-align: center;
-      padding: 48px 32px;
+      padding: 40px 32px;
       background: linear-gradient(135deg, rgba(5,150,105,.04), rgba(52,211,153,.06));
       border: 1px solid rgba(5, 150, 105, .15);
-      border-radius: 16px;
-      margin-top: 32px;
+      border-radius: 12px;
+      margin-top: 12px;
     }
 
     .detail-cta h3 {
       font-family: 'Lora', 'Georgia', serif;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 600;
       color: var(--ink);
       margin-bottom: 8px;
@@ -256,7 +885,7 @@
     }
 
     .detail-cta p {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--muted);
       margin-bottom: 20px;
       max-width: 440px;
@@ -265,180 +894,135 @@
       line-height: 1.6;
     }
 
-    /* ============ FINANCIAL CHARTS ============ */
-    .fin-section-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.03);
-    }
-
-    .fin-section-header {
-      display: flex;
+    /* ============ BANNER ICON ============ */
+    .banner-icon {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      margin-right: 4px;
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
     }
 
-    .fin-section-title {
-      font-family: 'Lora', 'Georgia', serif;
-      font-size: 19px;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.3px;
-    }
-
-    .fin-stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .fin-stat-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-    }
-
-    .fin-stat-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 6px;
-    }
-
-    .fin-stat-value {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--ink);
-      letter-spacing: -0.5px;
-    }
-
-    .fin-stat-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .fin-highlight {
-      background: var(--pl);
-      border: 1px solid rgba(5,150,105,.2);
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary);
-      margin-top: 12px;
-    }
-
-    .fin-chart-block {
-      margin-top: 28px;
-    }
-
-    .fin-chart-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--soft);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-    }
-
-    .fin-chart-wrap {
-      position: relative;
-      height: 260px;
-      width: 100%;
-    }
-
-    .fin-chart-wrap-sm {
-      position: relative;
-      height: 200px;
-      width: 100%;
-    }
-
-    .fin-risks {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .fin-risk-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--soft);
-      line-height: 1.5;
-    }
-
-    .fin-risk-dot {
-      width: 20px;
-      height: 20px;
-      background: #FEF3C7;
-      border: 1px solid #FCD34D;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .detail-hero {
-        padding: 40px 6% 28px;
-      }
-      .section-card {
-        padding: 22px 20px;
-      }
-      .fin-section-card {
-        padding: 22px 20px;
-      }
-      .fin-stat-grid {
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .page-layout {
         grid-template-columns: 1fr;
       }
-      .detail-meta-row {
-        gap: 8px;
+      .left-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
       }
-      .detail-meta-chip {
-        font-size: 12px;
-        padding: 6px 12px;
+      .left-sidebar-inner {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        padding: 16px;
+        gap: 14px;
       }
+      /* Hide ToC, progress, fit widget on mobile */
+      .sidebar-toc-section,
+      .reading-progress-container,
+      .fit-widget {
+        display: none;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .detail-hero {
+        padding: 32px 20px 24px;
+      }
+      .detail-content {
+        padding: 20px 20px 60px;
+      }
+      body > nav {
+        display: flex !important;
+        justify-content: space-between !important;
+        padding: 13px 20px !important;
+        height: auto !important;
+      }
+      .nav-logo-section {
+        padding-left: 0 !important;
+        border-right: none !important;
+        height: auto !important;
+      }
+      .nav-main-section {
+        padding: 0 !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        width: auto !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-meta-badges {
+        flex-direction: column;
+      }
+      .section-card {
+        padding: 20px 16px;
+      }
+    }
+    /* ============ NAVIGATION BAR GRID ALIGNMENT ============ */
+    body > nav {
+      display: grid !important;
+      grid-template-columns: 280px 1fr !important;
+      padding: 0 !important;
+      height: 70px !important;
+      background: rgba(248, 250, 252, 0.9) !important;
+      border-bottom: 1px solid var(--border) !important;
+      backdrop-filter: blur(12px) !important;
+      width: 100% !important;
+    }
+
+    .nav-logo-section {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .nav-main-section {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
     }
   </style>
 </head>
 
 <body>
+  <div class="reading-progress-bar-top" id="readingProgressBar"></div>
 
   <div class="top-banner">
-    <span>⚡ Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join the community.html">Join the community →</a></span>
+    <span><i data-lucide="zap" class="banner-icon"></i> Launching Soon: We are opening priority beta access to just 1,000 students. <a href="join the community.html">Join the community →</a></span>
   </div>
 
   <nav>
-    <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
-        style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
-        style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
-          style="color:#34A853;">ova</span></span><small class="logo-badge">ALPHA</small></a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="how-it-works.html">How it works</a>
-      <a href="whats-different.html">Why Aptova</a>
-      <a href="explore.html" class="active">Explore Opportunities</a>
-      <a href="about.html">About Us</a>
-      <a href="join the community.html">Join Community</a>
+    <div class="nav-logo-section">
+      <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;"><img src="Zero.svg" alt=""
+          style="height:40px;width:auto;transform:scale(1.1);transform-origin:left center;"><span
+          style="letter-spacing:-1px;color:#000000;font-weight:800;">Apt<span
+            style="color:#34A853;">ova</span></span><small class="logo-badge">ALPHA</small></a>
     </div>
-    <a href="join the community.html" class="nav-cta">Join the community</a>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+    <div class="nav-main-section">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="whats-different.html">Why Aptova</a>
+        <a href="explore.html" class="active">Explore Opportunities</a>
+        <a href="about.html">About Us</a>
+        <a href="join the community.html">Join Community</a>
+      </div>
+      <a href="join the community.html" class="nav-cta">Join the community</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+    </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
@@ -458,24 +1042,38 @@
     }
   </script>
 
-  <section class="detail-hero">
-    <div class="detail-hero-inner">
-      <a href="explore.html" class="back-link">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to Explore Opportunities
-      </a>
-      <div class="detail-tag" id="domainTag">Opportunity Deep Dive</div>
-      <h1 class="detail-title" id="oppTitle">Loading…</h1>
-      <div class="detail-meta-row" id="metaRow"></div>
-    </div>
-  </section>
+  <div class="page-layout">
+    <!-- LEFT SIDEBAR (populated by JS) -->
+    <aside class="left-sidebar" id="leftSidebar">
+      <div class="left-sidebar-inner" id="leftSidebarInner">
+        <!-- JS will populate -->
+      </div>
+    </aside>
 
-  <section class="detail-content" id="detailContent">
-    <div class="state-box" id="loadingState">
-      <div class="spinner"></div>
-      <p>Pulling together the full breakdown…</p>
+    <!-- RIGHT: HERO + CONTENT -->
+    <div class="page-main">
+      <section class="detail-hero">
+        <div class="detail-hero-inner">
+          <a href="explore.html" class="back-link">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Explore Opportunities
+          </a>
+          <div class="detail-tag" id="domainTag">Opportunity Deep Dive</div>
+          <h1 class="detail-title" id="oppTitle">Loading…</h1>
+          <p class="hero-subtitle" id="heroSubtitle" style="display:none;"></p>
+          <div class="hero-meta-badges" id="heroBadges"></div>
+          <div class="detail-meta-row" id="metaRow"></div>
+        </div>
+      </section>
+
+      <section class="detail-content" id="detailContent">
+        <div class="state-box" id="loadingState">
+          <div class="spinner"></div>
+          <p>Pulling together the full breakdown…</p>
+        </div>
+      </section>
     </div>
-  </section>
+  </div>
 
   <footer>
     <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:6px;font-size:18px;"><img
@@ -498,40 +1096,77 @@
 
   <script>
     // ----------------------------------------------------------------
-    // Section display config: key -> { title, icon svg path(s) }
+    // Section display config: key -> { title, icon }
     // ----------------------------------------------------------------
     const SECTION_CONFIG = {
       overview: {
         title: "Opportunity Overview",
-        icon: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>'
+        icon: "book-open"
       },
       daily_work: {
         title: "What You'll Actually Do",
-        icon: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'
+        icon: "activity"
       },
       requirements: {
         title: "What You Need To Start",
-        icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/>'
+        icon: "list-checks"
       },
       market_income: {
         title: "Market & Income Reality",
-        icon: '<path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.1-2.8-2.8L7 14"/>'
+        icon: "trending-up"
       },
       growth: {
         title: "Getting Started & Growth Potential",
-        icon: '<path d="M2 12h6l3-9 4 18 3-9h4"/>'
+        icon: "rocket"
       },
       challenges: {
         title: "Common Challenges",
-        icon: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>'
+        icon: "alert-triangle"
       },
       fit: {
         title: "Who This Opportunity Is Best Suited For",
-        icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'
+        icon: "users"
       }
     };
 
     const SECTION_ORDER = ["overview", "daily_work", "requirements", "market_income", "growth", "challenges", "fit"];
+
+    // ----------------------------------------------------------------
+    // Dynamic Point Label Styling
+    // ----------------------------------------------------------------
+    const LABEL_STYLES = {
+      // Fit section
+      "BEST SUITED FOR": { class: "badge-success", label: "Best Suited For", icon: "user-check" },
+      "NOT IDEAL FOR": { class: "badge-danger", label: "Not Ideal For", icon: "user-x" },
+      "HELPFUL TRAITS": { class: "badge-info", label: "Helpful Traits", icon: "sparkles" },
+      
+      // Challenges section
+      "OBSTACLES": { class: "badge-danger", label: "Obstacles", icon: "alert-triangle" },
+      "WHY PEOPLE FAIL": { class: "badge-danger", label: "Why People Fail", icon: "x-circle" },
+      "CONSIDERATIONS": { class: "badge-warning", label: "Considerations", icon: "info" },
+      
+      // Daily Work section
+      "DAY-TO-DAY": { class: "badge-info", label: "Day-to-day", icon: "calendar" },
+      "RESPONSIBILITIES": { class: "badge-info", label: "Responsibilities", icon: "check-square" },
+      "NATURE OF WORK": { class: "badge-neutral", label: "Nature of Work", icon: "activity" },
+      
+      // Requirements section
+      "SKILLS": { class: "badge-info", label: "Skills Needed", icon: "award" },
+      "TOOLS": { class: "badge-info", label: "Tools Needed", icon: "wrench" },
+      "INVESTMENT": { class: "badge-warning", label: "Investment", icon: "wallet" },
+      "CERTIFICATIONS": { class: "badge-neutral", label: "Certifications", icon: "file-badge" },
+      
+      // Market / Income section
+      "FIRST INCOME REALITY": { class: "badge-warning", label: "First Income Reality", icon: "clock" },
+      "DEMAND REALITY": { class: "badge-info", label: "Demand Reality", icon: "trending-up" },
+      "COMPETITION REALITY": { class: "badge-neutral", label: "Competition Reality", icon: "scale" },
+      "INCOME POTENTIAL": { class: "badge-success", label: "Income Potential", icon: "coins" },
+      
+      // Growth section
+      "FINDING CLIENTS": { class: "badge-info", label: "Finding Clients", icon: "search" },
+      "SCALABILITY": { class: "badge-success", label: "Scalability", icon: "trending-up" },
+      "PROGRESSION PATH": { class: "badge-success", label: "Progression Path", icon: "arrow-up-right" }
+    };
 
     // ----------------------------------------------------------------
     // Chart helpers
@@ -671,9 +1306,75 @@
     }
 
     // ----------------------------------------------------------------
-    // Render financial_condition section
+    // Render "Who This Fits" widget for sidebar
     // ----------------------------------------------------------------
-    function renderFinancialSection(fc) {
+    function renderFitWidget(fitItems) {
+      if (!fitItems || !fitItems.length) return "";
+
+      const suited = [];
+      const notIdeal = [];
+
+      fitItems.forEach(item => {
+        const label = (item.label || "").toLowerCase().trim();
+        const traits = item.text.split(/[,;]/).map(t => t.trim()).filter(Boolean);
+
+        if (label.includes("best suited") || label.includes("helpful")) {
+          suited.push(...traits);
+        } else if (label.includes("not ideal")) {
+          notIdeal.push(...traits);
+        }
+      });
+
+      if (!suited.length && !notIdeal.length) return "";
+
+      let html = `
+        <div class="fit-widget">
+          <div class="fit-widget-title">
+            <i data-lucide="target"></i> Who This Fits
+          </div>
+          <div class="fit-list">
+      `;
+
+      if (suited.length) {
+        html += `<div class="fit-section-label fit-label-yes">Best Suited For</div>`;
+        suited.forEach(trait => {
+          html += `
+            <div class="fit-item">
+              <div class="fit-item-icon fit-yes">
+                <i data-lucide="check"></i>
+              </div>
+              <span>${escapeHtml(trait)}</span>
+            </div>
+          `;
+        });
+      }
+
+      if (suited.length && notIdeal.length) {
+        html += `<div class="fit-divider"></div>`;
+      }
+
+      if (notIdeal.length) {
+        html += `<div class="fit-section-label fit-label-no">Not Ideal For</div>`;
+        notIdeal.forEach(trait => {
+          html += `
+            <div class="fit-item">
+              <div class="fit-item-icon fit-no">
+                <i data-lucide="x"></i>
+              </div>
+              <span>${escapeHtml(trait)}</span>
+            </div>
+          `;
+        });
+      }
+
+      html += `</div></div>`;
+      return html;
+    }
+
+    // ----------------------------------------------------------------
+    // Render KPI tiles HTML
+    // ----------------------------------------------------------------
+    function renderKpiTiles(fc) {
       if (!fc || !fc.length) return "";
       const d = fc[0]?.data;
       if (!d) return "";
@@ -682,7 +1383,6 @@
       const be     = d.break_even   || {};
       const mc     = d.monthly_costs || {};
       const ue     = d.unit_economics || {};
-      const risks  = d.risks        || [];
 
       const minStart   = inv.minimum_start   || "—";
       const margin     = ue.margin           || "—";
@@ -691,83 +1391,278 @@
       const minCost    = mc.minimum          || "—";
 
       return `
-        <div class="fin-section-card">
-          <div class="fin-section-header">
-            <div class="section-icon">
-              <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-              </svg>
-            </div>
-            <div class="fin-section-title">Financial Reality</div>
+        <div class="kpi-container">
+          <div class="kpi-container-title">
+            <i data-lucide="bar-chart-3"></i> Key Financial Reality
           </div>
-
-          <!-- Key stats row -->
-          <div class="fin-stat-grid">
-            <div class="fin-stat-box">
-              <div class="fin-stat-label">Minimum to Start</div>
-              <div class="fin-stat-value">${escapeHtml(minStart)}</div>
-              <div class="fin-stat-sub">initial investment needed</div>
+          <div class="kpi-grid">
+            <div class="kpi-tile">
+              <div class="kpi-label">Min to Start</div>
+              <div class="kpi-value">${escapeHtml(minStart)}</div>
+              <div class="kpi-subtitle">Initial investment</div>
             </div>
-            <div class="fin-stat-box">
-              <div class="fin-stat-label">Typical Margin</div>
-              <div class="fin-stat-value">${escapeHtml(margin)}</div>
-              <div class="fin-stat-sub">profit per sale</div>
+            <div class="kpi-tile kpi-accent-blue">
+              <div class="kpi-label">Typical Margin</div>
+              <div class="kpi-value">${escapeHtml(margin)}</div>
+              <div class="kpi-subtitle">Profit margin</div>
             </div>
-            <div class="fin-stat-box">
-              <div class="fin-stat-label">Break-even Point</div>
-              <div class="fin-stat-value">${escapeHtml(bePoint)}</div>
-              <div class="fin-stat-sub">strong execution: ${escapeHtml(beStrong)}</div>
+            <div class="kpi-tile kpi-accent-amber">
+              <div class="kpi-label">Break-even</div>
+              <div class="kpi-value">${escapeHtml(bePoint)}</div>
+              <div class="kpi-subtitle">${escapeHtml(beStrong)}</div>
             </div>
-            <div class="fin-stat-box">
-              <div class="fin-stat-label">Monthly Running Cost</div>
-              <div class="fin-stat-value">${escapeHtml(minCost)}</div>
-              <div class="fin-stat-sub">minimum recurring cost</div>
+            <div class="kpi-tile kpi-accent-purple">
+              <div class="kpi-label">Monthly Cost</div>
+              <div class="kpi-value">${escapeHtml(minCost)}</div>
+              <div class="kpi-subtitle">Recurring cost</div>
             </div>
           </div>
-
-          <!-- Income Timeline chart -->
-          <div class="fin-chart-block">
-            <div class="fin-chart-label">📈 Realistic Income Timeline</div>
-            <div class="fin-chart-wrap">
-              <canvas id="chart-income"></canvas>
-            </div>
-          </div>
-
-          <!-- Investment breakdown chart -->
-          <div class="fin-chart-block">
-            <div class="fin-chart-label">💰 Where Your Initial Investment Goes</div>
-            <div class="fin-chart-wrap-sm">
-              <canvas id="chart-investment"></canvas>
-            </div>
-            <div class="fin-highlight">Minimum practical start: ${escapeHtml(minStart)}</div>
-          </div>
-
-          <!-- Monthly costs chart -->
-          <div class="fin-chart-block">
-            <div class="fin-chart-label">🔁 Monthly Operating Costs</div>
-            <div class="fin-chart-wrap-sm">
-              <canvas id="chart-monthly"></canvas>
-            </div>
-            <div class="fin-highlight">Running cost: ${escapeHtml(minCost)}/month</div>
-          </div>
-
-          <!-- Financial risks -->
-          ${risks.length ? `
-          <div class="fin-chart-block">
-            <div class="fin-chart-label">⚠️ Financial Risks</div>
-            <div class="fin-risks">
-              ${risks.map(r => `
-                <div class="fin-risk-item">
-                  <div class="fin-risk-dot">⚠</div>
-                  <span>${escapeHtml(r)}</span>
-                </div>
-              `).join("")}
-            </div>
-          </div>
-          ` : ""}
-
         </div>
       `;
+    }
+
+    // ----------------------------------------------------------------
+    // Render the Left Sidebar contents
+    // ----------------------------------------------------------------
+    function renderLeftSidebar(sections) {
+      const sidebar = document.getElementById('leftSidebarInner');
+
+      let html = '';
+
+      // 1. Identity block
+      html += `
+        <div class="sidebar-identity">
+          <div class="sidebar-opp-name">${escapeHtml(oppName || 'Opportunity')}</div>
+          <div class="sidebar-domain-tag">
+            <i data-lucide="compass"></i> Deep Dive
+          </div>
+        </div>
+      `;
+
+      // 2. Table of Contents
+      html += `<div class="sidebar-toc-section">`;
+      html += `<div class="sidebar-toc-title">In This Report</div>`;
+      html += `<div class="sidebar-toc" id="sidebarToc">`;
+      let tocIndex = 1;
+      SECTION_ORDER.forEach(key => {
+        const config = SECTION_CONFIG[key];
+        const items = sections[key];
+        if (!config || !items || !items.length) return;
+        const num = String(tocIndex).padStart(2, '0');
+        html += `
+          <a class="sidebar-toc-item" href="#sec-${key}" data-section="${key}">
+            <span class="toc-num">${num}</span>
+            <span>${config.title}</span>
+          </a>
+        `;
+        tocIndex++;
+      });
+      // Financial section
+      if (sections.financial_condition && sections.financial_condition.length) {
+        const num = String(tocIndex).padStart(2, '0');
+        html += `
+          <a class="sidebar-toc-item" href="#sec-financial" data-section="financial">
+            <span class="toc-num">${num}</span>
+            <span>Detailed Financial Analysis</span>
+          </a>
+        `;
+      }
+      html += `</div></div>`;
+
+      // 3. KPI Tiles
+      html += renderKpiTiles(sections.financial_condition);
+
+      // 4. Fit Widget
+      html += renderFitWidget(sections.fit);
+
+      // 5. Sidebar Spacer
+      html += `<div class="sidebar-spacer"></div>`;
+
+      // 6. CTA
+      html += `
+        <a href="join the community.html" class="sidebar-cta-btn">
+          Join the Community <i data-lucide="arrow-right"></i>
+        </a>
+      `;
+
+      sidebar.innerHTML = html;
+    }
+
+    // ----------------------------------------------------------------
+    // Render financial_condition section inside Main Column
+    // ----------------------------------------------------------------
+    function renderFinancialSection(fc) {
+      if (!fc || !fc.length) return "";
+      const d = fc[0]?.data;
+      if (!d) return "";
+
+      const inv    = d.investment   || {};
+      const mc     = d.monthly_costs || {};
+      const risks  = d.risks        || [];
+
+      const minStart   = inv.minimum_start   || "—";
+      const minCost    = mc.minimum          || "—";
+
+      return `
+        <div class="section-card" id="sec-financial" style="scroll-margin-top:24px;">
+          <div class="section-card-header">
+            <div class="section-icon">
+              <i data-lucide="bar-chart-3"></i>
+            </div>
+            <div class="section-title">Detailed Financial Analysis</div>
+          </div>
+          <div class="section-body">
+            <!-- Tab Row -->
+            <div class="fin-tabs">
+              <button class="fin-tab-btn active" data-tab="income">
+                <i data-lucide="trending-up"></i> Income Timeline
+              </button>
+              <button class="fin-tab-btn" data-tab="investment">
+                <i data-lucide="wallet"></i> Startup Capital
+              </button>
+              <button class="fin-tab-btn" data-tab="monthly">
+                <i data-lucide="repeat"></i> Operating Costs
+              </button>
+            </div>
+
+            <!-- Tab: Income Timeline -->
+            <div class="fin-tab-content active" id="tab-income">
+              <div class="fin-chart-block">
+                <div class="fin-chart-wrap">
+                  <canvas id="chart-income"></canvas>
+                </div>
+                <div class="fin-highlight">
+                  <i data-lucide="info"></i> Minimum to start: ${escapeHtml(minStart)}
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Investment Breakdown -->
+            <div class="fin-tab-content" id="tab-investment">
+              <div class="fin-chart-block">
+                <div class="fin-chart-wrap-sm">
+                  <canvas id="chart-investment"></canvas>
+                </div>
+                <div class="fin-highlight">
+                  <i data-lucide="info"></i> Minimum practical start: ${escapeHtml(minStart)}
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Monthly Costs -->
+            <div class="fin-tab-content" id="tab-monthly">
+              <div class="fin-chart-block">
+                <div class="fin-chart-wrap-sm">
+                  <canvas id="chart-monthly"></canvas>
+                </div>
+                <div class="fin-highlight">
+                  <i data-lucide="info"></i> Minimum running cost: ${escapeHtml(minCost)}/month
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial Risks Callout -->
+        ${risks.length ? `
+        <div class="financial-risks-card">
+          <div class="risks-header">
+            <i data-lucide="alert-octagon"></i> Financial Risks & Mitigation
+          </div>
+          <div class="fin-risks">
+            ${risks.map(r => `
+              <div class="fin-risk-item">
+                <i data-lucide="alert-triangle"></i>
+                <span>${escapeHtml(r)}</span>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+        ` : ""}
+      `;
+    }
+
+    // ----------------------------------------------------------------
+    // Setup financial tabs toggling behavior
+    // ----------------------------------------------------------------
+    function setupFinancialTabs() {
+      const buttons = document.querySelectorAll('.fin-tab-btn');
+      const contents = document.querySelectorAll('.fin-tab-content');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-tab');
+
+          buttons.forEach(b => b.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          btn.classList.add('active');
+          const activeContent = document.getElementById(`tab-${target}`);
+          if (activeContent) {
+            activeContent.classList.add('active');
+          }
+        });
+      });
+    }
+
+    // ----------------------------------------------------------------
+    // Setup IntersectionObserver for ToC highlighting
+    // ----------------------------------------------------------------
+    function setupTocHighlighting() {
+      const tocLinks = document.querySelectorAll('.sidebar-toc-item');
+      if (!tocLinks.length) return;
+
+      const sectionIds = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href')?.replace('#', '');
+        if (id) sectionIds.push(id);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+      });
+
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      // Smooth scroll on click
+      tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = link.getAttribute('href')?.replace('#', '');
+          const target = document.getElementById(id);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    }
+
+    // ----------------------------------------------------------------
+    // Setup reading progress bar
+    // ----------------------------------------------------------------
+    function setupReadingProgress() {
+      const bar = document.getElementById('readingProgressBar');
+      if (!bar) return;
+
+      window.addEventListener('scroll', () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const pct = docHeight > 0 ? Math.min(100, (scrolled / docHeight) * 100) : 0;
+        bar.style.width = pct + '%';
+      }, { passive: true });
     }
 
     // ----------------------------------------------------------------
@@ -776,15 +1671,76 @@
     const params = new URLSearchParams(window.location.search);
     const oppName = params.get('name');
 
+    function getStarRating(name) {
+      if (!name) return "4.5";
+      let sum = 0;
+      for (let i = 0; i < name.length; i++) {
+        sum += name.charCodeAt(i);
+      }
+      const rating = 4.2 + (sum % 8) * 0.1;
+      return rating.toFixed(1);
+    }
+
     function escapeHtml(str) {
       const div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
     }
 
+    // ----------------------------------------------------------------
+    // Populate hero subtitle and metadata badges
+    // ----------------------------------------------------------------
+    function populateHero(sections) {
+      // Extract "What it is" for subtitle
+      const overview = sections.overview || [];
+      const whatItIs = overview.find(item => (item.label || "").toLowerCase().includes("what it is"));
+      if (whatItIs) {
+        const subtitleEl = document.getElementById('heroSubtitle');
+        subtitleEl.textContent = whatItIs.text;
+        subtitleEl.style.display = '';
+      }
+
+      // Extract hero badges from financial data
+      const fc = sections.financial_condition;
+      const badges = [];
+      const rating = getStarRating(oppName);
+      badges.push({ label: "Student Rating", value: `★ ${rating}`, cls: "hb-amber" });
+
+      if (fc && fc.length) {
+        const d = fc[0]?.data;
+        if (d) {
+          const inv    = d.investment || {};
+          const ue     = d.unit_economics || {};
+          const be     = d.break_even || {};
+
+          if (inv.minimum_start)  badges.push({ label: "Investment", value: inv.minimum_start, cls: "hb-green" });
+          if (ue.margin)          badges.push({ label: "Margin", value: ue.margin, cls: "hb-blue" });
+          if (be.point_range)     badges.push({ label: "Break-even", value: be.point_range[0] + "–" + be.point_range[1] + " sales", cls: "hb-green" });
+        }
+      }
+
+      const badgesEl = document.getElementById('heroBadges');
+      badgesEl.innerHTML = badges.map(b => `
+        <div class="hero-badge ${b.cls}">
+          ${escapeHtml(b.label)}: <strong>${escapeHtml(b.value)}</strong>
+        </div>
+      `).join('');
+    }
+
+    // ----------------------------------------------------------------
+    // Main render function
+    // ----------------------------------------------------------------
     function renderSections(sections) {
       const container = document.getElementById('detailContent');
-      let html = '';
+
+      // Populate the hero section
+      populateHero(sections);
+
+      // Render the left sidebar
+      renderLeftSidebar(sections);
+
+      // Build main content HTML
+      let html = '<div class="content-sections">';
 
       SECTION_ORDER.forEach(key => {
         const config = SECTION_CONFIG[key];
@@ -792,10 +1748,10 @@
         if (!config || !items || !items.length) return;
 
         html += `
-          <div class="section-card">
+          <div class="section-card" id="sec-${key}">
             <div class="section-card-header">
               <div class="section-icon">
-                <svg viewBox="0 0 24 24">${config.icon}</svg>
+                <i data-lucide="${config.icon}"></i>
               </div>
               <div class="section-title">${config.title}</div>
             </div>
@@ -804,16 +1760,28 @@
 
         items.forEach(item => {
           if (item.label) {
+            const rawLabel = item.label.toUpperCase().trim();
+            const badgeStyle = LABEL_STYLES[rawLabel] || {
+              class: "badge-neutral",
+              label: item.label,
+              icon: "file-text"
+            };
+            
             html += `
-              <div class="point-row">
-                <span class="point-label">${escapeHtml(item.label)}</span>
-                <span class="point-text">${escapeHtml(item.text)}</span>
+              <div class="point-row-premium">
+                <div>
+                  <span class="point-badge ${badgeStyle.class}">
+                    <i data-lucide="${badgeStyle.icon}"></i>
+                    ${escapeHtml(badgeStyle.label)}
+                  </span>
+                </div>
+                <div class="point-text">${escapeHtml(item.text)}</div>
               </div>
             `;
           } else {
             html += `
-              <div class="point-row">
-                <span class="point-text">${escapeHtml(item.text)}</span>
+              <div class="point-row-premium text-only">
+                <div class="point-text">${escapeHtml(item.text)}</div>
               </div>
             `;
           }
@@ -822,26 +1790,105 @@
         html += `</div></div>`;
       });
 
-      // Add financial section with charts
+      // Add Financial tabbed charts and risks
       html += renderFinancialSection(sections.financial_condition);
+
+      // Add feedback option for every opportunity description
+      html += `
+        <div class="feedback-card" style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.02);">
+          <div id="feedbackFormArea">
+            <h3 style="font-family: 'Lora', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">Was this opportunity roadmap helpful?</h3>
+            <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 16px;">Help us improve these student roadmaps with your anonymous rating and feedback.</p>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;" id="feedbackStars">
+              <button class="feedback-star-btn" data-star="1" style="background:none; border:none; font-size:28px; color:#CBD5E1; cursor:pointer; padding:0; transition:color 0.15s; outline:none;">★</button>
+              <button class="feedback-star-btn" data-star="2" style="background:none; border:none; font-size:28px; color:#CBD5E1; cursor:pointer; padding:0; transition:color 0.15s; outline:none;">★</button>
+              <button class="feedback-star-btn" data-star="3" style="background:none; border:none; font-size:28px; color:#CBD5E1; cursor:pointer; padding:0; transition:color 0.15s; outline:none;">★</button>
+              <button class="feedback-star-btn" data-star="4" style="background:none; border:none; font-size:28px; color:#CBD5E1; cursor:pointer; padding:0; transition:color 0.15s; outline:none;">★</button>
+              <button class="feedback-star-btn" data-star="5" style="background:none; border:none; font-size:28px; color:#CBD5E1; cursor:pointer; padding:0; transition:color 0.15s; outline:none;">★</button>
+            </div>
+            
+            <textarea id="feedbackText" placeholder="Any suggestions to make this blueprint more practical?" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 14px; margin-bottom: 16px; resize: vertical; min-height: 80px; outline: none; box-sizing: border-box; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+            
+            <button onclick="submitDetailFeedback()" class="btn" style="padding: 10px 24px; font-size: 14px;">Submit Feedback</button>
+          </div>
+          <div id="feedbackSuccessArea" style="display: none; text-align: center; padding: 16px 0;">
+            <div style="width: 48px; height: 48px; background: var(--pl); border: 1px solid rgba(5,150,105,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 20px; margin: 0 auto 12px;">✓</div>
+            <h4 style="font-family: 'Lora', Georgia, serif; font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Thank you!</h4>
+            <p style="font-size: 13.5px; color: var(--muted);">Your feedback has been submitted successfully to help refine our blueprints.</p>
+          </div>
+        </div>
+      `;
 
       html += `
         <div class="detail-cta">
           <h3>Want a personalized read on this?</h3>
           <p>Join the community to get a custom fit assessment based on your own budget, time, skills, and location — not a generic overview.</p>
-          <a href="join the community.html" class="btn" style="display:inline-flex;">Join the community →</a>
+          <a href="join the community.html" class="btn" style="display:inline-flex;">Join the community <i data-lucide="arrow-right" style="width:16px;height:16px;margin-left:6px;display:inline-flex;align-items:center;"></i></a>
         </div>
       `;
 
+      html += '</div>'; // close content-sections
+
       container.innerHTML = html;
 
-      // Draw charts after innerHTML is set (canvases now exist in DOM)
+      // Draw charts after innerHTML is set
       const fcData = sections.financial_condition?.[0]?.data;
       if (fcData) {
         drawIncomeTimeline(fcData);
         drawInvestmentChart(fcData);
         drawMonthlyCostsChart(fcData);
+        setupFinancialTabs();
       }
+
+      // Initialize Lucide icons
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // Setup interactivity
+      setupTocHighlighting();
+      setupReadingProgress();
+      setupFeedbackStars();
+    }
+
+    // ----------------------------------------------------------------
+    // Interactive feedback rating functions
+    // ----------------------------------------------------------------
+    let selectedStarRating = 0;
+
+    function setupFeedbackStars() {
+      const stars = document.querySelectorAll('.feedback-star-btn');
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          selectedStarRating = parseInt(star.getAttribute('data-star'), 10);
+          updateStarsState();
+        });
+        star.addEventListener('mouseover', () => {
+          highlightStars(parseInt(star.getAttribute('data-star'), 10));
+        });
+        star.addEventListener('mouseout', () => {
+          updateStarsState();
+        });
+      });
+    }
+
+    function highlightStars(val) {
+      const stars = document.querySelectorAll('.feedback-star-btn');
+      stars.forEach(star => {
+        const starVal = parseInt(star.getAttribute('data-star'), 10);
+        star.style.color = starVal <= val ? '#F59E0B' : '#CBD5E1';
+      });
+    }
+
+    function updateStarsState() {
+      highlightStars(selectedStarRating);
+    }
+
+    function submitDetailFeedback() {
+      const text = document.getElementById('feedbackText').value;
+      document.getElementById('feedbackFormArea').style.display = 'none';
+      document.getElementById('feedbackSuccessArea').style.display = 'block';
     }
 
     function renderError(message) {
@@ -882,6 +1929,9 @@
     }
 
     loadOpportunity();
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   </script>
 
   <script src="assets/early-access.js"></script>

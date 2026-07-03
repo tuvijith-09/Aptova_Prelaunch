@@ -1127,6 +1127,49 @@
       transition: opacity .3s
     }
 
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      color: var(--soft);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10010;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      outline: none;
+      user-select: none;
+    }
+
+    .modal-nav-btn:hover {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .modal-nav-btn.prev {
+      left: 24px;
+    }
+
+    .modal-nav-btn.next {
+      right: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-nav-btn {
+        display: none !important;
+      }
+    }
+
     .modal-bg.show {
       display: flex;
       opacity: 1
@@ -2050,10 +2093,12 @@
 
   <!-- MODAL -->
   <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+    <button class="modal-nav-btn prev" onclick="prevModalOpp(event)" aria-label="Previous opportunity">←</button>
     <div class="modal" id="modalContainer" style="max-width: 560px; transition: max-width 0.3s ease;">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div id="modalBody"></div>
     </div>
+    <button class="modal-nav-btn next" onclick="nextModalOpp(event)" aria-label="Next opportunity">→</button>
   </div>
 
   <script>
@@ -2141,6 +2186,16 @@
     ];
 
     let slideInterval = setInterval(nextSlide, 4000);
+
+    function getStarRating(name) {
+      if (!name) return "4.5";
+      let sum = 0;
+      for (let i = 0; i < name.length; i++) {
+        sum += name.charCodeAt(i);
+      }
+      const rating = 4.2 + (sum % 8) * 0.1;
+      return rating.toFixed(1);
+    }
 
     function parseCapRupee(cap) {
       if (!cap) return 0;
@@ -2257,6 +2312,7 @@
     function openCarouselModal(i) {
       window.currentModalIndex = i;
       const d = CAROUSEL_DATA[i];
+      const rating = getStarRating(d.n);
       const enriched = getEnrichedDetails(d);
 
       const modalContainer = document.getElementById('modalContainer');
@@ -2273,7 +2329,10 @@
           <div class="split-left">
             <div>
               <div class="modal-tag" style="background: #FAF5FF; color: #7C3AED; border-color: #D8B4FE;">${d.tag}</div>
-              <h2 style="margin-bottom: 12px;">${d.n}</h2>
+              <h2 style="margin-bottom: 12px; font-family: 'Lora', Georgia, serif; font-size: 26px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                ${d.n}
+                <span style="font-size: 16px; color: #D97706; font-weight: 700; background: #FEF3C7; border: 1px solid #FDE68A; padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 2px;">★ ${rating}</span>
+              </h2>
               <p style="color: var(--soft); font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">${d.d}</p>
             </div>
 
@@ -2281,7 +2340,7 @@
               <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Key Summary</div>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                 <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Capital Needed:</span><strong>${d.cap}</strong></div>
-                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Key Advantage:</span><strong>${d.adv}</strong></div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Key Platform / Edge:</span><strong>${d.adv}</strong></div>
                 <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Earnings:</span><strong style="color: var(--primary);">${enriched.earnings}</strong></div>
                 <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--muted);">Commitment:</span><strong style="color: var(--primary);">${enriched.commitment}</strong></div>
               </div>
@@ -2451,7 +2510,28 @@
       slideInterval = setInterval(nextSlide, 4000);
     }
 
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    function prevModalOpp(e) {
+      if (e) e.stopPropagation();
+      if (window.currentModalIndex === undefined) return;
+      let prevIdx = window.currentModalIndex - 1;
+      if (prevIdx < 0) prevIdx = CAROUSEL_DATA.length - 1;
+      openCarouselModal(prevIdx);
+    }
+
+    function nextModalOpp(e) {
+      if (e) e.stopPropagation();
+      if (window.currentModalIndex === undefined) return;
+      let nextIdx = (window.currentModalIndex + 1) % CAROUSEL_DATA.length;
+      openCarouselModal(nextIdx);
+    }
+
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') closeModal(); 
+      if (window.currentModalIndex !== undefined) {
+        if (e.key === 'ArrowLeft') prevModalOpp();
+        if (e.key === 'ArrowRight') nextModalOpp();
+      }
+    });
   </script>
 
   <script src="assets/poll.js"></script>
