@@ -517,31 +517,26 @@
       margin-bottom: 50px;
     }
 
-    .card-hover-btn {
+    .card-hover-rating {
       position: absolute;
       bottom: -40px;
-      left: 24px;
-      right: 24px;
-      height: 38px;
-      background: var(--primary);
-      color: white;
-      border: none;
+      left: 20px;
+      right: 20px;
+      background: white;
+      border: 1px solid var(--border);
       border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
+      justify-content: space-between;
       transition: all .3s cubic-bezier(.4, 0, .2, 1);
       opacity: 0;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
-      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      z-index: 10;
     }
 
-    .card:hover .card-hover-btn {
-      bottom: 20px;
+    .card:hover .card-hover-rating {
+      bottom: 16px;
       opacity: 1;
     }
 
@@ -1341,14 +1336,24 @@
         <span class="chip ${isWow ? 'wow' : ''}">${item.adv}</span>
       </div>
       <div class="card-peek">${item.d}</div>
-      <button class="card-hover-btn">View Full Details →</button>`;
+      <div class="card-hover-rating" onclick="event.stopPropagation()">
+        <div class="rating-prompt-state" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+          <span class="rating-label" style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;">Rate:</span>
+          <div class="card-stars" style="display: flex; gap: 4px;">
+            <button class="card-star-btn" data-star="1" style="background: none; border: none; font-size: 16px; color: #CBD5E1; cursor: pointer; padding: 0; outline: none; transition: color 0.15s, transform 0.15s;">★</button>
+            <button class="card-star-btn" data-star="2" style="background: none; border: none; font-size: 16px; color: #CBD5E1; cursor: pointer; padding: 0; outline: none; transition: color 0.15s, transform 0.15s;">★</button>
+            <button class="card-star-btn" data-star="3" style="background: none; border: none; font-size: 16px; color: #CBD5E1; cursor: pointer; padding: 0; outline: none; transition: color 0.15s, transform 0.15s;">★</button>
+            <button class="card-star-btn" data-star="4" style="background: none; border: none; font-size: 16px; color: #CBD5E1; cursor: pointer; padding: 0; outline: none; transition: color 0.15s, transform 0.15s;">★</button>
+            <button class="card-star-btn" data-star="5" style="background: none; border: none; font-size: 16px; color: #CBD5E1; cursor: pointer; padding: 0; outline: none; transition: color 0.15s, transform 0.15s;">★</button>
+          </div>
+          <span class="view-details-link" style="font-size: 11px; font-weight: 700; color: var(--primary); cursor: pointer; margin-left: 8px;" onclick="openModal(${i})">Details →</span>
+        </div>
+        <div class="rating-success-state" style="display: none; color: #059669; font-weight: 700; font-size: 12px; align-items: center; justify-content: center; gap: 4px; width: 100%;">
+          <span>✓ Thank you!</span>
+        </div>
+      </div>`;
         
-        // Wire up hover button to go straight to details page
-        const hoverBtn = card.querySelector('.card-hover-btn');
-        hoverBtn.onclick = (e) => {
-          e.stopPropagation();
-          window.location.href = 'opportunity-detail.html?name=' + encodeURIComponent(item.n);
-        };
+        setupCardStarHovering(card);
         
         grid.appendChild(card);
       });
@@ -1473,6 +1478,49 @@
         if (e.key === 'ArrowRight') nextModalOpp();
       }
     });
+
+    // Card hover star rating interaction
+    function setupCardStarHovering(cardEl) {
+      const stars = cardEl.querySelectorAll('.card-star-btn');
+      stars.forEach(star => {
+        star.addEventListener('mouseover', (e) => {
+          e.stopPropagation();
+          const val = parseInt(star.getAttribute('data-star'), 10);
+          highlightCardStars(stars, val);
+        });
+        star.addEventListener('mouseout', (e) => {
+          e.stopPropagation();
+          highlightCardStars(stars, 0);
+        });
+        star.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const val = parseInt(star.getAttribute('data-star'), 10);
+          submitCardRating(cardEl, val);
+        });
+      });
+    }
+
+    function highlightCardStars(stars, val) {
+      stars.forEach(star => {
+        const starVal = parseInt(star.getAttribute('data-star'), 10);
+        star.style.color = starVal <= val ? '#F59E0B' : '#CBD5E1';
+      });
+    }
+
+    function submitCardRating(cardEl, val) {
+      const promptState = cardEl.querySelector('.rating-prompt-state');
+      const successState = cardEl.querySelector('.rating-success-state');
+      if (promptState && successState) {
+        promptState.style.display = 'none';
+        successState.style.display = 'flex';
+        setTimeout(() => {
+          const idx = parseInt(cardEl.getAttribute('data-idx'), 10);
+          openModal(idx);
+          promptState.style.display = 'flex';
+          successState.style.display = 'none';
+        }, 1200);
+      }
+    }
 
     var activeCat = 'all';
 
